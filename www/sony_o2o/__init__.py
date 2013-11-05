@@ -26,4 +26,4 @@ def default_context_processor():
 
 from sony_o2o.views.guest.Guest import Guest as v1_guest
 
-_api.add_resource(v1_guest, '/v1/guest')
+_api.add_resource(v1_guest, '/v1/guest/<int:id>')

@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 
 from flask.ext import restful
+from sony_o2o.libs import auth
 
 
-#TODO 需要验证用户身份才能返回所有用户列表
 class Guest(restful.Resource):
-    def get(self):
-        guest = {}
+
+    @auth.require_login()
+    def get(self, id):
+        guest = {"id": id}
         return guest
 
     def post(self):

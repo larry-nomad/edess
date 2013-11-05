@@ -1,47 +1,13 @@
 # -*- coding: utf-8 -*-
 
-import ldap
 import md5
 from flask import request, session
-from opsapi_auth.libs.ajax import *
+from sony_o2o.libs.ajax import *
 import settings
-from opsapi_auth_lib import logger
-from opsapi_auth_lib.utils import utils
-from opsapi_auth_lib.models.__init__ import ClientModel
+from sony_o2o import logger
 from flask import Response
-from opsapi_auth.libs import ajax
+from sony_o2o.libs import ajax
 
-
-def ldapLogin(user, passwd):
-    l_user = "%s@qunarservers.com" % user
-    scope = ldap.SCOPE_SUBTREE
-    filter = "(sAMAccountName=%s)" % user
-    retrieve_attributes = None
-
-    try:
-        con = ldap.open(settings.LDAP_HOST, settings.LDAP_PORT)
-        con.simple_bind_s(l_user, passwd)
-        #result_id = con.search(settings.LDAP_BASE, scope, filterstr=filter, attrlist=retrieve_attributes)
-        #result_type, result_data = con.result(result_id, 1)
-        return True
-    except:
-        return None
-
-#    if len(result_data) < 1:
-#        return None
-#
-#    result_data = result_data[0]
-#    return result_data
-
-def clientLogin(username, password):
-    query = ClientModel.select().where(\
-            ClientModel.username==username,\
-            ClientModel.password==password)
-    query_result = utils.getPwMap(query)
-    if len(query_result) == 0:
-        return False
-    else:
-        return True
 
 # @decorator
 class require_login(object):
@@ -63,12 +29,13 @@ class require_login(object):
                     return func(*args, **kwargs)
                 else:
                     return Response(ajax.ajax_error('require authorization'), status=401, mimetype='application/json')
-            if not session.has_key("user_id"):
+            if not "user_id" in session:
                 return ajax_direct_login()
             return func(*args, **kwargs)
 
         invoke.__name__ = func.__name__
         return invoke
+
 
 # @decorator
 class require_post_field(object):
@@ -77,10 +44,8 @@ class require_post_field(object):
 
     def __call__(self, func):
         def invoke(*args, **kwargs):
-            if not request.form.has_key(self.field_name):
+            if not self.field_name in request.form:
                 return ajax_error(msg='not found key %s' % self.field_name)
             return func(*args, **kwargs)
         invoke.__name__ = func.__name__
         return invoke
-
-
