@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import md5
 from flask import request, session
 from sony_o2o.libs.ajax import *
-import settings
-from sony_o2o import logger
 from flask import Response
 from sony_o2o.libs import ajax
 
@@ -16,21 +13,8 @@ class require_login(object):
 
     def __call__(self, func):
         def invoke(*args, **kwargs):
-            if request.authorization is not None:
-                username = request.authorization['username']
-                password = request.authorization['password']
-                password = md5.new(password).hexdigest()
-                check_client = clientLogin(username, password)
-                if request.remote_addr not in settings.API_ALLOW_LIST:
-                    logger.error('api ip %s is not in allow list.' % request.remote_addr)
-                    return Response(ajax.ajax_error('require authorization'), status=401, mimetype='application/json')
-                if check_client is True:
-                    session['user_id'] = username
-                    return func(*args, **kwargs)
-                else:
-                    return Response(ajax.ajax_error('require authorization'), status=401, mimetype='application/json')
-            if not "user_id" in session:
-                return ajax_direct_login()
+            if not "guest_id" in session:
+                return Response(ajax.ajax_error('require login'), status=401, mimetype='application/json')
             return func(*args, **kwargs)
 
         invoke.__name__ = func.__name__

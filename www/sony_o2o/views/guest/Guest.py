@@ -6,7 +6,7 @@ from sony_o2o.libs import auth
 
 class Guest(restful.Resource):
 
-    @auth.require_login()
+    #@auth.require_login()
     def get(self, id):
         guest = {"id": id}
         return guest
