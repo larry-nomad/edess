@@ -4,7 +4,7 @@ import os
 import random
 import uuid
 import decimal
-from sony_lib import logger
+from o2olib import logger
 import datetime
 from types import *
 from time import sleep

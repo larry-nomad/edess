@@ -30,7 +30,7 @@ LOG_WEB_NAME = 'web'
 
 # pgsql
 DBSETTINGS = {
-    'HOST': '127.0.0.1',
+    'HOST': 'l-pg.ops.dev.cn6.qunar.com',
     'PORT': 5432,
     'USER': 'postgres',
     'PASSWD': 'keyqunars1234',

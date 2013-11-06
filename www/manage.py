@@ -9,8 +9,8 @@ from flaskext.actions import Manager
 import settings
 from sony_o2o import app
 from flaskext.actions.fastcgi import runfastcgi
-from sony_lib.utils import utils
-from sony_lib import logger
+from o2olib.utils import utils
+from o2olib import logger
 
 app.config.from_object(settings)
 manager = Manager(app, default_server_actions=True)

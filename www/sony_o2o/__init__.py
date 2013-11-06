@@ -2,9 +2,8 @@
 
 from flask import Flask
 from flask.ext import restful
-
-from sony_lib import logger
 from sony_o2o.libs import session
+from o2olib import logger
 import settings
 
 
@@ -26,4 +25,9 @@ def default_context_processor():
 
 from sony_o2o.views.guest.Guest import Guest as v1_guest
 
+_api.add_resource(v1_guest, '/v1/guest')
 _api.add_resource(v1_guest, '/v1/guest/<int:id>')
+
+from sony_o2o.views.guest.Guest import GuestList as v1_guest_list
+
+_api.add_resource(v1_guest_list, '/v1/guest/list/<string:expr>')

@@ -2,8 +2,8 @@
 
 import time
 
-from opsapi_auth_lib import peewee
-import opsapi_auth_settings as settings
+from o2olib import peewee
+import o2o_settings as settings
 
 
 class SafeDatabase(peewee.PostgresqlDatabase):
@@ -26,11 +26,11 @@ class SafeDatabase(peewee.PostgresqlDatabase):
 
 
 psql_db = SafeDatabase(
-    host=settings.PGSQL_HOST,
-    port=settings.PGSQL_PORT,
-    user=settings.PGSQL_USER,
-    password=settings.PGSQL_PASSWD,
-    database=settings.PGSQL_DBNAME
+    host=settings.DBSETTINGS['HOST'],
+    port=settings.DBSETTINGS['PORT'],
+    user=settings.DBSETTINGS['USER'],
+    password=settings.DBSETTINGS['PASSWD'],
+    database=settings.DBSETTINGS['DBNAME']
     )
 
 
