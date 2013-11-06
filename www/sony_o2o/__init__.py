@@ -30,4 +30,4 @@ _api.add_resource(v1_guest, '/v1/guest/<int:id>')
 
 from sony_o2o.views.guest.Guest import GuestList as v1_guest_list
 
-_api.add_resource(v1_guest_list, '/v1/guest/list/<string:expr>')
+_api.add_resource(v1_guest_list, '/v1/guest/list')

@@ -33,7 +33,7 @@ class Guest(restful.Resource):
 class GuestList(restful.Resource):
 
     #@auth.require_login()
-    def get(self, expr):
+    def get(self):
         print 'you search me'
-        print expr
+        print request.args.get('name')
         return ''
