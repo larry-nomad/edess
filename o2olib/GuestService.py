@@ -24,7 +24,6 @@ def add_guest(guest):
 
 
 def update_guest(guest):
-    if guest:
         guest_id = guest['id']
         query = GuestModel().select().where(Q(id=guest_id))
         guest_model = query.get()

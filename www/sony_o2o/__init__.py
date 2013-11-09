@@ -25,7 +25,22 @@ def default_context_processor():
 
 from sony_o2o.views.guest.Guest import Guest as v1_guest
 
+'''
 _api.add_resource(v1_guest, '/v1/guest')
+'''
+_api.add_resource(v1_guest, '/v1/guest/<int:id>')
+
+from sony_o2o.views.product.Product import Product as v1_product
+
+_api.add_resource(v1_product, '/v1/product/<int:id>')
+
+from sony_o2o.views.product.Product import ProductList as v1_products
+
+_api.add_resource(v1_products, '/v1/products', '/v1/products/<string:name>/<string:category>')
+
+from sony_o2o.views.product.Like import Like as v1_like
+
+_api.add_resource(v1_like, '/v1/like', '/v1/like/<int:id>', '/v1/like/product/<int:product_id>')
 
 from sony_o2o.views.guest.Guest import GuestList as v1_guest_list
 
