@@ -33,6 +33,7 @@ _api.add_resource(v1_guest, '/v1/guest', '/v1/guest/<int:id>')
 
 from sony_o2o.views.guest.Guest import GuestList as v1_guest_list
 _api.add_resource(v1_guest_list, '/v1/guests')
+_api.add_resource(v1_guest_list, '/v1/guest/list')
 
 from sony_o2o.views.product.Product import Product as v1_product
 _api.add_resource(v1_product, '/v1/product/<int:id>')
@@ -54,9 +55,6 @@ _api.add_resource(v1_manual, '/v1/manual', '/v1/manual/<int:id>')
 
 from sony_o2o.views.product.Product import Manuals as v1_manuals
 _api.add_resource(v1_manuals, '/v1/manuals')
-
-
-_api.add_resource(v1_guest_list, '/v1/guest/list')
 
 from sony_o2o.views import index
 app.register_blueprint(index.BP, url_prefix='/')
