@@ -1,30 +1,18 @@
 from o2olib.utils import utils
-from o2olib import models
 from o2olib.models.like import LikeModel
-from o2olib.peewee import Q, DeleteQuery, SelectQuery
+from o2olib.peewee import  DeleteQuery,SelectQuery
+from o2olib.models.modelbase import update_model
 
-def get_likes(con):
+def get_likes(con_dic):
+    con = LikeModel.build_con(con_dic)
     if con:
-        likeId = con.get("id")
-        productId = con.get("productId")
-        guestId = con.get("guestId")
-        if likeId:
-            con = Q(id = likeId)
-        elif productId and guestId:
-            con = Q(product_id = productId, guest_id = guestId)
-        elif productId:
-            con = Q(product_id = productId)
-        elif guestId:
-            con = Q(guest_id = guestId)
-        else:
-            con = Q()
         query = LikeModel.select().where(con)
-        queryRs = utils.getPwMap(query)
-        return queryRs
+    else:
+        query = LikeModel.select()
+    query_rs = utils.getPwMap(query)
+    return query_rs
 
 def get_like(con):
-    if not(con.get("id") or (con.get("productId") and con.get("guestId"))):
-        return {};
     likes = get_likes(con)
     if len(likes) == 0:
         like = {}
@@ -32,36 +20,17 @@ def get_like(con):
         like = likes[0]
     return like
 
-def count_likes(conDic):
-    con = build_con(conDic)
+def count_likes(con_dic):
+    con = LikeModel.build_con(con_dic)
     sq = SelectQuery(LikeModel).where(con)
     return sq.count()
-
     
-def build_con(conDic):
-    if conDic:
-        likeId = conDic.get("id")
-        productId = conDic.get("productId")
-        guestId = conDic.get("guestId")
-        if likeId:
-            con = Q(id = likeId)
-        elif productId and guestId:
-            con = Q(product_id = productId, guest_id = guestId)
-        elif productId:
-            con = Q(product_id = productId)
-        elif guestId:
-            con = Q(guest_id = guestId)
-        else:
-            con = Q()
-        return con
-
 def add_like(like):
     if like:
         dbLike = get_like(like)
         if not dbLike:
-            model = models.like.LikeModel().create()
-            model.product_id = like.get('productId')
-            model.guest_id = like.get('guestId')
+            model = LikeModel().create()
+            update_model(model,like)
             model.save()
             return model.id
         else:
@@ -74,3 +43,5 @@ def delete_like(like):
             delQuery = DeleteQuery(LikeModel).where(id = dbLike.get("id"))
             delQuery.execute()
             return dbLike.get("id")
+
+

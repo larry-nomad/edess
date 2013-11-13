@@ -878,10 +878,12 @@ class Q(Leaf):
     def __init__(self, _model=None, **kwargs):
         self.model = _model
         self.query = kwargs
+        print "Q query:%s model:%s" % (self.query,self.model)
         self.negated = False
         super(Q, self).__init__()
 
     def __unicode__(self):
+        print self.query
         bits = ['%s = %s' % (k, v) for k, v in self.query.items()]
         if len(self.query.items()) > 1:
             connector = ' AND '
@@ -973,6 +975,7 @@ def find_models(item):
         for child in item.children:
             seen.update(find_models(child))
     elif isinstance(item, Q):
+        print "item Q:%s" % item.model
         seen.add(item.model)
     return seen
 
@@ -1675,6 +1678,7 @@ class SelectQuery(BaseQuery):
         if self._dirty or not self._qr:
             try:
                 sql, params, meta = self.sql_meta()
+                print "sql:%s params:%s" % (sql,params)
             except EmptyResultException:
                 return []
             else:
@@ -2550,13 +2554,19 @@ class BaseModelOptions(object):
 
     def get_related_field_for_model(self, model, name=None):
         for field in self.fields.values():
+            if isinstance(field, ForeignKeyField):
+                print "field.to:%s model:%s name:%s" % (field.to,model,name)
+            
             if isinstance(field, ForeignKeyField) and field.to == model:
                 if name is None or name == field.name or name == field.db_column:
                     return field
 
     def get_reverse_related_field_for_model(self, model, name=None):
         for field in model._meta.fields.values():
+            if isinstance(field, ForeignKeyField):
+                print "field.to:%s self.model_class:%s name:%s" % (field.to,self.model_class,name)
             if isinstance(field, ForeignKeyField) and field.to == self.model_class:
+                print "field.name:%s fiels.db_column:%s" % (field.name,field.db_column)
                 if name is None or name == field.name or name == field.db_column:
                     return field
 

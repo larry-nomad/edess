@@ -26,3 +26,11 @@ class GuestModel(ModelBase):
     credit_points = IntegerField()
     influence_point = IntegerField()
     status = CharField()
+'''
+    def to_model(self,dic):
+        for key in dic.keys():
+            v = dic[key]
+            if v is not None:
+                self.__setattr__(key,v)
+        return self
+'''

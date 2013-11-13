@@ -3,6 +3,7 @@
 import time
 
 from o2olib import peewee
+from o2olib.peewee import Q
 import o2o_settings as settings
 
 
@@ -37,3 +38,22 @@ psql_db = SafeDatabase(
 class ModelBase(peewee.Model):
     class Meta:
         database = psql_db
+    @classmethod
+    def build_con(cls,con_dic):
+        print "con:%s" % con_dic
+        con = None
+        for k,v in con_dic.items():
+            if v is not None:
+                query = {}
+                query[k] = v
+                tmpCon = Q(**query)
+                con = (con is not None) and con & tmpCon or tmpCon
+        return con   
+
+def update_model(model,dic):
+    for key in dic.keys():
+        v = dic[key]
+        print "k:%s v:%s"% (key,v)
+        if v is not None:
+            model.__setattr__(key,v)
+    return model
