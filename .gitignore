@@ -3,3 +3,6 @@
 *~
 logs/*
 pid/*
+.DS_Store
+.idea/
+*.iml
