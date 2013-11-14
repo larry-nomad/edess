@@ -63,7 +63,7 @@ class Reviews(Resource):
 class ReviewsForGuest(Resource):
     def get(self):
         con_dic =utils.multidict2dict(request.args)
-        con_dic["guest_id"] = 14
+        con_dic["guest_id"] = 16
         reviews = ReviewService.get_reviews_for_guest(con_dic)
         return reviews
 

@@ -1059,9 +1059,13 @@ class BaseQuery(object):
 
                 combined_expr = self.operations[op] % expr
                 operation = combined_expr % tuple(self.interpolation for p in params)
+
+                print "rhs:%s R:%s"%(rhs, R)
             elif isinstance(rhs, F):
                 lookup_value = rhs
                 operation = self.operations[op] # leave as "%s"
+
+                print "rhs:%s F:%s"%(rhs,F)
             else:
                 if op == 'in':
                     if isinstance(rhs, SelectQuery):
@@ -2223,6 +2227,8 @@ class FieldDescriptor(object):
 
 def qdict(op):
     def fn(self, rhs):
+        print "qdict name:%s op:%s"%(self.name,op)
+        #raise Exception("fuck")
         return Q(self.model, **{'%s__%s' % (self.name, op): rhs})
     return fn
 

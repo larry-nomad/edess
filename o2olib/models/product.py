@@ -16,34 +16,25 @@ class ProductModel(ModelBase):
     invisible = BooleanField()
 
     @classmethod
-    def build_con_dict(cls,con_dic):
-        con = {}
-        id = con_dic.get("id")
-        if id:
-            con["id"] = id
-
-        name = con_dic.get("name")
+    def build_con(cls,con_dict):
+        name = con_dict.get("name")
+        nCon = None
         if name:
-            con["name"] = "%%%s%%"%name
+            print("name: %s"%name)
+            nCon = (ProductModel.name ** name)
+            con_dict["name"] = None
 
-        category = con_dic.get("category")
-        if category:
-            con["category"] = category
-
-        manufacturer = con_dic.get("manufacturer")
-        if manufacturer:
-            con["manufacturer"] = manufacturer
-
-        invisible = con_dic.get("invisible")
+        invisible = con_dict.get("invisible")
         if not isinstance(invisible,bool):
             invisible = utils.str2bool(invisible) 
         if invisible is not None:
-            con["invisible"] = invisible
+            con_dict["invisible"] = invisible
+        
+        con = ModelBase.build_con(con_dict)
 
-        guest_id = con_dic.get("guest_id")
-        if guest_id:
-            con["guest_id"] = guest_id
-
+        if nCon:
+            con = (con is not None) and (con & nCon) or nCon
+        
         return con
         
 

@@ -8,5 +8,5 @@ class ManualModel(ModelBase):
     class Meta:
         db_table = 'map_guest_manuals'
     id = IntegerField()
-    product = ForeignKeyField(ProductModel)#IntegerField()
+    product_id = ForeignKeyField(ProductModel,db_column = "product_id")#IntegerField()
     guest_id = IntegerField()

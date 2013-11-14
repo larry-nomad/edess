@@ -48,11 +48,10 @@ class ModelBase(peewee.Model):
             if v is not None:
                 #query = {}
                 #query[k] = v
-                
                 #tmpCon = Q(**query)
-                tmpCon = (getattr(cls,k) == v)
-                print tmpCon
-                con = (con is not None) and (con & tmpCon) or tmpCon
+                if hasattr(cls,k):
+                    tmpCon = (getattr(cls,k)==v)
+                    con = (con is not None) and (con & tmpCon) or tmpCon
         return con   
 
     @classmethod

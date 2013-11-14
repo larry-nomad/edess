@@ -30,9 +30,12 @@ def get_products_for_like(con_dic):
     if not(con_dic and con_dic.get("guest_id")):
         raise QException(u"客户id不能为空")
     
-    con = ProductModel.build_con(con_dic)
-   
-   # print "test:%s %s"%(ProductModel.get("invisible"),ProductModel.invisible == True)
+    p_con = ProductModel.build_con(con_dic)
+    l_con = LikeModel.build_con(con_dic)
+    con = l_con
+    if p_con:
+        con = con & p_con
+
     query = ProductModel.select().join(
              LikeModel).where(con)
     query_rs = utils.getPwMap(query)
@@ -42,7 +45,11 @@ def get_products_for_manual(con_dic):
     if not(con_dic and con_dic.get("guest_id")):
         raise QException(u"客户id不能为空")
     
-    con = ProductModel.build_con(con_dic)
+    p_con = ProductModel.build_con(con_dic)
+    m_con = ManualModel.build_con(con_dic)
+    con = m_con
+    if p_con:
+        con = con & p_con
     query = ProductModel.select().join(
              ManualModel).where(con)
     query_rs = utils.getPwMap(query)

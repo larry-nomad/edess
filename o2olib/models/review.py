@@ -10,7 +10,7 @@ class ReviewModel(ModelBase):
         db_table = 'map_guest_reviews'
     id = IntegerField()
     product_id = IntegerField()
-    guest = ForeignKeyField(GuestModel)
+    guest_id = ForeignKeyField(GuestModel,db_column="guest_id")
     is_approved = BooleanField()
     comment = TextField()
     ranked_stars = IntegerField()
