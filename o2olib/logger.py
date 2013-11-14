@@ -154,6 +154,11 @@ class Logger(object):
         if self.is_error:
             self._error_logger.error(*args)
 
+    def exception(self, *args):
+        if self.is_error:
+            self._error_logger.exception(*args)
+
+
 
 def info(*args):
     Logger().info(*args)
@@ -165,3 +170,6 @@ def debug(*args):
 
 def error(*args):
     Logger().error(*args)
+
+def exception(*args):
+    Logger().exception(*args)

@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 
-from flask.ext import restful
 from flask import request
 from o2olib import ProductService
 from o2olib import LikeService
 from o2olib import ReviewService
 from o2olib import ManualService
-from JsonResult import JsonResult as JR
+from o2olib import GuestService
+from Resource import Resource
+from o2olib.utils import utils
+
 
 def fill_product(product):
     if product:
@@ -14,85 +16,89 @@ def fill_product(product):
         product["likes_count"] = LikeService.count_likes(con)
         product["starts_counts"] =  ReviewService.count_stars(con)
 
-def str2bool(str):
-    if not str:
-        return None
-    elif str.lower() in ("false","f","no"):
-        return False
-    else:
-        return True
-
-def request_to_dic(req):
-    vs = req
-    kvs = {}
-    for k,v in vs.items():
-        kvs[k] = req.get(k)
-    return kvs
-
-
-class Product(restful.Resource):
+class Product(Resource):
     
     def get(self, id):
-        product =  ProductService.get_product(id)
+        product =  ProductService.get(id)
         fill_product(product)
-        return JR(product).to_dic()
+        return product
 
-class ProductList(restful.Resource):
+class Products(Resource):
 
     def get(self):
-        con_dic = request_to_dic(request.args)
-        products = ProductService.get_products(con_dic)
+        con_dic = utils.multidict2dict(request.args)
+        products = ProductService.gets(con_dic)
         for product in products:
             fill_product(product)
-        return JR(products).to_dic()
+        return products
 
-class Review(restful.Resource):
+class Review(Resource):
     def post(self):
-        review = request_to_dic(request.form)
+        review = utils.multidict2dict(request.form)
         review["id"] = None
         review["is_approved"] = False
-        return ReviewService.add_review(review)
+        return ReviewService.add(review)
 
+    #auth
     def put(self):
-        review = requst_to_dic(request.form)
-        return ReviewService.update_review(review)
+        review = utils.multidict2dict(request.form)
+        #review["guest_id"] = session.get[""]
+        return ReviewService.update(review)
     
+    #auth
     def delete(self,id):
-        return ReviewService.delete_review(id)
+        obj = {"id":id}
+        obj["guest_id"] = 14
+        return ReviewService.delete(obj)
         
 
-class Reviews(restful.Resource):
+class Reviews(Resource):
     def get(self):
-        is_approved_str = request.args.get("is_approvedStr")
-        con_dic = request_to_dic(request.args)
-        reviews = ReviewService.get_reviews(con_dic)
-        return JR(reviews).to_dic()
+        con_dic = utils.multidict2dict(request.args)
+        reviews = ReviewService.gets(con_dic)
+        for review in reviews:
+            review["guest"] = GuestService.get(review.get("guest"))
+        return reviews
 
-class Like(restful.Resource):
+class ReviewsForGuest(Resource):
+    def get(self):
+        con_dic =utils.multidict2dict(request.args)
+        con_dic["guest_id"] = 14
+        reviews = ReviewService.get_reviews_for_guest(con_dic)
+        return reviews
+
+
+class Like(Resource):
     #@auth.require_login()
     def post(self):
-        like = request_to_dic(request.form)
+        like = utils.multidict2dict(request.form)
         #like["guest_id"] = 1
         '''
         session['guestId']
         '''
-        return  LikeService.add_like(like)
+        return  LikeService.add(like)
     
     #@auth.require_login()    
-    def delete(self, id):
-        like =  request_to_dic(request.form)
-        like["id"] = id
+    def delete(self):
+        like =  utils.multidict2dict(request.args)
+        #like["id"] = id
         '''
         like["productId"] = request.form['productId']
         like["guestId"] = 1
         session['guestId']
         '''
-        return LikeService.delete_like(like)
+        return LikeService.delete(like)
 
-class Manual(restful.Resource):
+class Likes(Resource):
+    def get(self):
+        con = utils.multidict2dict(request.args)
+        con["guest_id"] = 14
+        return ProductService.get_products_for_like(con)
+
+class Manual(Resource):
     #@auth.require_login()
     def post(self):
-        obj = request_to_dic(request.form)
+        obj = utils.multidict2dict(request.form)
         #like["guest_id"] = 1
         '''
         session['guestId']
@@ -100,12 +106,13 @@ class Manual(restful.Resource):
         return  ManualService.add(obj)
     
     #@auth.require_login()    
-    def delete(self, id):
-        obj =  request_to_dic(request.args)
-        obj["id"] = id
+    def delete(self):
+        obj =  utils.multidict2dict(request.args)
+        #obj["id"] = id
         return ManualService.delete(obj)
 
-class Manuals(restful.Resource):
+class Manuals(Resource):
     def get(self):
-        con = {"guest_id":1}
-        return JR(ProductService.get_products_for_manual(con)).to_dic()
+        con = utils.multidict2dict(request.args)
+        con["guest_id"] = 14
+        return ProductService.get_products_for_manual(con)
