@@ -91,3 +91,12 @@ _api.add_resource(v1_manuals, '/v1/manuals')
 
 from sony_o2o.views import index
 app.register_blueprint(index.BP, url_prefix='/')
+
+from sony_o2o.views import hot
+app.register_blueprint(hot.BP, url_prefix='/')
+
+from sony_o2o.views import search
+app.register_blueprint(search.BP, url_prefix='/')
+
+from sony_o2o.views import detail
+app.register_blueprint(detail.BP, url_prefix='/')
