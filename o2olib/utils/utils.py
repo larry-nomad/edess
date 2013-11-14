@@ -175,3 +175,22 @@ def RetryPoller(msg='', retry_times=3, interval=3):
             return res
         return DelegatePollerFunc
     return Polling
+
+def str2bool(str):
+    '''
+    字符串转换成bool类型
+    '''
+    if not str:
+        return None
+    elif str.lower() in ("false","f","no"):
+        return False
+    else:
+        return True
+
+def multidict2dict(req):
+    vs = req
+    kvs = {}
+    for k,v in vs.items():
+        kvs[k] = req.get(k)
+    return kvs
+

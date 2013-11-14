@@ -5,6 +5,7 @@ import time
 from o2olib import peewee
 from o2olib.peewee import Q
 import o2o_settings as settings
+import o2olib.logger as logger
 
 
 class SafeDatabase(peewee.PostgresqlDatabase):
@@ -40,20 +41,28 @@ class ModelBase(peewee.Model):
         database = psql_db
     @classmethod
     def build_con(cls,con_dic):
-        print "con:%s" % con_dic
+        logger.info("ModelBase build_con(cls:%s con_dic:%s)" % (cls,con_dic))
+        con_dic = cls.build_con_dict(con_dic)
         con = None
         for k,v in con_dic.items():
             if v is not None:
-                query = {}
-                query[k] = v
-                tmpCon = Q(**query)
-                con = (con is not None) and con & tmpCon or tmpCon
+                #query = {}
+                #query[k] = v
+                
+                #tmpCon = Q(**query)
+                tmpCon = (getattr(cls,k) == v)
+                print tmpCon
+                con = (con is not None) and (con & tmpCon) or tmpCon
         return con   
 
+    @classmethod
+    def build_con_dict(cls,con_dic):
+        return con_dic
+
 def update_model(model,dic):
+    logger.info("update_model(model:%s dic:%s)"% (model,dic))
     for key in dic.keys():
         v = dic[key]
-        print "k:%s v:%s"% (key,v)
         if v is not None:
             model.__setattr__(key,v)
     return model

@@ -1034,8 +1034,10 @@ class BaseQuery(object):
         model = _model
         parsed = []
         for lhs, rhs in query.iteritems():
+            print "lhs:%s rhs:%s query_separator:%s"%(lhs,rhs,self.query_separator)
             if self.query_separator in lhs:
                 lhs, op = lhs.rsplit(self.query_separator, 1)
+                print "lhs:%s op:%s"%(lhs,op)
             else:
                 op = 'eq'
 
@@ -1097,6 +1099,7 @@ class BaseQuery(object):
 
     @returns_clone
     def where(self, *args, **kwargs):
+        print "args:%s kwargs:%s"%(args,kwargs)
         parsed = parseq(self.query_context, *args, **kwargs)
         if parsed:
             self._where.append(parsed)
@@ -2538,6 +2541,7 @@ class BaseModelOptions(object):
     def get_field_by_name(self, name):
         if name in self.fields:
             return self.fields[name]
+        print "self:%s name:%s fields:%s"%(self,name,self.fields)
         raise AttributeError('Field named %s not found' % name)
 
     def get_column_names(self):

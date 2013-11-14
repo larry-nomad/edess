@@ -20,7 +20,7 @@ def get(con):
         manual = manuals[0]
     return manual
 
-def count(con_dic):
+def count_manuals(con_dic):
     con = ManualModel.build_con(con_dic)
     sq = SelectQuery(ManualModel).where(con)
     return sq.count()

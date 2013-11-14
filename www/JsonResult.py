@@ -12,6 +12,7 @@ class JsonResult:
     def set_error_msg(self, msg):
         self.msg = msg
         self.ret = u"fail"
+        return self
 
     def to_dic(self):
         d = {}
