@@ -61,7 +61,6 @@ _api.add_resource(v1_guest, '/v1/guest', '/v1/guest/<int:id>')
 
 from sony_o2o.views.guest.Guest import Guests as v1_guest_list
 _api.add_resource(v1_guest_list, '/v1/guests')
-_api.add_resource(v1_guest_list, '/v1/guest/list')
 
 from sony_o2o.views.product.Product import Product as v1_product
 _api.add_resource(v1_product, '/v1/product/<int:id>')
