@@ -1,0 +1,97 @@
+h1,h2,h3,h4,h5,h6,div,p,ul,li {
+  margin: 0;
+  padding: 0;
+}
+
+.hot-container {
+  width: 290px;
+  margin: 0 auto;
+  .product {
+    margin-bottom: 10px;
+    .cover {
+      img {
+        width: 135px;
+        height: 135px;
+      }
+    }
+    .info {
+      margin: 0 10px;
+      font-size: 12px;
+      .title {
+        font-size: 14px;
+        margin-top: 10px;
+      }
+      .star {
+        margin-top: 10px;
+        color: #999999;
+        .light {
+          color: #F2950B;
+        }
+      }
+      .price {
+        margin-top: 10px;
+      }
+    }
+  }
+}
+
+.search-container {
+  width: 290px;
+  margin: 0 auto;
+}
+
+.detail-container {
+  width: 290px;
+  margin: 0 auto;
+  .info {
+    .title {
+      font-size: 20px;
+    }
+    .ext {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+  }
+  .navbar {
+    margin-top: 10px;
+  }
+  .photo {
+    position: relative;
+    margin-top: 10px;
+    .like {
+      position: absolute;
+      right: 0px;
+      top: 0px;
+    }
+    .pic {
+      margin: 0 auto;
+      width: 290px;
+
+      img {
+        display: block;
+        width: 290px;
+      }
+    }
+    ul.thumb {
+      list-style: none;
+      list-style-position: inside;
+      overflow: hidden;
+      margin-top: 5px;
+
+      li {
+        float: left;
+        margin-right: 5px;
+
+        img {
+          width: 40px;
+          height: 40px;
+        }
+      }
+    }
+    .share {
+      position: absolute;
+      right: 0px;
+      bottom: 0px;
+    }
+  }
+}
