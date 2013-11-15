@@ -878,12 +878,10 @@ class Q(Leaf):
     def __init__(self, _model=None, **kwargs):
         self.model = _model
         self.query = kwargs
-        print "Q query:%s model:%s" % (self.query,self.model)
         self.negated = False
         super(Q, self).__init__()
 
     def __unicode__(self):
-        print self.query
         bits = ['%s = %s' % (k, v) for k, v in self.query.items()]
         if len(self.query.items()) > 1:
             connector = ' AND '
@@ -975,7 +973,6 @@ def find_models(item):
         for child in item.children:
             seen.update(find_models(child))
     elif isinstance(item, Q):
-        print "item Q:%s" % item.model
         seen.add(item.model)
     return seen
 
@@ -1034,10 +1031,8 @@ class BaseQuery(object):
         model = _model
         parsed = []
         for lhs, rhs in query.iteritems():
-            print "lhs:%s rhs:%s query_separator:%s"%(lhs,rhs,self.query_separator)
             if self.query_separator in lhs:
                 lhs, op = lhs.rsplit(self.query_separator, 1)
-                print "lhs:%s op:%s"%(lhs,op)
             else:
                 op = 'eq'
 
@@ -1059,13 +1054,9 @@ class BaseQuery(object):
 
                 combined_expr = self.operations[op] % expr
                 operation = combined_expr % tuple(self.interpolation for p in params)
-
-                print "rhs:%s R:%s"%(rhs, R)
             elif isinstance(rhs, F):
                 lookup_value = rhs
                 operation = self.operations[op] # leave as "%s"
-
-                print "rhs:%s F:%s"%(rhs,F)
             else:
                 if op == 'in':
                     if isinstance(rhs, SelectQuery):
@@ -1103,7 +1094,6 @@ class BaseQuery(object):
 
     @returns_clone
     def where(self, *args, **kwargs):
-        print "args:%s kwargs:%s"%(args,kwargs)
         parsed = parseq(self.query_context, *args, **kwargs)
         if parsed:
             self._where.append(parsed)
@@ -1685,7 +1675,6 @@ class SelectQuery(BaseQuery):
         if self._dirty or not self._qr:
             try:
                 sql, params, meta = self.sql_meta()
-                print "sql:%s params:%s" % (sql,params)
             except EmptyResultException:
                 return []
             else:
@@ -2227,8 +2216,6 @@ class FieldDescriptor(object):
 
 def qdict(op):
     def fn(self, rhs):
-        print "qdict name:%s op:%s"%(self.name,op)
-        #raise Exception("fuck")
         return Q(self.model, **{'%s__%s' % (self.name, op): rhs})
     return fn
 
@@ -2547,7 +2534,6 @@ class BaseModelOptions(object):
     def get_field_by_name(self, name):
         if name in self.fields:
             return self.fields[name]
-        print "self:%s name:%s fields:%s"%(self,name,self.fields)
         raise AttributeError('Field named %s not found' % name)
 
     def get_column_names(self):
@@ -2564,19 +2550,13 @@ class BaseModelOptions(object):
 
     def get_related_field_for_model(self, model, name=None):
         for field in self.fields.values():
-            if isinstance(field, ForeignKeyField):
-                print "field.to:%s model:%s name:%s" % (field.to,model,name)
-            
             if isinstance(field, ForeignKeyField) and field.to == model:
                 if name is None or name == field.name or name == field.db_column:
                     return field
 
     def get_reverse_related_field_for_model(self, model, name=None):
         for field in model._meta.fields.values():
-            if isinstance(field, ForeignKeyField):
-                print "field.to:%s self.model_class:%s name:%s" % (field.to,self.model_class,name)
             if isinstance(field, ForeignKeyField) and field.to == self.model_class:
-                print "field.name:%s fiels.db_column:%s" % (field.name,field.db_column)
                 if name is None or name == field.name or name == field.db_column:
                     return field
 

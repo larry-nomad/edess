@@ -40,28 +40,40 @@ class ModelBase(peewee.Model):
     class Meta:
         database = psql_db
     @classmethod
-    def build_con(cls,con_dic):
-        logger.info("ModelBase build_con(cls:%s con_dic:%s)" % (cls,con_dic))
+    def build_con(cls,con_dict):
+        return cls.inner_build_con(con_dict)
+
+    @classmethod
+    def build_con_dict(cls,con_dict):
+        return con_dict
+
+    @classmethod
+    def inner_build_con(cls,con_dic):
+        logger.info("ModelBase inner_build_con(cls:%s con_dic:%s)" % (cls,con_dic))
         con_dic = cls.build_con_dict(con_dic)
         con = None
         for k,v in con_dic.items():
-            if v is not None:
+            if v is not None and hasattr(cls,k):
                 #query = {}
                 #query[k] = v
                 #tmpCon = Q(**query)
-                if hasattr(cls,k):
-                    tmpCon = (getattr(cls,k)==v)
-                    con = (con is not None) and (con & tmpCon) or tmpCon
+                #if hasattr(cls,k):
+                val = v
+                if isinstance(v,list):
+                    val = v[0]
+                logger.debug("ModelBase build_con(k:%s v:%s)"%(k,val))
+                tmpCon = (getattr(cls,k)==v)
+                con = (con is not None) and (con & tmpCon) or tmpCon
         return con   
 
-    @classmethod
-    def build_con_dict(cls,con_dic):
-        return con_dic
 
 def update_model(model,dic):
-    logger.info("update_model(model:%s dic:%s)"% (model,dic))
+    logger.debug("update_model(model:%s dic:%s)"% (model,dic))
     for key in dic.keys():
         v = dic[key]
-        if v is not None:
-            model.__setattr__(key,v)
+        if v is not None and hasattr(model,key):
+            val = v
+            if isinstance(v,list):
+                val = v[0]
+            model.__setattr__(key,val)
     return model
