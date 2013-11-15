@@ -10,3 +10,4 @@ pid/*
 /.pydevproject
 /.gitignore
 /.settings
+/logs

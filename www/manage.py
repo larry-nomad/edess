@@ -92,7 +92,7 @@ if __name__ == "__main__":
         print 'setup logger error.'
         sys.exit(2)
 
-    logger.Logger().disableDebug()
+    #logger.Logger().disableDebug()
 
     # manager run
     manager.run()

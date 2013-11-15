@@ -5,6 +5,7 @@ from o2olib.models.like import LikeModel
 from o2olib.peewee import  DeleteQuery,SelectQuery
 from o2olib.models.modelbase import update_model
 from datetime import datetime
+from o2olib.QException import QException
 
 def gets(con_dic):
     con = LikeModel.build_con(con_dic)
@@ -29,16 +30,17 @@ def count_likes(con_dic):
     return sq.count()
     
 def add(like):
-    if like:
-        dbLike = get(like)
-        if not dbLike:
-            model = LikeModel().create()
-            update_model(model,like)
-            model.like_date = datetime.now()
-            model.save()
-            return model.id
-        else:
-            return dbLike.get("id")
+    if not like:
+        raise QException(u"没有要插入数据")
+    dbLike = get(like)
+    if not dbLike:
+        model = LikeModel().create()
+        update_model(model,like)
+        model.like_date = datetime.now()
+        model.save()
+        return model.id
+    else:
+        return dbLike.get("id")
 
 def delete(like):
     if like:

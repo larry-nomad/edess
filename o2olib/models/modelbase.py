@@ -3,7 +3,6 @@
 import time
 
 from o2olib import peewee
-from o2olib.peewee import Q
 import o2o_settings as settings
 import o2olib.logger as logger
 
@@ -49,7 +48,7 @@ class ModelBase(peewee.Model):
 
     @classmethod
     def inner_build_con(cls,con_dic):
-        logger.info("ModelBase inner_build_con(cls:%s con_dic:%s)" % (cls,con_dic))
+        logger.debug("ModelBase inner_build_con(cls:%s con_dic:%s)" % (cls,con_dic))
         con_dic = cls.build_con_dict(con_dic)
         con = None
         for k,v in con_dic.items():
@@ -71,9 +70,10 @@ def update_model(model,dic):
     logger.debug("update_model(model:%s dic:%s)"% (model,dic))
     for key in dic.keys():
         v = dic[key]
-        if v is not None and hasattr(model,key):
+        if v is not None :#and hasattr(model,key):
             val = v
             if isinstance(v,list):
                 val = v[0]
+            logger.debug("update_model(k:%s v:%s)"%(key,val))
             model.__setattr__(key,val)
     return model
