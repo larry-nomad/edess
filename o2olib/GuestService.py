@@ -16,7 +16,7 @@ def gets(con_dic):
 
 def get(id):
     if not id:
-        raise QException(u"客户id不能为空")
+        raise QException(u"用户id不能为空")
     guests = gets({"id":id})
     if len(guests) == 0:
         rs = {}
@@ -45,7 +45,7 @@ def update(guest):
     
 def delete(id):
     if not id:
-        raise QException(u"客户id不能为空")
+        raise QException(u"用户id不能为空")
     dq = DeleteQuery(GuestModel).where(id = id)
     return dq.execute()
 
