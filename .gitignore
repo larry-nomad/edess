@@ -6,3 +6,7 @@ pid/*
 .DS_Store
 .idea/
 *.iml
+/.project
+/.pydevproject
+/.gitignore
+/.settings
