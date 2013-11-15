@@ -188,9 +188,11 @@ def str2bool(str):
         return True
 
 def multidict2dict(req):
-    vs = req
+    '''
+    vs = req.to_dict(False)
     kvs = {}
     for k,v in vs.items():
         kvs[k] = req.get(k)
     return kvs
-
+    '''
+    return req.to_dict(False)

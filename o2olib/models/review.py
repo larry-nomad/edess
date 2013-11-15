@@ -18,10 +18,11 @@ class ReviewModel(ModelBase):
 
     @classmethod
     def build_con_dict(cls,con_dict):
-        is_approved_str = con_dict.get("is_approved")
-        is_approved = utils.str2bool(is_approved_str)
-        if is_approved is not None:
-            con_dict["is_approved"] = is_approved
-        print con_dict
+        is_approved_strs = con_dict.get("is_approved")
+        if is_approved_strs:
+            is_approved_str = is_approved_strs[0]
+            is_approved = utils.str2bool(is_approved_str)
+            if is_approved is not None:
+                con_dict["is_approved"] = is_approved
         return con_dict
 
