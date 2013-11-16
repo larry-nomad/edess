@@ -1,46 +1,60 @@
+# -*- coding: utf-8 -*-
+
 from o2olib.utils import utils
-from o2olib import models
 from o2olib.models.product import ProductModel
+from o2olib.models.like import LikeModel
+from o2olib.models.manual import ManualModel
+from QException import QException
 from o2olib.peewee import Q
 
-def get_product(id):
-    if id != '':
-        queryRs = get_products({"id": id})
-        if len(queryRs) == 0:
-            product = {}
-        else:
-            product = queryRs[0]
-        return product
-
-def get_products(conDic):
-    con = build_con(conDic)
-    if con:
-        query = ProductModel.select().where(build_con(conDic))
+def get(id):
+    if not id:
+        raise QException(u"产品id不能为空")
+    query_rs = gets({"id": id})
+    if len(query_rs) == 0:
+        product = {}
     else:
-        query = ProductModel.select().where()
-    query_result = utils.getPwMap(query)
-    return query_result
+        product = query_rs[0]
+    return product
 
-def build_con(conDic):
-    id = conDic.get("id")
-    name = conDic.get("name")
-    category = conDic.get("category")
-    manufacturer = conDic.get("manufacturer")
-    invisible = conDic.get("invisible")
-    con = None
-    if id:
-        con = Q(id = id)
-    if name:
-        nameCon = Q(name = name)
-        con = (con != None) and con & nameCon or nameCon
-    if category:
-        cCon  = Q(category = category)
-        con = (con != None) and con & cCon or cCon
-    if manufacturer:
-        mCon = Q(manufacturer = manufacturer)
-        con = (con !=None) and con & mCon or mCon
-    if invisible != None:
-        iCon = Q(invisible = invisible)
-        con = (con != None) and con & iCon or iCon
-    return con
+def gets(con_dic):
+    con = ProductModel.build_con(con_dic)
+    if con:
+        query = ProductModel.select().where(con)
+    else:
+        query = ProductModel.select()
+    query_rs = utils.getPwMap(query)
+    return query_rs
+
+def get_products_for_like(con_dic):
+    if not(con_dic and con_dic.get("guest_id")):
+        raise QException(u"客户id不能为空")
+    
+    p_con = ProductModel.build_con(con_dic)
+    l_con = LikeModel.build_con(con_dic)
+    con = l_con
+    if p_con:
+        con = con & p_con
+
+    query = ProductModel.select().join(
+             LikeModel).where(con)
+    query_rs = utils.getPwMap(query)
+    return query_rs
+
+def get_products_for_manual(con_dic):
+    if not(con_dic and con_dic.get("guest_id")):
+        raise QException(u"客户id不能为空")
+    
+    p_con = ProductModel.build_con(con_dic)
+    m_con = ManualModel.build_con(con_dic)
+    con = m_con
+    if p_con:
+        con = con & p_con
+    query = ProductModel.select().join(
+             ManualModel).where(con)
+    query_rs = utils.getPwMap(query)
+    return query_rs
+
+    
+
 

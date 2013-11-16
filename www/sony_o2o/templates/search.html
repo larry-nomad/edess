@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block main %}
+<div data-role="page" id="page-search">
+    <div data-role="header">
+        <a href="/hot" data-ajax="false" data-icon="star">热门推荐</a>
+        <h1>产品搜索</h1>
+    </div>
+    <div data-role="content">
+        <div class="search-container">
+            <form action="">
+                <ul data-role="listview" data-divider-theme="c">
+                    <li data-role="list-divider">产品目录</li>
+                    <li>
+                        <fieldset data-role="controlgroup" data-iconpos="right">
+                            <label><input type="checkbox" name="catalog" value="photo">数码相机</label>
+                            <label><input type="checkbox" name="catalog" value="common">日常家电</label>
+                            <label><input type="checkbox" name="catalog" value="laptop">笔记本电脑</label>
+                        </fieldset>
+                    </li>
+                    <li data-role="list-divider">按型号搜索</li>
+                    <li>
+                        <label><input type="search" name="q" placeholder="输入关键词..."/></label>
+                    </li>
+                    <li><button type="submit" data-icon="search" data-iconpos="right">搜索</button></li>
+                </ul>
+            </form>
+        </div>
+    </div>
+    <div data-role="footer">
+        <h2>&nbsp;</h2>
+    </div>
+</div>
+{% endblock %}

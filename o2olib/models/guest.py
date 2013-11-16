@@ -26,3 +26,5 @@ class GuestModel(ModelBase):
     credit_points = IntegerField()
     influence_point = IntegerField()
     status = CharField()
+
+

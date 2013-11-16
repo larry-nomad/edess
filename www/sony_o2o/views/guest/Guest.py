@@ -1,39 +1,33 @@
 # -*- coding: utf-8 -*-
 
-from flask.ext import restful
 from flask import request
 from sony_o2o.libs import auth
 from o2olib import GuestService
+from Resource import Resource
+from o2olib.utils import utils
 
 
-class Guest(restful.Resource):
+class Guest(Resource):
 
     #@auth.require_login()
     def get(self, id):
-        guest = {"id": id}
-        return guest
+        return GuestService.get(id)
 
     def post(self):
-        guest = {"name": 'luyan'}
-        GuestService.add_guest(guest)
-        return guest
+        guest = utils.multidict2dict(request.form)
+        return GuestService.add(guest)
+    
+    def put(self):
+        guest = utils.multidict2dict(request.form)
+        return GuestService.update(guest)
+    
+    def delete(self,id):
+        if id:
+           return GuestService.delete(id)
 
-    def put(self, id):
-        guest = {}
-        guest['id'] = id
-        guest['name'] = request.form.get('name')
-        GuestService.update_guest(guest)
-        return guest
-
-    def delete(self):
-        GuestService.delete_guest(id)
-        return id
-
-
-class GuestList(restful.Resource):
+class Guests(Resource):
 
     #@auth.require_login()
     def get(self):
-        print 'you search me'
-        print request.args.get('name')
-        return ''
+        con_dic = utils.multidict2dict(request.args)
+        return GuestService.gets(con_dic)
