@@ -7,34 +7,74 @@
     </div>
     <div data-role="content">
         <div class="hot-container">
-            <div class="ui-grid-a">
-                {% for n in (1,2,3) %}
-                <div class="ui-block-a">
-                    <div class="product">
-                        <div class="cover"><a href="/detail/1"><img src="/static/img/135.gif" alt=""/></a></div>
-                        <div class="info">
-                            <h2 class="title"><a href="/detail/1">苹果最新 iPad Air 免费送！</a></h2>
-                            <p class="star"><span class="light">★★★★</span>★</p>
-                            <p class="price">$399.00</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="ui-block-b">
-                    <div class="product">
-                        <div class="cover"><a href="/detail/1"><img src="/static/img/135.gif" alt=""/></a></div>
-                        <div class="info">
-                            <h2 class="title">VAIO VAIO VAIO</h2>
-                            <p class="star"><span class="light">★★</span>★★★</p>
-                            <p class="price">$1,234.99</p>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
+            <div class="ui-grid-a" id="J_list">
+                <!--<div class="ui-block-a">-->
+                    <!--<div class="product">-->
+                        <!--<div class="cover"><a href="/detail/1"><img src="/static/img/135a.png" alt=""/></a></div>-->
+                        <!--<div class="info">-->
+                            <!--<h2 class="title"><a href="/detail/1" class="ui-link">苹果最新 iPad Air 免费送！</a></h2>-->
+                            <!--<p class="star"><span class="light">★★★★</span>★</p>-->
+                            <!--<p class="price">$399.00</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="ui-block-b">-->
+                    <!--<div class="product">-->
+                        <!--<div class="cover"><a href="/detail/1"><img src="/static/img/135b.png" alt=""/></a></div>-->
+                        <!--<div class="info">-->
+                            <!--<h2 class="title">VAIO VAIO VAIO</h2>-->
+                            <!--<p class="star"><span class="light">★★</span>★★★</p>-->
+                            <!--<p class="price">$1,234.99</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
             </div>
         </div>
     </div>
-    <div data-role="footer">
-        <h2>&nbsp;</h2>
-    </div>
+</div>
+<div data-role="page" id="page-script">
+    <script type="text/template" id="J_template_list">
+        <div class="ui-block-${a_b}">
+            <div class="product">
+                <div class="cover"><a href="/detail/${id}" data-ajax="false"><img src="/static/img/135${a_b}.png" alt=""/></a></div>
+                <div class="info">
+                    <h2 class="title"><a href="/detail/${id}" data-ajax="false" class="ui-link">${name}</a></h2>
+                    <p class="star"><span class="light">★★★★</span>★</p>
+                    <p class="price">${category}</p>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/javascript" src="/static/js/tr.js"></script>
+    <script type="text/javascript">
+        $(document).on('pageinit', '#page-hot', function(e) {
+            $.mobile.loading( 'show', {
+                text: '加载数据...',
+                textVisible: true,
+                theme: 'a',
+                textonly: false
+            });
+
+            var url = '/v1/products';
+            $.get(url, function(res, status, xhr) {
+                if(status !== 'success' || res.data.length === 0) {
+                    return;
+                }
+                var template = $('#J_template_list').html(),
+                        data = res.data,
+                        html = '';
+                for(var i = 0, len = data.length; i < len; i++) {
+                    html += TemplateRender(template, {
+                        a_b: (i % 2) ? 'b' : 'a',
+                        id: data[i].id,
+                        name: data[i].name,
+                        category: data[i].category
+                    });
+                }
+                $('#J_list').html(html);
+                $.mobile.loading('hide');
+            });
+        });
+    </script>
 </div>
 {% endblock %}
