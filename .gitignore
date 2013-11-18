@@ -4,6 +4,7 @@
 logs/*
 pid/*
 .DS_Store
+.sass-cache/
 .idea/
 *.iml
 /.project
