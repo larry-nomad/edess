@@ -17,7 +17,8 @@ class SafeDatabase(peewee.PostgresqlDatabase):
                 cursor = result.cursor()
                 cursor.execute("SELECT 1")
                 break
-            except Exception:
+            except Exception,ex:
+                logger.exception(ex)
                 try:
                     self.close()
                 except:
