@@ -1,13 +1,13 @@
 h1, h2, h3, h4, h5, h6, div, p, ul, li { margin: 0; padding: 0; }
 
-.hot-container { width: 290px; margin: 0 auto; }
-.hot-container .product { margin-bottom: 10px; }
-.hot-container .product .cover img { width: 135px; height: 135px; }
-.hot-container .product .info { margin: 0 10px; font-size: 12px; }
-.hot-container .product .info .title { font-size: 14px; margin-top: 10px; }
-.hot-container .product .info .star { margin-top: 10px; color: #999999; }
-.hot-container .product .info .star .light { color: #F2950B; }
-.hot-container .product .info .price { margin-top: 10px; }
+.list-container { width: 290px; margin: 0 auto; }
+.list-container .product { margin-bottom: 10px; }
+.list-container .product .cover img { width: 135px; height: 135px; }
+.list-container .product .info { margin: 0 10px; font-size: 12px; }
+.list-container .product .info .title { font-size: 14px; margin-top: 10px; }
+.list-container .product .info .star { margin-top: 10px; color: #999999; }
+.list-container .product .info .star .light { color: #F2950B; }
+.list-container .product .info .price { margin-top: 10px; }
 
 .search-container { width: 290px; margin: 0 auto; }
 
@@ -23,3 +23,27 @@ h1, h2, h3, h4, h5, h6, div, p, ul, li { margin: 0; padding: 0; }
 .detail-container .photo ul.thumb li { float: left; margin-right: 5px; }
 .detail-container .photo ul.thumb li img { width: 40px; height: 40px; }
 .detail-container .photo .share { position: absolute; right: 0px; bottom: 0px; }
+
+/* Swipe works with mouse as well but often causes text selection. */
+#page-hot * {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+/* Arrow only buttons in the header. */
+#page-list .ui-header .ui-btn {
+    background: none;
+    border: none;
+    top: 9px;
+}
+#page-list .ui-header .ui-btn-inner {
+    border: none;
+}
+/* Content styling. */
+dl { font-family: "Times New Roman", Times, serif; padding: 1em; }
+dt { font-size: 2em; font-weight: bold; }
+dt span { font-size: .5em; color: #777; margin-left: .5em; }
+dd { font-size: 1.25em; margin: 1em 0 0; padding-bottom: 1em; border-bottom: 1px solid #eee; }
+.back-btn { float: right; margin: 0 2em 1em 0; }
