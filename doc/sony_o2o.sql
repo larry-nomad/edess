@@ -310,7 +310,8 @@ CREATE TABLE table_product (
     manufacturer character varying(256),
     brief text,
     invisible boolean,
-    year character varying
+    year character varying,
+    tmall_link character varying(2048)
 );
 
 
@@ -475,13 +476,13 @@ COPY table_guest (id, name, gender, birthday, telephone, register_date, last_act
 -- Data for Name: table_product; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY table_product (id, name, category, manufacturer, brief, invisible, year) FROM stdin;
-3	头戴显示器 HMZ-T3W	display	SONY	WirelessHD™无线技术\n便携设计，方便外出携带\n电池盒有线连接主机，可连续播放约5部电影\n电池盒无线连接主机，可连续播放约2部电影\n电池盒MHL连接手机、平板，可连续播放约2部电影\n电池盒通过MHL线连接手机、平板，可给手机、平板充电\n头戴设备较HMZ-T1轻约25%，佩戴更舒适\n750英寸3D巨幕\n7.1虚拟声道\n高速响应，低延迟画面	f	2013
-4	佩戴式高清数码摄像机 HDR-AS15	dv	SONY	Exmor R CMOS影像传感器 / 卡尔·蔡司®Tessar®镜头 / 170°广角拍摄* / WIFI影像传输 / 5种录制模式 / 电子防抖	f	2013
-5	摄录望远镜 DEV-30	telescope	SONY	15倍放大倍率*1 / 3D/2D高清视频拍摄 / 约2040万像素静态图像拍摄*2 / 光学防抖（增强模式）*3/ 以记忆棒*4或SD/SDHC存储卡*5为存储介质 / 标配电池持续拍摄时长约3小时*6	\N	2013
-6	NFC无线扬声器 SRS-BTV5	speaker	SONY	手机连接扬声器？赶快抛弃那些繁琐的蓝牙匹配步骤吧，就是要让听音乐变得更加简单！SRS-BTV5 的一触即听功能，只需将智能手机和扬声器轻轻一触*，通过 NFC（近场通讯技术），可快速实现一对一蓝牙匹配，让 SRS-BTV5 播放手机中的音乐。一触即听，让音乐满屋、亲友同享，就是这么简单！	\N	2013
-2	防水耳机 NWZ-W273	player	SONY	NWZ-W273防水性能得到显著提升：达到相当于防水等级IPX5/8*1标准，实现水深2米的防水保护。您可以在游泳、雨中跑步时使用,让音乐伴随您放松地运动。	f	2013
-1	浮潜拍照手机 Xperia™ Z1 L39h	mobile	SONY	约2070万像素高清晰成像\n1/2.3英寸索尼 Exmor RS™ 积层型影像传感器\n索尼G镜头，BIONZ影像处理器\n智能AR、局部彩色等多种相机效果\nTimeshift burst时光平移(2秒内可拍下61张照片)\n5英寸屏幕，1080p高清晰屏幕\nX-Reality™ 迅锐图像处理引擎\n索尼TRILUMINOS™ 特丽魅彩移动显示技术\n高通骁龙800四核处理器\nIP55/IP58精密防尘、防水\n支持NFC近场通信技术	\N	2013
+COPY table_product (id, name, category, manufacturer, brief, invisible, year, tmall_link) FROM stdin;
+3	头戴显示器 HMZ-T3W	display	SONY	WirelessHD™无线技术\n便携设计，方便外出携带\n电池盒有线连接主机，可连续播放约5部电影\n电池盒无线连接主机，可连续播放约2部电影\n电池盒MHL连接手机、平板，可连续播放约2部电影\n电池盒通过MHL线连接手机、平板，可给手机、平板充电\n头戴设备较HMZ-T1轻约25%，佩戴更舒适\n750英寸3D巨幕\n7.1虚拟声道\n高速响应，低延迟画面	f	2013	\N
+4	佩戴式高清数码摄像机 HDR-AS15	dv	SONY	Exmor R CMOS影像传感器 / 卡尔·蔡司®Tessar®镜头 / 170°广角拍摄* / WIFI影像传输 / 5种录制模式 / 电子防抖	f	2013	\N
+5	摄录望远镜 DEV-30	telescope	SONY	15倍放大倍率*1 / 3D/2D高清视频拍摄 / 约2040万像素静态图像拍摄*2 / 光学防抖（增强模式）*3/ 以记忆棒*4或SD/SDHC存储卡*5为存储介质 / 标配电池持续拍摄时长约3小时*6	\N	2013	\N
+6	NFC无线扬声器 SRS-BTV5	speaker	SONY	手机连接扬声器？赶快抛弃那些繁琐的蓝牙匹配步骤吧，就是要让听音乐变得更加简单！SRS-BTV5 的一触即听功能，只需将智能手机和扬声器轻轻一触*，通过 NFC（近场通讯技术），可快速实现一对一蓝牙匹配，让 SRS-BTV5 播放手机中的音乐。一触即听，让音乐满屋、亲友同享，就是这么简单！	\N	2013	\N
+2	防水耳机 NWZ-W273	player	SONY	NWZ-W273防水性能得到显著提升：达到相当于防水等级IPX5/8*1标准，实现水深2米的防水保护。您可以在游泳、雨中跑步时使用,让音乐伴随您放松地运动。	f	2013	\N
+1	浮潜拍照手机 Xperia™ Z1 L39h	mobile	SONY	约2070万像素高清晰成像\n1/2.3英寸索尼 Exmor RS™ 积层型影像传感器\n索尼G镜头，BIONZ影像处理器\n智能AR、局部彩色等多种相机效果\nTimeshift burst时光平移(2秒内可拍下61张照片)\n5英寸屏幕，1080p高清晰屏幕\nX-Reality™ 迅锐图像处理引擎\n索尼TRILUMINOS™ 特丽魅彩移动显示技术\n高通骁龙800四核处理器\nIP55/IP58精密防尘、防水\n支持NFC近场通信技术	\N	2013	\N
 \.
 
 
