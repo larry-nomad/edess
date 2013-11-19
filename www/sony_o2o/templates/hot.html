@@ -1,17 +1,26 @@
 {% extends "base.html" %}
 {% block main %}
 <div data-role="page" id="page-list" data-theme="d">
+    <div data-role="header" data-theme="c">
+        <h1>热门推荐</h1>
+        <a href="#left-panel" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false">Menu</a>
+        <a href="#right-panel" data-theme="d" data-icon="arrow-l" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open right panel</a>
+    </div><!-- /header -->
     <div data-role="content">
         <div class="list-container">
         <div class="ui-grid-a" id="J_list"></div>
     </div>
     </div><!-- /content -->
     <div data-role="panel" id="left-panel" data-theme="b">
-        <p>Left reveal panel.</p>
+        <p>我的收藏</p>
+        <p>我的手册</p>
+        <p>我的资料</p>
         <a href="#" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-iconpos="right">Close</a>
     </div><!-- /panel -->
     <div data-role="panel" id="right-panel" data-display="push" data-position="right" data-theme="c">
-        <p>Right push panel.</p>
+        <p>产品搜素</p>
+        <p>装备推荐</p>
+        <p>旅友必备</p>
         <a href="#" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-iconpos="right">Close</a>
     </div><!-- /panel -->
 

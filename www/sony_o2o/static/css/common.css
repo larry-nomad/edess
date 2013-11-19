@@ -25,7 +25,7 @@ h1, h2, h3, h4, h5, h6, div, p, ul, li { margin: 0; padding: 0; }
 .detail-container .photo .share { position: absolute; right: 0px; bottom: 0px; }
 
 /* Swipe works with mouse as well but often causes text selection. */
-#page-hot * {
+#page-list * {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
