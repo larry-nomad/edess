@@ -27,6 +27,7 @@ json.settings.setdefault('separators', (',', ':'))
 logger.log_dir = settings.LOG_PATH
 logger.log_name = settings.LOG_WEB_NAME
 
+
 @app.errorhandler(404)
 def page_not_fount(error):
     logger.exception(error)
@@ -37,7 +38,6 @@ def page_not_fount(error):
 def exception_handler(error):
     logger.exception(error)
     return jjson.dumps(JsonResult().set_error_msg(error.message).to_dic()),500
-
 
 @app.errorhandler(QException)
 def special_exception_handler(error):
