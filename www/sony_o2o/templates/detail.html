@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block main %}
-<div data-role="page" id="page-detail">
-    <div data-role="header">
-        <a href="/search" data-ajax="false" data-icon="search">搜索</a>
+<div data-role="page" id="page-detail" data-theme="d">
+    <div data-role="header" data-theme="d">
+        <a href="/search" data-ajax="false" data-icon="search" data-iconpos="notext"></a>
         <h1>产品详情</h1>
     </div>
     <div data-role="content">
@@ -35,9 +35,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div data-role="footer">
-        <h2>&nbsp;</h2>
     </div>
 </div>
 {% endblock %}

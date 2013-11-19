@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% block main %}
-<div data-role="page" id="page-search">
-    <div data-role="header">
-        <a href="/hot" data-ajax="false" data-icon="star">热门推荐</a>
+<div data-role="page" id="page-search" data-theme="d">
+    <div data-role="header" data-theme="d">
+        <a href="/hot" data-ajax="false" data-icon="star" data-iconpos="notext"></a>
         <h1>产品搜索</h1>
     </div>
     <div data-role="content">
         <div class="search-container">
             <form action="">
-                <ul data-role="listview" data-divider-theme="c">
+                <ul data-role="listview" data-divider-theme="d">
                     <li data-role="list-divider">产品目录</li>
                     <li>
                         <fieldset data-role="controlgroup" data-iconpos="right">
@@ -25,9 +25,6 @@
                 </ul>
             </form>
         </div>
-    </div>
-    <div data-role="footer">
-        <h2>&nbsp;</h2>
     </div>
 </div>
 {% endblock %}

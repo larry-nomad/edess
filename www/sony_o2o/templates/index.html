@@ -1,15 +1,13 @@
 {% extends "base.html" %}
 {% block main %}
-<div data-role="page" id="page-index">
-    <div data-role="header">
-        <a href="/search" data-ajax="false" data-icon="search">搜索</a>
+<div data-role="page" id="page-index" data-theme="d">
+    <div data-role="header" data-theme="d">
+        <a href="/search" data-ajax="false" data-icon="search" data-iconpos="notext"></a>
         <h1>热门推荐</h1>
     </div>
     <div data-role="content">
-        <div class="hot-container">
-            <div class="ui-grid-a" id="J_list">
-
-            </div>
+        <div class="list-container">
+            <div class="ui-grid-a" id="J_list"></div>
         </div>
     </div>
 </div>

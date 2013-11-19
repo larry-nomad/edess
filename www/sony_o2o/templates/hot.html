@@ -1,75 +1,81 @@
 {% extends "base.html" %}
 {% block main %}
 <div data-role="page" id="page-list" data-theme="d">
-    <div data-role="header" data-theme="c">
-        <h1>热门推荐</h1>
-        <a href="#left-panel" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false">Menu</a>
-        <a href="#right-panel" data-theme="d" data-icon="arrow-l" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open right panel</a>
-    </div><!-- /header -->
+    <div data-role="header" data-theme="d">
+        <h1>装备推荐</h1>
+        <a href="#left-panel" data-icon="bars" data-iconpos="notext"></a>
+    </div>
     <div data-role="content">
         <div class="list-container">
-        <div class="ui-grid-a" id="J_list"></div>
+            <div class="ui-grid-a" id="J_list"></div>
+        </div>
     </div>
-    </div><!-- /content -->
-    <div data-role="panel" id="left-panel" data-theme="b">
-        <p>我的收藏</p>
-        <p>我的手册</p>
-        <p>我的资料</p>
-        <a href="#" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-iconpos="right">Close</a>
-    </div><!-- /panel -->
-    <div data-role="panel" id="right-panel" data-display="push" data-position="right" data-theme="c">
-        <p>产品搜素</p>
-        <p>装备推荐</p>
-        <p>旅友必备</p>
-        <a href="#" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-iconpos="right">Close</a>
-    </div><!-- /panel -->
+    <div data-role="panel" id="left-panel" data-theme="a">
+        <ul data-role="listview" data-theme="a">
+            <li data-role="list-divider" data-theme="d">导航</li>
+            <li><a href="/search" data-ajax="false">产品搜索</a></li>
+            <li><a href="/hot" data-ajax="false">装备推荐</a></li>
+            <li><a href="#" data-ajax="false">旅游必备</a></li>
+            <li data-role="list-divider" data-theme="d">用户</li>
+            <li><a href="#" data-ajax="false">我的收藏</a></li>
+            <li><a href="#" data-ajax="false">我的手册</a></li>
+            <li><a href="#" data-ajax="false">我的资料</a></li>
+        </ul>
+    </div>
+</div>
 
-    <div data-role="page" id="page-script">
-        <script type="text/template" id="J_template_list">
-            <div class="ui-block-${a_b}">
-                <div class="product">
-                    <div class="cover"><a href="/detail/${id}" data-ajax="false"><img src="/static/img/135${a_b}.png" alt=""/></a></div>
-                    <div class="info">
-                        <h2 class="title"><a href="/detail/${id}" data-ajax="false" class="ui-link">${name}</a></h2>
-                        <p class="star"><span class="light">★★★★</span>★</p>
-                        <p class="price">${category}</p>
-                    </div>
+<div data-role="page" id="page-script">
+    <script type="text/template" id="J_template_list">
+        <div class="ui-block-${a_b}">
+            <div class="product">
+                <div class="cover"><a href="/detail/${id}" data-ajax="false"><img src="/static/img/135${a_b}.png" alt=""/></a></div>
+                <div class="info">
+                    <h2 class="title"><a href="/detail/${id}" data-ajax="false" class="ui-link">${name}</a></h2>
+                    <p class="star"><span class="light">★★★★</span>★</p>
+                    <p class="price">${category}</p>
                 </div>
             </div>
-        </script>
-        <script type="text/javascript" src="/static/js/tr.js"></script>
-        <script type="text/javascript">
-            $(document).on('pageinit', '#page-list', function(e) {
-                $.mobile.loading( 'show', {
-                    text: '加载数据...',
-                    textVisible: true,
-                    theme: 'a',
-                    textonly: false
-                });
+        </div>
+    </script>
+    <script type="text/javascript" src="/static/js/tr.js"></script>
+    <script type="text/javascript">
+        $(document).on('pageinit', '#page-list', function(e) {
 
-                var url = '/v1/products';
-                $.get(url, function(res, status, xhr) {
-                    if(status !== 'success' || res.data.length === 0) {
-                        return;
-                    }
-                    var template = $('#J_template_list').html(),
-                            data = res.data,
-                            html = '';
-                    for(var i = 0, len = data.length; i < len; i++) {
-                        html += TemplateRender(template, {
-                            a_b: (i % 2) ? 'b' : 'a',
-                            id: data[i].id,
-                            name: data[i].name,
-                            category: data[i].category
-                        });
-                    }
-                    $('#J_list').html(html);
-                    $.mobile.loading('hide');
-                });
+            $.mobile.loading( 'show', {
+                text: '加载数据...',
+                textVisible: true,
+                theme: 'a',
+                textonly: false
             });
-        </script>
-    </div>
 
+            var url = '/v1/products';
+            $.get(url, function(res, status, xhr) {
+                if(status !== 'success' || res.data.length === 0) {
+                    return;
+                }
+                var template = $('#J_template_list').html(),
+                        data = res.data,
+                        html = '';
+                for(var i = 0, len = data.length; i < len; i++) {
+                    html += TemplateRender(template, {
+                        a_b: (i % 2) ? 'b' : 'a',
+                        id: data[i].id,
+                        name: data[i].name,
+                        category: data[i].category
+                    });
+                }
+                $('#J_list').html(html);
+                $.mobile.loading('hide');
+            });
+        });
 
+        $(document).on("swiperight", "#page-list", function( e ) {
+            if ( $.mobile.activePage.jqmData( "panel" ) !== "open" ) {
+                if ( e.type === "swiperight" ) {
+                    $( "#left-panel" ).panel( "open" );
+                }
+            }
+        });
+    </script>
 </div>
 {% endblock %}
