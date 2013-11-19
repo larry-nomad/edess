@@ -100,3 +100,6 @@ app.register_blueprint(search.BP, url_prefix='/')
 
 from sony_o2o.views import detail
 app.register_blueprint(detail.BP, url_prefix='/')
+
+from sony_o2o.views import store
+app.register_blueprint(store.BP, url_prefix='/')
