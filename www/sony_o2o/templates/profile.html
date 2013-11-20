@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block main %}
+<div data-role="page" id="page-profile" data-theme="d">
+    <div data-role="header" data-theme="d">
+        <a href="/hot" data-ajax="false" data-icon="star" data-iconpos="notext"></a>
+        <h1>我的资料</h1>
+    </div>
+    <div data-role="content">
+        <div class="profile-container">
+            <form action="" id="J_profile" method="post">
+                <ul data-role="listview" data-divider-theme="d">
+                    <li data-role="list-divider" data-theme="a">基本信息</li>
+                    <li>
+                        <label for="J_nick">称呼</label>
+                        <input type="text" id="J_nick" name="nick"/>
+                        <label for="J_name">真实姓名</label>
+                        <input type="text" id="J_name" name="name"/>
+                        <label for="J_birthday">生日</label>
+                        <input type="date" id="J_birthday" name="birthday"/>
+                    </li>
+                    <li data-role="list-divider" data-theme="a">联系方式</li>
+                    <li>
+                        <label for="J_email">电子邮件</label>
+                        <input type="email" id="J_email" name="email"/>
+                        <label for="J_phone">手机</label>
+                        <input type="number" id="J_phone" name="phone"/>
+                        <label for="J_qq">QQ</label>
+                        <input type="number" id="J_qq" name="qq"/>
+                        <label for="J_wechat">微信</label>
+                        <input type="text" id="J_wechat" name="wechat"/>
+                        <label for="J_weibo" id="J_weibo">微博</label>
+                        <input type="text" id="J_weibo" name="weibo"/>
+                    </li>
+                    <li><button type="button" data-icon="check" data-corners="false">保存信息</button></li>
+                </ul>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
