@@ -32,12 +32,12 @@ logger.log_name = settings.LOG_WEB_NAME
 def page_not_fount(error):
     logger.exception(error)
     msg = u"资源正在维护"
-    return jjson.dumps(JsonResult().set_error_msg(msg).to_dic()),404
+    return jjson.dumps(JsonResult().set_error_msg(msg).to_dic()), 404
 
 @app.errorhandler(Exception)
 def exception_handler(error):
     logger.exception(error)
-    return jjson.dumps(JsonResult().set_error_msg(error.message).to_dic()),500
+    return jjson.dumps(JsonResult().set_error_msg(error.message).to_dic()),500 
 
 @app.errorhandler(QException)
 def special_exception_handler(error):
@@ -105,6 +105,4 @@ from sony_o2o.views import store
 app.register_blueprint(store.BP, url_prefix='/')
 
 from sony_o2o.views import login
-#_api.add_resource(v1_login, '/v1/login')
 app.register_blueprint(login.BP, url_prefix='/')
-
