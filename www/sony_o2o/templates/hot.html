@@ -23,6 +23,7 @@
             <li><a href="#" data-ajax="false">我的资料</a></li>
         </ul>
     </div>
+    <div class="go-top"><a href="javascript:window.scrollTo(0,0);" data-role="button" data-icon="arrow-u" data-corners="false" data-mini="true">顶部</a></div>
 </div>
 
 <div data-role="page" id="page-script">
@@ -42,14 +43,15 @@
     <script type="text/javascript" src="/static/js/tr.js"></script>
     <script type="text/javascript">
         $(document).on('pageinit', '#page-list', function(e) {
-
+            /**
+             * 获取数据，填充列表
+             */
             $.mobile.loading( 'show', {
                 text: '加载数据...',
                 textVisible: true,
                 theme: 'a',
                 textonly: false
             });
-
             var url = '/v1/products';
             $.get(url, function(res, status, xhr) {
                 if(status !== 'success' || res.data.length === 0) {
@@ -75,14 +77,31 @@
                     });
                 });
             });
-        });
 
-        $(document).on("swiperight", "#page-list", function( e ) {
-            if ( $.mobile.activePage.jqmData( "panel" ) !== "open" ) {
-                if ( e.type === "swiperight" ) {
-                    $( "#left-panel" ).panel( "open" );
+            /**
+             * 返回顶部按钮
+             */
+            $(window).on('scrollstop', function(e) {
+                var el = $('.go-top'),
+                        win = $(window);
+                if(win.scrollTop() > win.height() / 2) {
+                    el.show();
                 }
-            }
+                else {
+                    el.hide();
+                }
+            });
+
+            /**
+             * 滑动菜单
+             */
+            $(document).on("swiperight", "#page-list", function( e ) {
+                if ( $.mobile.activePage.jqmData( "panel" ) !== "open" ) {
+                    if ( e.type === "swiperight" ) {
+                        $( "#left-panel" ).panel( "open" );
+                    }
+                }
+            });
         });
     </script>
 </div>
