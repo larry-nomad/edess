@@ -34,13 +34,10 @@ def page_not_fount(error):
     msg = u"资源正在维护"
     return jjson.dumps(JsonResult().set_error_msg(msg).to_dic()), 404
 
-<<<<<<< HEAD
 @app.errorhandler(Exception)
 def exception_handler(error):
     logger.exception(error)
     return jjson.dumps(JsonResult().set_error_msg(error.message).to_dic()),500 
-=======
->>>>>>> 95f5a2d379b9dc85576097185f4703f24b038643
 
 @app.errorhandler(QException)
 def special_exception_handler(error):
