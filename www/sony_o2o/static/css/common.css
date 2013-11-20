@@ -1,25 +1,19 @@
 h1, h2, h3, h4, h5, h6, div, p, ul, li { margin: 0; padding: 0; }
 
-.hot-container { width: 290px; margin: 0 auto; }
-.hot-container .product { margin-bottom: 10px; }
-.hot-container .product .cover img { width: 135px; height: 135px; }
-.hot-container .product .info { margin: 0 10px; font-size: 12px; }
-.hot-container .product .info .title { font-size: 14px; margin-top: 10px; }
-.hot-container .product .info .star { margin-top: 10px; color: #999999; }
-.hot-container .product .info .star .light { color: #F2950B; }
-.hot-container .product .info .price { margin-top: 10px; }
+.list-container { width: 290px; margin: 0 auto; }
+.list-container .product .pic { margin-bottom: 10px; }
+.list-container .product .pic img { width: 290px; height: 290px; }
+.list-container .product .info { font-size: 12px; margin-bottom: 10px; }
+.list-container .product .more { text-align: right; }
+.list-container .product .swipe { overflow: hidden; visibility: hidden; position: relative; }
+.list-container .product .swipe-wrap { overflow: hidden; position: relative; }
+.list-container .product .swipe-wrap > div { float: left; width: 100%; position: relative; }
 
 .search-container { width: 290px; margin: 0 auto; }
 
 .detail-container { width: 290px; margin: 0 auto; }
 .detail-container .info .title { font-size: 20px; }
-.detail-container .info .ext { margin-top: 10px; font-size: 14px; }
-.detail-container .navbar { margin-top: 10px; }
-.detail-container .photo { position: relative; margin-top: 10px; }
-.detail-container .photo .like { position: absolute; right: 0px; top: 0px; }
-.detail-container .photo .pic { margin: 0 auto; width: 290px; }
-.detail-container .photo .pic img { display: block; width: 290px; }
-.detail-container .photo ul.thumb { list-style: none; list-style-position: inside; overflow: hidden; margin-top: 5px; }
-.detail-container .photo ul.thumb li { float: left; margin-right: 5px; }
-.detail-container .photo ul.thumb li img { width: 40px; height: 40px; }
-.detail-container .photo .share { position: absolute; right: 0px; bottom: 0px; }
+.detail-container .video { height: 290px; background-color: #333333; }
+.detail-container .comment { height: 290px; background-color: #cccccc; }
+.detail-container .manual { height: 290px; background-color: #cccccc; }
+.detail-container .specific { height: 290px; background-color: #cccccc; }

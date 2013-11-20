@@ -3,34 +3,38 @@ h1,h2,h3,h4,h5,h6,div,p,ul,li {
   padding: 0;
 }
 
-.hot-container {
+.list-container {
   width: 290px;
   margin: 0 auto;
   .product {
-    margin-bottom: 10px;
-    .cover {
+    .pic {
+      margin-bottom: 10px;
       img {
-        width: 135px;
-        height: 135px;
+        width: 290px;
+        height: 290px;
       }
     }
     .info {
-      margin: 0 10px;
       font-size: 12px;
-      .title {
-        font-size: 14px;
-        margin-top: 10px;
-      }
-      .star {
-        margin-top: 10px;
-        color: #999999;
-        .light {
-          color: #F2950B;
-        }
-      }
-      .price {
-        margin-top: 10px;
-      }
+      margin-bottom: 10px;
+    }
+    .more {
+      text-align: right;
+    }
+
+    .swipe {
+      overflow: hidden;
+      visibility: hidden;
+      position: relative;
+    }
+    .swipe-wrap {
+      overflow: hidden;
+      position: relative;
+    }
+    .swipe-wrap > div {
+      float:left;
+      width:100%;
+      position: relative;
     }
   }
 }
@@ -47,51 +51,21 @@ h1,h2,h3,h4,h5,h6,div,p,ul,li {
     .title {
       font-size: 20px;
     }
-    .ext {
-      margin-top: 10px;
-      font-size: 14px;
-    }
   }
-  .navbar {
-    margin-top: 10px;
+  .video {
+    height: 290px;
+    background-color: #333333;
   }
-  .photo {
-    position: relative;
-    margin-top: 10px;
-    .like {
-      position: absolute;
-      right: 0px;
-      top: 0px;
-    }
-    .pic {
-      margin: 0 auto;
-      width: 290px;
-
-      img {
-        display: block;
-        width: 290px;
-      }
-    }
-    ul.thumb {
-      list-style: none;
-      list-style-position: inside;
-      overflow: hidden;
-      margin-top: 5px;
-
-      li {
-        float: left;
-        margin-right: 5px;
-
-        img {
-          width: 40px;
-          height: 40px;
-        }
-      }
-    }
-    .share {
-      position: absolute;
-      right: 0px;
-      bottom: 0px;
-    }
+  .comment {
+    height: 290px;
+    background-color: #cccccc;
+  }
+  .manual {
+    height: 290px;
+    background-color: #cccccc;
+  }
+  .specific {
+    height: 290px;
+    background-color: #cccccc;
   }
 }
