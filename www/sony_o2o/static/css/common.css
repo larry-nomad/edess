@@ -5,6 +5,9 @@ h1, h2, h3, h4, h5, h6, div, p, ul, li { margin: 0; padding: 0; }
 .list-container .product .pic img { width: 290px; height: 290px; }
 .list-container .product .info { font-size: 12px; margin-bottom: 10px; }
 .list-container .product .more { text-align: right; }
+.list-container .product .swipe { overflow: hidden; visibility: hidden; position: relative; }
+.list-container .product .swipe-wrap { overflow: hidden; position: relative; }
+.list-container .product .swipe-wrap > div { float: left; width: 100%; position: relative; }
 
 .search-container { width: 290px; margin: 0 auto; }
 
@@ -14,6 +17,3 @@ h1, h2, h3, h4, h5, h6, div, p, ul, li { margin: 0; padding: 0; }
 .detail-container .comment { height: 290px; background-color: #cccccc; }
 .detail-container .manual { height: 290px; background-color: #cccccc; }
 .detail-container .specific { height: 290px; background-color: #cccccc; }
-.detail-container .photo { position: relative; margin-top: 10px; }
-.detail-container .photo .pic { margin: 0 auto; width: 290px; }
-.detail-container .photo .pic img { display: block; width: 290px; }

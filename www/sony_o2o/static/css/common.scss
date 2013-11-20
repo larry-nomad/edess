@@ -21,6 +21,21 @@ h1,h2,h3,h4,h5,h6,div,p,ul,li {
     .more {
       text-align: right;
     }
+
+    .swipe {
+      overflow: hidden;
+      visibility: hidden;
+      position: relative;
+    }
+    .swipe-wrap {
+      overflow: hidden;
+      position: relative;
+    }
+    .swipe-wrap > div {
+      float:left;
+      width:100%;
+      position: relative;
+    }
   }
 }
 
@@ -52,17 +67,5 @@ h1,h2,h3,h4,h5,h6,div,p,ul,li {
   .specific {
     height: 290px;
     background-color: #cccccc;
-  }
-  .photo {
-    position: relative;
-    margin-top: 10px;
-    .pic {
-      margin: 0 auto;
-      width: 290px;
-      img {
-        display: block;
-        width: 290px;
-      }
-    }
   }
 }

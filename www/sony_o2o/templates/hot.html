@@ -29,7 +29,12 @@
     <script type="text/template" id="J_template_list">
         <li data-role="list-divider" data-theme="a">${name}</li>
         <li class="product">
-            <div class="pic"><img src="/static/img/290a.png" alt=""/></div>
+            <div class="pic swipe">
+                <div class='swipe-wrap'>
+                    <div><img src="/static/img/290a.png" alt=""/></div>
+                    <div><img src="/static/img/290b.png" alt=""/></div>
+                </div>
+            </div>
             <div class="info">${brief}</div>
             <div class="more"><a href="/detail/${id}" data-icon="arrow-r" data-iconpos="right" data-role="button" data-mini="true" data-corners="false" data-inline="true">了解更多</a></div>
         </li>
@@ -62,6 +67,14 @@
                 }
                 $('#J_list').html(html).trigger('create').listview('refresh');
                 $.mobile.loading('hide');
+
+                $('.swipe').each(function(idx) {
+                    Swipe(this, {
+                        auto: 3000,
+                        continuous: true,
+                        stopPropagation: true
+                    });
+                });
             });
         });
 
