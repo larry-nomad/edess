@@ -6,4 +6,4 @@ BP = Blueprint('index', __name__)
 
 @BP.route('/')
 def frontend():
-	    return render_template("index.html")
+    render_template("index.html")
