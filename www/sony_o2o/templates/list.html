@@ -22,8 +22,8 @@
         <ul data-role="listview" data-theme="a">
             <li data-role="list-divider" data-theme="d">导航</li>
             <li><a href="/search" data-ajax="false">产品搜索</a></li>
-            <li><a href="#" data-ajax="false">装备推荐</a></li>
-            <li><a href="#" data-ajax="false">旅游必备</a></li>
+            <li><a href="/list/hot" data-ajax="false">装备推荐</a></li>
+            <li><a href="/list/travel" data-ajax="false">旅游必备</a></li>
             <li><a href="/store" data-transition="slide">直营店面</a></li>
             <li data-role="list-divider" data-theme="d">用户</li>
             <li><a href="#" data-ajax="false">我的收藏</a></li>
@@ -51,17 +51,27 @@
     </script>
     <script type="text/javascript" src="/static/js/tr.js"></script>
     <script type="text/javascript">
+        var list_config = {page: '{{page}}'};
         $(document).on('pageinit', '#page-list', function(e) {
             /**
              * 获取数据，填充列表
              */
+            var hot_arr = [2, 3, 6, 7, 9, 11, 12, 13, 14],
+                    travel_arr = [1, 4, 5, 8, 10],
+                    urls = {
+                        hot: '/v1/products?id=' + hot_arr.join('&id='),
+                        travel: '/v1/products?id=' + travel_arr.join('&id='),
+                        other: '/v1/products'
+                    },
+                    url = urls[(list_config.page in urls) ? list_config.page : 'other'];
+
             $.mobile.loading( 'show', {
                 text: '加载数据...',
                 textVisible: true,
                 theme: 'a',
                 textonly: false
             });
-            var url = '/v1/products';
+
             $.get(url, function(res, status, xhr) {
                 if(status !== 'success' || res.data.length === 0) {
                     return;
