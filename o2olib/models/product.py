@@ -29,11 +29,14 @@ class ProductModel(ModelBase):
         if category:
             cCon = (ProductModel.category << category)
             con_dict["category"] = None
+            
+        iCon = None
+        ids = utils.get_val_from_dict(con_dict, "id", "list")
+        if ids:
+            iCon = (ProductModel.id << ids)
+            con_dict["id"] = None
 
         invisible = utils.get_val_from_dict(con_dict, "invisible")
-#         invisible = None
-#         if invisibles:
-#             invisible = invisibles[0]
         if not isinstance(invisible,bool):
             invisible = utils.str2bool(invisible) 
         if invisible is not None:
@@ -45,6 +48,8 @@ class ProductModel(ModelBase):
             con = (con is not None) and (con & nCon) or nCon
         if cCon:
             con = (con is not None) and (con & cCon) or cCon
+        if iCon:
+            con = (con is not None) and (con & iCon) or iCon
 
         return con
         

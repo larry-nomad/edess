@@ -21,8 +21,8 @@ def fill_product(product):
 
 class Product(Resource):
     
-    def get(self, oid):
-        product = ProductService.get(oid)
+    def get(self, id):
+        product = ProductService.get(id)
         fill_product(product)
         return product
 
@@ -50,8 +50,8 @@ class Review(Resource):
         return ReviewService.update(review)
     
     @require_login
-    def delete(self,oid):
-        obj = {"id":oid}
+    def delete(self,id):
+        obj = {"id":id}
         obj["guest_id"] = session["guest_id"]
         return ReviewService.delete(obj)
         
