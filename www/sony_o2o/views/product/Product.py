@@ -2,30 +2,32 @@
 
 from flask import request,session
 from o2olib import ProductService
+from o2olib import ProductImgService
 from o2olib import LikeService
 from o2olib import ReviewService
 from o2olib import ManualService
 from o2olib import GuestService
 from Resource import Resource
 from o2olib.utils import utils
-from auth import requires_auth as auth
+from sony_o2o.libs.auth import require_login
 
 
 def fill_product(product):
     if product:
-        con = { "product_id": product.get("id")}
+        con = {"product_id": product.get("id")}
         product["likes_count"] = LikeService.count_likes(con)
         product["starts_counts"] =  ReviewService.count_stars(con)
+        product["imgs"] = ProductImgService.gets(con)
 
 class Product(Resource):
     
-    def get(self, id):
-        product =  ProductService.get(id)
+    def get(self, oid):
+        product = ProductService.get(oid)
         fill_product(product)
         return product
 
 class Products(Resource):
-
+#     @require_login
     def get(self):
         con_dic = utils.multidict2dict(request.args)
         products = ProductService.gets(con_dic)
@@ -41,22 +43,22 @@ class Review(Resource):
         review["is_approved"] = False
         return ReviewService.add(review)
 
-    @auth
+    @require_login
     def put(self):
         review = utils.multidict2dict(request.form)
         review["guest_id"] = session["guest_id"]
         return ReviewService.update(review)
     
-    @auth
-    def delete(self,id):
-        obj = {"id":id}
+    @require_login
+    def delete(self,oid):
+        obj = {"id":oid}
         obj["guest_id"] = session["guest_id"]
         return ReviewService.delete(obj)
         
 
 class Reviews(Resource):
     
-    @auth
+    @require_login
     def get(self):
         con_dic = utils.multidict2dict(request.args)
         con_dic["guest_id"] = session["guest_id"]
@@ -67,7 +69,7 @@ class Reviews(Resource):
 
 class ReviewsForGuest(Resource):
     
-    @auth
+    @require_login
     def get(self):
         con_dic =utils.multidict2dict(request.args)
         con_dic["guest_id"] = session["guest_id"]
@@ -77,13 +79,13 @@ class ReviewsForGuest(Resource):
 
 class Like(Resource):
     
-    @auth
+    @require_login
     def post(self):
         like = utils.multidict2dict(request.form)
         like["guest_id"] = session["guest_id"]
         return  LikeService.add(like)
     
-    @auth
+    @require_login
     def delete(self):
         like =  utils.multidict2dict(request.args)
         session["guest_id"] = session["guest_id"]
@@ -91,7 +93,7 @@ class Like(Resource):
 
 class Likes(Resource):
     
-    @auth
+    @require_login
     def get(self):
         con = utils.multidict2dict(request.args)
         con["guest_id"] = session["guest_id"]
@@ -99,13 +101,13 @@ class Likes(Resource):
 
 class Manual(Resource):
     
-    @auth
+    @require_login
     def post(self):
         obj = utils.multidict2dict(request.form)
         obj["guest_id"] = session["guest_id"]
         return  ManualService.add(obj)
     
-    @auth
+    @require_login
     def delete(self):
         obj =  utils.multidict2dict(request.args)
         obj["guest_id"] = session["guest_id"]
@@ -113,7 +115,7 @@ class Manual(Resource):
 
 class Manuals(Resource):
     
-    @auth
+    @require_login
     def get(self):
         con = utils.multidict2dict(request.args)
         con["guest_id"] = session["guest_id"]

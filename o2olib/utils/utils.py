@@ -8,6 +8,7 @@ from o2olib import logger
 import datetime
 from types import *
 from time import sleep
+from o2olib.QException import QException
 
 
 def GenUuid():
@@ -196,3 +197,21 @@ def multidict2dict(req):
     return kvs
     '''
     return req.to_dict(False)
+
+def get_val_from_dict(dict, key, type=None):
+    if not dict or not key:
+        raise QException(u"util.get_val_from_dict(dict:%s key:%s) dict,key都不能为空"%(dict,key))
+    else:
+        val = dict.get(key)
+        if not val:
+            return None
+        if type:
+            if not isinstance(val,list):
+                return [val]
+            else:
+                return val
+        else:
+            if isinstance(val,list):
+                return val[0]
+            else:
+                return val

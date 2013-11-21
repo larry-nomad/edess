@@ -333,6 +333,8 @@ class Database(object):
         if require_commit and self.get_autocommit():
             self.commit()
         logger.debug((sql, params))
+        from o2olib import logger as log
+        log.debug((sql, params))
         return cursor
 
     def begin(self):

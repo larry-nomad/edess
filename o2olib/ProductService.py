@@ -2,10 +2,10 @@
 
 from o2olib.utils import utils
 from o2olib.models.product import ProductModel
+from o2olib.models.productimg import ProductImgModel
 from o2olib.models.like import LikeModel
 from o2olib.models.manual import ManualModel
 from QException import QException
-from o2olib.peewee import Q
 
 def get(id):
     if not id:
