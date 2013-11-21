@@ -200,7 +200,7 @@ def multidict2dict(req):
 
 def get_val_from_dict(dict, key, type=None):
     if not dict or not key:
-        raise QException(u"util.get_val_from_dict(dict:%s key:%s) dict,key都不能为空"%(dict,key))
+        return
     else:
         val = dict.get(key)
         if not val:

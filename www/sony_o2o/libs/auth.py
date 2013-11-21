@@ -4,17 +4,12 @@ from functools import wraps
 from flask import Response, redirect,session, request
 from o2olib import logger
 from o2olib.QException import QException
-from JsonResult import JsonResult as JR
-import json
-
-
 
 LOGIN_URL = "http://oauth.qunar.com/oauth-client/%s/login?appname=%s&display=mobile&ret=%s&method=login&vistor=%s"%(
                 "qq"#"sina"
                  ,"www"
                  ,"http://lfd.qunar.com:8888/hot"
                  ,"http://lfd.qunar.com:8888/v1/login")
-                 
 
 def check_user():
     if "guest_id" in session:

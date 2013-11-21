@@ -11,10 +11,12 @@ from o2olib import logger
 import httplib2 as http
 import json
 from o2olib.QException import QException
+from datetime import datetime
 
 SINA_API_URL = "https://api.weibo.com/2/users/show.json"  
 QQ_API_URL = "https://graph.qq.com/user/get_user_info"
 OPEN_ID_GETTER_URL = "https://graph.z.qq.com/moc2/me"
+GENDER_DICT_FOR_QQ = {u"男":"m", u"女":"f"}
 
 def login_from_sina(args):
     access_token = args.get("token")
@@ -25,12 +27,17 @@ def login_from_sina(args):
     r, content = h.request(url,"GET")
     ret_data = json.loads(content)
     logger.info("login_from_qq,url:%s ret_data:%s"%(url,content))
-    if not ret_data.get("ret"):
+    if ret_data.get("error_code"):
         raise QException(u"获取用户信息失败")
     
     name = ret_data.get("name")
     weibo = ret_data.get("idstr")
-    guest = {"name":name,"weibo":weibo}
+    gender = ret_data.get("gender")
+    guest = {
+             "name": name
+             ,"weibo": weibo
+             ,"gender": gender
+             }
     return login(guest)
 
 def login_from_qq(args):
@@ -48,7 +55,13 @@ def login_from_qq(args):
     
     name = ret_data.get("nickname")
     qq = ret_data.get("nickname")
-    return login({"qq_openid":openid,"qq":qq,"name":name})
+    gender = ret_data.get("gender")
+    return login({
+                  "qq_openid":openid
+                  ,"qq":qq
+                  ,"name":name
+                  ,"gender":GENDER_DICT_FOR_QQ.get(gender)
+                  })
     
 
 def get_open_id(token):
@@ -67,8 +80,12 @@ def get_open_id(token):
 def login(guest):
     guests = GuestService.gets(guest)
     if len(guests) == 0:
+        guest["register_date"] = datetime.now()
+        guest["last_active_date"] = datetime.now()
         guest["id"] = GuestService.add(guest)
     else:
         guest = guests[0]
+        guest["last_active_date"] = datetime.now()
+        GuestService.update(guest)
     return guest
 
