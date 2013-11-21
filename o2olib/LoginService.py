@@ -26,7 +26,7 @@ def login_from_sina(args):
     url = "%s?access_token=%s&uid=%s"%(SINA_API_URL,access_token,uid)
     r, content = h.request(url,"GET")
     ret_data = json.loads(content)
-#     logger.info(u"login_from_qq,url:%s ret_data:%s"%(url,content))
+#     logger.info(u"login_from_sina,url:%s ret_data:%s"%(url,content))
     if ret_data.get("error_code"):
         raise QException(u"获取用户信息失败")
     
@@ -49,7 +49,7 @@ def login_from_qq(args):
     url = "%s?oauth_consumer_key=%s&access_token=%s&openid=%s&format=%s"%(QQ_API_URL,appid,access_token,openid,"json")
     r,content = h.request(url,"GET")
     ret_data = json.loads(content)
-    logger.info("login_from_qq,url:%s ret_data:%s"%(url,content))
+#     logger.info("login_from_qq,url:%s ret_data:%s"%(url,content))
     if ret_data.get("ret") != 0:
         raise QException(u"获取用户信息失败")
     
