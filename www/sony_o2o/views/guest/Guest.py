@@ -9,8 +9,8 @@ from sony_o2o.libs.auth import require_login
 class Guest(Resource):
 
     @require_login
-    def get(self, oid):
-        return GuestService.get(oid)
+    def get(self, id):
+        return GuestService.get(id)
 
     def post(self):
         guest = utils.multidict2dict(request.form)
@@ -20,9 +20,9 @@ class Guest(Resource):
         guest = utils.multidict2dict(request.form)
         return GuestService.update(guest)
     
-    def delete(self,oid):
-        if oid:
-            return GuestService.delete(oid)
+    def delete(self,id):
+        if id:
+            return GuestService.delete(id)
 
 class Guests(Resource):
 
