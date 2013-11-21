@@ -12,9 +12,21 @@ import re
 from flask import redirect,Blueprint,request,session
 
 BP = Blueprint('login', __name__)
-
-API_URL = "https://api.weibo.com/2/users/show.json"  
-
+LOGIN_URL = "http://oauth.qunar.com/oauth-client/%s/login?appname=%s&display=mobile&ret=%s&method=login&vistor=%s"
+#                 %(
+#                 "qq"#"sina"
+#                  ,"www"
+#                  ,"http://lfd.qunar.com:8888/hot"
+#                  ,"http://lfd.qunar.com:8888/v1/login")
+@BP.route("v1/dologin")
+def do_login():
+    domain = request.args.get("domain")
+    ret = request.args.get("ret")
+    logger.debug("request.url:%s request.base_url:%s request.url_root:%s request.host_url:%s"%(request.url,request.base_url,request.url_root,request.host_url))
+    login_url = "%s/v1/login"%request.host_url
+    url = LOGIN_URL%(domain,"www",ret,login_url)
+    return redirect(url)
+    
 @BP.route("v1/login")     
 def login():
     domain = request.args.get("domain")
