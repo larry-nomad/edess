@@ -1,5 +1,7 @@
 h1, h2, h3, h4, h5, h6, div, p, ul, li { margin: 0; padding: 0; }
 
+.go-top { position: fixed; left: 5px; bottom: 5px; display: none; }
+
 .list-container { width: 290px; margin: 0 auto; }
 .list-container .product .pic { margin-bottom: 10px; }
 .list-container .product .pic img { width: 290px; height: 290px; }
@@ -17,3 +19,7 @@ h1, h2, h3, h4, h5, h6, div, p, ul, li { margin: 0; padding: 0; }
 .detail-container .comment { height: 290px; background-color: #cccccc; }
 .detail-container .manual { height: 290px; background-color: #cccccc; }
 .detail-container .specific { height: 290px; background-color: #cccccc; }
+
+.store-container { width: 290px; margin: 0 auto; }
+
+.profile-container { width: 290px; margin: 0 auto; }

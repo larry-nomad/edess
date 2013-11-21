@@ -20,9 +20,10 @@
             <li data-role="list-divider" data-theme="d">用户</li>
             <li><a href="#" data-ajax="false">我的收藏</a></li>
             <li><a href="#" data-ajax="false">我的手册</a></li>
-            <li><a href="#" data-ajax="false">我的资料</a></li>
+            <li><a href="/profile" data-ajax="false">我的资料</a></li>
         </ul>
     </div>
+    <div class="go-top"><a href="javascript:window.scrollTo(0,0);" data-role="button" data-icon="arrow-u" data-corners="false" data-mini="true">顶部</a></div>
 </div>
 
 <div data-role="page" id="page-script">
@@ -36,20 +37,21 @@
                 </div>
             </div>
             <div class="info">${brief}</div>
-            <div class="more"><a href="/detail/${id}" data-icon="arrow-r" data-iconpos="right" data-role="button" data-mini="true" data-corners="false" data-inline="true">了解更多</a></div>
+            <div class="more"><a href="/detail/${id}" data-ajax="false" data-icon="arrow-r" data-iconpos="right" data-role="button" data-mini="true" data-corners="false" data-inline="true">了解更多</a></div>
         </li>
     </script>
     <script type="text/javascript" src="/static/js/tr.js"></script>
     <script type="text/javascript">
         $(document).on('pageinit', '#page-list', function(e) {
-
+            /**
+             * 获取数据，填充列表
+             */
             $.mobile.loading( 'show', {
                 text: '加载数据...',
                 textVisible: true,
                 theme: 'a',
                 textonly: false
             });
-
             var url = '/v1/products';
             $.get(url, function(res, status, xhr) {
                 if(status !== 'success' || res.data.length === 0) {
@@ -75,14 +77,31 @@
                     });
                 });
             });
-        });
 
-        $(document).on("swiperight", "#page-list", function( e ) {
-            if ( $.mobile.activePage.jqmData( "panel" ) !== "open" ) {
-                if ( e.type === "swiperight" ) {
-                    $( "#left-panel" ).panel( "open" );
+            /**
+             * 返回顶部按钮
+             */
+            $(window).on('scrollstop', function(e) {
+                var el = $('.go-top'),
+                        win = $(window);
+                if(win.scrollTop() > win.height() / 2) {
+                    el.show();
                 }
-            }
+                else {
+                    el.hide();
+                }
+            });
+
+            /**
+             * 滑动菜单
+             */
+            $(document).on("swiperight", "#page-list", function( e ) {
+                if ( $.mobile.activePage.jqmData( "panel" ) !== "open" ) {
+                    if ( e.type === "swiperight" ) {
+                        $( "#left-panel" ).panel( "open" );
+                    }
+                }
+            });
         });
     </script>
 </div>
