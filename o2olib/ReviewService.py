@@ -62,8 +62,10 @@ def count_stars(con_dic):
     coursor.close()
     rs = {}
     for item in items:
+        k = item[0]
+        if k:
+            rs[k] = item[1]
         #rs.append({"ranked_stars": item[0],"count":item[1]})
-        rs[item[0]] = item[1]
     return rs
 
 
