@@ -2,7 +2,15 @@
 {% block main %}
 <div data-role="page" id="page-list" data-theme="d">
     <div data-role="header" data-theme="d">
+        {% if page == 'hot' %}
         <h1>装备推荐</h1>
+        {% endif %}
+        {% if page == 'travel' %}
+        <h1>旅友必备</h1>
+        {% endif %}
+        {% if page != 'hot' and page != 'travel'%}
+        <h1>产品列表</h1>
+        {% endif %}
         <a href="#left-panel" data-icon="bars" data-iconpos="notext"></a>
     </div>
     <div data-role="content">
