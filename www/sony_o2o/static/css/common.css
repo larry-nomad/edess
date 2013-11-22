@@ -1,6 +1,6 @@
 h1, h2, h3, h4, h5, h6, div, p, ul, li { margin: 0; padding: 0; }
 
-.go-top { position: fixed; left: 5px; bottom: 5px; display: none; }
+.go-top { position: fixed; left: 5px; bottom: 5px; display: none; z-index: 9999; }
 
 .list-container { width: 290px; margin: 0 auto; }
 .list-container .product .pic { margin-bottom: 10px; }
