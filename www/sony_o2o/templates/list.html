@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block main %}
 <div data-role="page" id="page-list" data-theme="d">
-    {% include "nav_panel.html" %}
+    {% include "panel.html" %}
     <div data-role="header" data-theme="d">
         <a href="#left-panel" data-icon="bars" data-iconpos="notext"></a>
         {% if page == 'hot' %}
@@ -20,9 +20,6 @@
             <ul id="J_list" data-role="listview" data-theme="d"></ul>
         </div>
     </div>
-</div>
-
-<div data-role="page">
     <script type="text/template" id="J_template_list">
         <li data-role="list-divider" data-theme="a">${name}</li>
         <li class="product">
@@ -37,55 +34,9 @@
             <div class="more"><a href="/detail/${id}" data-ajax="false" data-icon="arrow-r" data-iconpos="right" data-role="button" data-mini="true" data-corners="false" data-inline="true">了解更多</a></div>
         </li>
     </script>
-    <script type="text/javascript" src="/static/js/tr.js"></script>
     <script type="text/javascript">
         var list_config = {page: '{{page}}'};
-        $(document).on('pageinit', '#page-list', function(e) {
-            /**
-             * 获取数据，填充列表
-             */
-            var hot_arr = [2, 3, 6, 7, 9, 11, 12, 13, 14],
-                    travel_arr = [1, 4, 5, 8, 10],
-                    urls = {
-                        hot: '/v1/products?id=' + hot_arr.join('&id='),
-                        travel: '/v1/products?id=' + travel_arr.join('&id='),
-                        other: '/v1/products'
-                    },
-                    url = urls[(list_config.page in urls) ? list_config.page : 'other'];
-
-            $.mobile.loading( 'show', {
-                text: '加载数据...',
-                textVisible: true,
-                theme: 'a',
-                textonly: false
-            });
-
-            $.get(url, function(res, status, xhr) {
-                if(status !== 'success' || res.data.length === 0) {
-                    return;
-                }
-                var template = $('#J_template_list').html(),
-                        data = res.data,
-                        html = '';
-                for(var i = 0, len = data.length; i < len; i++) {
-                    html += TemplateRender(template, {
-                        id: data[i].id,
-                        name: data[i].name,
-                        brief: data[i].brief
-                    });
-                }
-                $('#J_list').html(html).trigger('create').listview('refresh');
-                $.mobile.loading('hide');
-
-                $('.swipe').each(function(idx) {
-                    Swipe(this, {
-                        continuous: true,
-                        stopPropagation: true
-                    });
-                });
-            });
-        });
     </script>
 </div>
-{% include "nav_panel_script.html" %}
+{% include "script.html" %}
 {% endblock %}

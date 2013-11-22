@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block main %}
 <div data-role="page" id="page-profile" data-theme="d">
-    {% include "nav_panel.html" %}
+    {% include "panel.html" %}
     <div data-role="header" data-theme="d">
         <a href="#left-panel" data-icon="bars" data-iconpos="notext"></a>
         <h1>我的资料</h1>
@@ -48,20 +48,5 @@
         </div>
     </div>
 </div>
-
-<div data-role="page">
-    <script type="text/javascript">
-        $(document).on('pageinit', '#page-profile', function(e) {
-            $('#J_profile_form').on('submit', function(e) {
-                if($('#J_login').val() === '') {
-                    window.scrollTo(0, 0);
-                    alert('登录名称，不能为空！');
-                    e.preventDefault();
-                    return false;
-                }
-            });
-        });
-    </script>
-</div>
-{% include "nav_panel_script.html" %}
+{% include "script.html" %}
 {% endblock %}

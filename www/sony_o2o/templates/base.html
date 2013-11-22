@@ -8,8 +8,11 @@
     <script type="text/javascript" src="/static/swipe/swipe.min.js"></script>
     <script type="text/javascript" src="/static/jquery/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="/static/jquery/mobile/jquery.mobile-1.3.2.min.js"></script>
+    <script type="text/javascript">
+        $.mobile.defaultPageTransition = 'fade';
+    </script>
 </head>
 <body>
-    {% block main %}{% endblock %}
+{% block main %}{% endblock %}
 </body>
 </html>
