@@ -1,0 +1,34 @@
+<div data-role="page" id="page-list" data-theme="d">
+    <div data-role="header" data-theme="d">
+        {% if page == 'hot' %}
+        <h1>装备推荐</h1>
+        {% endif %}
+        {% if page == 'travel' %}
+        <h1>旅友必备</h1>
+        {% endif %}
+        {% if page != 'hot' and page != 'travel'%}
+        <h1>产品列表</h1>
+        {% endif %}
+        <a href="#left-panel" data-icon="bars" data-iconpos="notext"></a>
+        <a href="http://oauth.qunar.com/oauth-client/qq/login?appname=www&display=mobile&ret=http://touch.xperia.qunar.com/hot&method=login&vistor=http://touch.xperia.qunar.com/v1/login">QQ登录</a>
+        <a href="http://oauth.qunar.com/oauth-client/sina/login?appname=www&display=mobile&ret=http://touch.xperia.qunar.com/hot&method=login&vistor=http://touch.xperia.qunar.com/v1/login">微博登录</a>
+    </div>
+    <div data-role="content">
+        <div class="list-container">
+            <ul id="J_list" data-role="listview" data-theme="d"></ul>
+        </div>
+    </div>
+    <div data-role="panel" id="left-panel" data-theme="a">
+        <ul data-role="listview" data-theme="a">
+            <li data-role="list-divider" data-theme="d">导航</li>
+            <li><a href="/list/hot" data-ajax="false">装备推荐</a></li>
+            <li><a href="/list/travel" data-ajax="false">旅游必备</a></li>
+            <li><a href="/store" data-transition="slide">直营店面</a></li>
+            <li data-role="list-divider" data-theme="d">用户</li>
+            <li><a href="#" data-ajax="false">我的收藏</a></li>
+            <li><a href="#" data-ajax="false">我的手册</a></li>
+            <li><a href="/profile" data-ajax="false">我的资料</a></li>
+        </ul>
+    </div>
+    <div class="go-top"><a href="javascript:window.scrollTo(0,0);" data-role="button" data-icon="arrow-u" data-corners="false" data-mini="true">顶部</a></div>
+</div>
