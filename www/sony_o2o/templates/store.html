@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 {% block main %}
 <div data-role="page" id="page-store" data-theme="d">
+    {% include "nav_panel.html" %}
     <div data-role="header" data-theme="d">
-        <a href="/list/hot" data-ajax="false" data-icon="star" data-iconpos="notext"></a>
-        <h1>直营店面</h1>
+        <a href="#left-panel" data-icon="bars" data-iconpos="notext"></a>
+        <h1>SONY直营店面</h1>
     </div>
     <div data-role="content">
         <div class="store-container">
@@ -57,4 +58,5 @@
         </div>
     </div>
 </div>
+{% include "nav_panel_script.html" %}
 {% endblock %}

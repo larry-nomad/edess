@@ -12,3 +12,4 @@ pid/*
 /.gitignore
 /.settings
 /logs
+/.cache

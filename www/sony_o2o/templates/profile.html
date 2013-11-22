@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% block main %}
 <div data-role="page" id="page-profile" data-theme="d">
+    {% include "nav_panel.html" %}
     <div data-role="header" data-theme="d">
-        <a href="/list/hot" data-ajax="false" data-icon="star" data-iconpos="notext"></a>
+        <a href="#left-panel" data-icon="bars" data-iconpos="notext"></a>
         <h1>我的资料</h1>
     </div>
     <div data-role="content">
@@ -47,7 +48,7 @@
     </div>
 </div>
 
-<div data-role="page" id="page-script">
+<div data-role="page">
     <script type="text/javascript">
         $(document).on('pageinit', '#page-profile', function(e) {
             $('#J_profile_form').on('submit', function(e) {
@@ -61,4 +62,5 @@
         });
     </script>
 </div>
+{% include "nav_panel_script.html" %}
 {% endblock %}

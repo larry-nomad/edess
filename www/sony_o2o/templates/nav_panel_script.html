@@ -1,0 +1,28 @@
+<div data-role="page">
+    <script type="text/javascript">
+        /**
+         * 返回顶部按钮
+         */
+        $(window).on('scrollstop', function(e) {
+            var el = $('.go-top'),
+                    win = $(window);
+            if(win.scrollTop() > win.height() / 2) {
+                el.show();
+            }
+            else {
+                el.hide();
+            }
+        });
+
+        /**
+         * 滑动菜单
+         */
+        $(document).on("swiperight", function( e ) {
+            if ( $.mobile.activePage.jqmData( "panel" ) !== "open" ) {
+                if ( e.type === "swiperight" ) {
+                    $( "#left-panel" ).panel( "open" );
+                }
+            }
+        });
+    </script>
+</div>

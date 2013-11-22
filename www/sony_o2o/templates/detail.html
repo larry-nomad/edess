@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% block main %}
 <div data-role="page" id="page-detail" data-theme="d">
+    {% include "nav_panel.html" %}
     <div data-role="header" data-theme="d">
-        <a href="/search" data-ajax="false" data-icon="search" data-iconpos="notext"></a>
+        <a href="#left-panel" data-icon="bars" data-iconpos="notext"></a>
         <h1>Smartphone attachable lens-style camera</h1>
     </div>
     <div data-role="content">
@@ -33,4 +34,5 @@
         </div>
     </div>
 </div>
+{% include "nav_panel_script.html" %}
 {% endblock %}

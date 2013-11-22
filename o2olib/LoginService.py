@@ -12,6 +12,7 @@ import httplib2 as http
 import json
 from o2olib.QException import QException
 from datetime import datetime
+from urllib import urlencode
 
 SINA_API_URL = "https://api.weibo.com/2/users/show.json"  
 QQ_API_URL = "https://graph.qq.com/user/get_user_info"
@@ -23,10 +24,13 @@ def login_from_sina(args):
     uid = args.get("userId")
     
     h = http.Http(".cache")
-    url = "%s?access_token=%s&uid=%s"%(SINA_API_URL,access_token,uid)
+#     url = urlencode("%s?access_token=%s&uid=%s"%(SINA_API_URL,access_token,uid))
+    url = "%s?%s"%(SINA_API_URL,urlencode({"access_token": access_token,
+                                         "uid":uid}))
+
     r, content = h.request(url,"GET")
     ret_data = json.loads(content)
-#     logger.info(u"login_from_sina,url:%s ret_data:%s"%(url,content))
+    logger.info(u"login_from_sina,url:%s ret_data:%s"%(url,ret_data))
     if ret_data.get("error_code"):
         raise QException(u"获取用户信息失败")
     
@@ -46,10 +50,15 @@ def login_from_qq(args):
     openid = rs.get("qq_openid")
     appid = rs.get("appid")
     h = http.Http(".cache")
-    url = "%s?oauth_consumer_key=%s&access_token=%s&openid=%s&format=%s"%(QQ_API_URL,appid,access_token,openid,"json")
+#     url = "%s?%s"%(QQ_API_URL,urlencode("oauth_consumer_key=%s&access_token=%s&openid=%s&format=%s"%(appid,access_token,openid,"json")))
+
+    url = "%s?%s"%(QQ_API_URL,urlencode({"oauth_consumer_key": appid,
+                                         "access_token":access_token,
+                                         "openid":openid,
+                                         "format":json}))
     r,content = h.request(url,"GET")
-    ret_data = json.loads(content)
-#     logger.info("login_from_qq,url:%s ret_data:%s"%(url,content))
+    ret_data = json.loads(content) 
+    logger.info(u"login_from_qq,url:%s ret_data:%s"%(url,ret_data))
     if ret_data.get("ret") != 0:
         raise QException(u"获取用户信息失败")
     

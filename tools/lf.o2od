@@ -2,7 +2,7 @@
 
 PYTHON_PATH='/usr/bin/python'
 PYTHON=python
-APP_PATH='/Users/liufang.deng/Documents/code/dev/edess'
+APP_PATH='/Users/liufang.deng/git/edess'
 
 export PYTHON_EGG_CACHE=/tmp/.egg_cache
 export GPM_PATH=$APP_PATH
