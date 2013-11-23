@@ -27,19 +27,30 @@ $(window).on('scrollstop', function(e) {
 /**
  * 滑动菜单
  */
-$(document).on("swiperight", function( e ) {
-    if ( $.mobile.activePage.jqmData( "panel" ) !== "open" ) {
+$(document).on("swiperight swipeleft", '#hot, #travel, #detail, #profile, #store', function( e ) {
+    var pageId = $(this).attr('id');
+    if($.mobile.activePage.jqmData("panel") !== "open" ) {
         if ( e.type === "swiperight" ) {
-            $( "#left-panel" ).panel( "open" );
+            $('#panel-left-' + pageId).panel('open');
+        }
+        if ( e.type === "swipeleft" ) {
+            $('#panel-right-' + pageId).panel('open');
         }
     }
+});
+$(document).on('pagebeforecreate', '#hot, #travel, #detail, #profile, #store', function(e) {
+    var pageId = $(this).attr('id'),
+        panel_template = TemplateRender($('#J_template_panel').html(), {
+            pageId: pageId
+        });
+    $(this).prepend(panel_template);
 });
 /**
  * profile页面
  */
 $(document).on('pageinit', '#profile', function(e) {
     $('#J_profile_form').on('submit', function(e) {
-        if($('#J_login').val() === '') {
+        if($('#J_profile_login').val() === '') {
             window.scrollTo(0, 0);
             alert('登录名称，不能为空！');
             e.preventDefault();
@@ -80,8 +91,8 @@ $(document).on('pageinit', '#hot, #travel', function(e) {
                 brief: data[i].brief
             });
         }
-        $('#' + page + ' ul').html(html).trigger('create').listview('refresh');
-        $('#' + page + ' ul' + ' .swipe').each(function(idx) {
+        $('#' + page + ' .list-container ul').html(html).trigger('create').listview('refresh');
+        $('#' + page + ' .list-container ul' + ' .swipe').each(function(idx) {
             Swipe(this, {
                 continuous: true,
                 stopPropagation: true

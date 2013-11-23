@@ -2,9 +2,9 @@
 {% block main %}
 <div data-role="page" id="hot" data-theme="d">
     <div data-role="header" data-theme="d">
-        <a href="#panel-left" data-icon="grid" data-iconpos="notext"></a>
+        <a href="#panel-left-hot" data-icon="bars" data-iconpos="notext"></a>
         <h1>装备推荐</h1>
-        <a href="#panel-right" data-icon="grid" data-iconpos="notext"></a>
+        <a href="#panel-right-hot" data-icon="grid" data-iconpos="notext"></a>
     </div>
     <div data-role="content">
         <div class="list-container">
@@ -15,9 +15,9 @@
 
 <div data-role="page" id="travel" data-theme="d">
     <div data-role="header" data-theme="d">
-        <a href="#panel-left" data-icon="grid" data-iconpos="notext"></a>
+        <a href="#panel-left-travel" data-icon="bars" data-iconpos="notext"></a>
         <h1>装备推荐</h1>
-        <a href="#panel-right" data-icon="grid" data-iconpos="notext"></a>
+        <a href="#panel-right-travel" data-icon="grid" data-iconpos="notext"></a>
     </div>
     <div data-role="content">
         <div class="list-container">
@@ -28,9 +28,9 @@
 
 <div data-role="page" id="detail" data-theme="d">
     <div data-role="header" data-theme="d">
-        <a href="#store" data-icon="bars" data-iconpos="notext"></a>
+        <a href="#panel-left-detail" data-icon="bars" data-iconpos="notext"></a>
         <h1>Smartphone attachable lens-style camera</h1>
-        <a href="#panel-right" data-icon="grid" data-iconpos="notext"></a>
+        <a href="#panel-right-detail" data-icon="grid" data-iconpos="notext"></a>
     </div>
     <div data-role="content">
         <div class="detail-container">
@@ -63,9 +63,9 @@
 
 <div data-role="page" id="store" data-theme="d">
     <div data-role="header" data-theme="d">
-        <a href="#detail" data-icon="bars" data-iconpos="notext"></a>
+        <a href="#panel-left-store" data-icon="bars" data-iconpos="notext"></a>
         <h1>SONY直营店面</h1>
-        <a href="#panel-right" data-icon="grid" data-iconpos="notext"></a>
+        <a href="#panel-right-store" data-icon="grid" data-iconpos="notext"></a>
     </div>
     <div data-role="content">
         <div class="store-container">
@@ -122,9 +122,9 @@
 
 <div data-role="page" id="profile" data-theme="d">
     <div data-role="header" data-theme="d">
-        <a href="#panel-left" data-icon="bars" data-iconpos="notext"></a>
+        <a href="#panel-left-profile" data-icon="bars" data-iconpos="notext"></a>
         <h1>我的资料</h1>
-        <a href="#panel-right" data-icon="grid" data-iconpos="notext"></a>
+        <a href="#panel-right-profile" data-icon="grid" data-iconpos="notext"></a>
     </div>
     <div data-role="content">
         <div class="profile-container">
@@ -132,34 +132,34 @@
                 <ul data-role="listview" data-divider-theme="d">
                     <li data-role="list-divider" data-theme="a">基本信息</li>
                     <li>
-                        <label for="J_login">登录名称</label>
-                        <input type="text" id="J_login" name="login" placeholder="登录名称，必填项" required="true"/>
-                        <label for="J_name">真实姓名</label>
-                        <input type="text" id="J_name" name="name" placeholder="真实姓名"/>
+                        <label for="J_profile_login">登录名称</label>
+                        <input type="text" id="J_profile_login" name="login" placeholder="登录名称，必填项" required="true"/>
+                        <label for="J_profile_name">真实姓名</label>
+                        <input type="text" id="J_profile_name" name="name" placeholder="真实姓名"/>
                         <fieldset data-role="controlgroup" data-type="horizontal">
                             <legend>称呼</legend>
-                            <input type="radio" name="gender" id="J_male" value="m"/>
-                            <label for="J_male">先生</label>
-                            <input type="radio" name="gender" id="J_female" value="f"/>
-                            <label for="J_female">女士</label>
-                            <input type="radio" name="gender" id="J_none" value=""/>
-                            <label for="J_none">保密</label>
+                            <input type="radio" name="gender" id="J_profile_male" value="m"/>
+                            <label for="J_profile_male">先生</label>
+                            <input type="radio" name="gender" id="J_profile_female" value="f"/>
+                            <label for="J_profile_female">女士</label>
+                            <input type="radio" name="gender" id="J_profile_none" value=""/>
+                            <label for="J_profile_none">保密</label>
                         </fieldset>
-                        <label for="J_birthday">生日</label>
-                        <input type="date" id="J_birthday" name="birthday" placeholder="生日"/>
+                        <label for="J_profile_birthday">生日</label>
+                        <input type="date" id="J_profile_birthday" name="birthday" placeholder="生日"/>
                     </li>
                     <li data-role="list-divider" data-theme="a">联系方式</li>
                     <li>
-                        <label for="J_email">电子邮件</label>
-                        <input type="email" id="J_email" name="email" placeholder="电子邮件"/>
-                        <label for="J_phone">手机</label>
-                        <input type="tel" id="J_phone" name="phone" placeholder="手机号码"/>
-                        <label for="J_qq">QQ</label>
-                        <input type="tel" id="J_qq" name="qq" placeholder="QQ号码"/>
-                        <label for="J_wechat">微信</label>
-                        <input type="text" id="J_wechat" name="wechat" placeholder="微信号码"/>
-                        <label for="J_weibo">微博</label>
-                        <input type="text" id="J_weibo" name="weibo" placeholder="微博号码"/>
+                        <label for="J_profile_email">电子邮件</label>
+                        <input type="email" id="J_profile_email" name="email" placeholder="电子邮件"/>
+                        <label for="J_profile_phone">手机</label>
+                        <input type="tel" id="J_profile_phone" name="phone" placeholder="手机号码"/>
+                        <label for="J_profile_qq">QQ</label>
+                        <input type="tel" id="J_profile_qq" name="qq" placeholder="QQ号码"/>
+                        <label for="J_profile_wechat">微信</label>
+                        <input type="text" id="J_profile_wechat" name="wechat" placeholder="微信号码"/>
+                        <label for="J_profile_weibo">微博</label>
+                        <input type="text" id="J_profile_weibo" name="weibo" placeholder="微博号码"/>
                     </li>
                     <li><button type="submit" data-icon="check" data-corners="false">保存信息</button></li>
                 </ul>
@@ -168,36 +168,35 @@
     </div>
 </div>
 
-<div data-role="page" id="panel">
-    <div data-role="panel" id="panel-left" data-theme="a" data-position="left">
-        <ul data-role="listview" data-theme="a">
-            <li data-role="list-divider" data-theme="d">导航</li>
-            <li><a href="#hot">装备推荐</a></li>
-            <li><a href="#travel">旅友必备</a></li>
-            <li><a href="#store">直营店面</a></li>
-            <li data-role="list-divider" data-theme="d">用户</li>
-            <li><a href="#">我的收藏</a></li>
-            <li><a href="#">我的手册</a></li>
-            <li><a href="#profile">我的资料</a></li>
-        </ul>
-    </div>
-
-    <div data-role="panel" id="panel-right" data-theme="a" data-position="right">
-        <ul data-role="listview" data-theme="a">
-            <li data-role="list-divider" data-theme="d">登录方式</li>
-            <li>
-                <a href="http://oauth.qunar.com/oauth-client/qq/login?appname=www&display=mobile&ret=http://touch.xperia.qunar.com/list/hot&method=login&vistor=http://touch.xperia.qunar.com/v1/login">QQ登录</a>
-            </li>
-            <li>
-                <a href="http://oauth.qunar.com/oauth-client/sina/login?appname=www&display=mobile&ret=http://touch.xperia.qunar.com/list/hot&method=login&vistor=http://touch.xperia.qunar.com/v1/login">微博登录</a>
-            </li>
-        </ul>
-    </div>
-
-    <div id="go-top" class="go-top"><a href="javascript:window.scrollTo(0,0);" data-role="button" data-icon="arrow-u" data-corners="false" data-mini="true">顶部</a></div>
-</div>
-
 <div data-role="page" id="script-script">
+    <script type="text/template" id="J_template_panel">
+        <div class="J_panel_container">
+            <div class="go-top"><a href="javascript:window.scrollTo(0,0);" data-role="button" data-icon="arrow-u" data-corners="false" data-mini="true">顶部</a></div>
+            <div data-role="panel" id="panel-left-${pageId}" data-theme="a" data-position="left">
+                <ul data-role="listview" data-theme="a">
+                    <li data-role="list-divider" data-theme="d">导航</li>
+                    <li><a href="#hot" data-ajax="false">装备推荐</a></li>
+                    <li><a href="#travel" data-ajax="false">旅友必备</a></li>
+                    <li><a href="#store" data-ajax="false">直营店面</a></li>
+                    <li data-role="list-divider" data-theme="d">用户</li>
+                    <li><a href="#">我的收藏</a></li>
+                    <li><a href="#">我的手册</a></li>
+                    <li><a href="#profile" data-ajax="false">我的资料</a></li>
+                </ul>
+            </div>
+            <div data-role="panel" id="panel-right-${pageId}" data-theme="a" data-position="right">
+                <ul data-role="listview" data-theme="a">
+                    <li data-role="list-divider" data-theme="d">登录方式</li>
+                    <li>
+                        <a href="http://oauth.qunar.com/oauth-client/qq/login?appname=www&display=mobile&ret=http://touch.xperia.qunar.com/list/hot&method=login&vistor=http://touch.xperia.qunar.com/v1/login">QQ登录</a>
+                    </li>
+                    <li>
+                        <a href="http://oauth.qunar.com/oauth-client/sina/login?appname=www&display=mobile&ret=http://touch.xperia.qunar.com/list/hot&method=login&vistor=http://touch.xperia.qunar.com/v1/login">微博登录</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </script>
     <script type="text/template" id="J_template_list">
         <li data-role="list-divider" data-theme="a">${name}</li>
         <li class="product">
@@ -209,7 +208,7 @@
                 </div>
             </div>
             <div class="info">${brief}</div>
-            <div class="more"><a href="/detail/${id}" data-ajax="false" data-icon="arrow-r" data-iconpos="right" data-role="button" data-mini="true" data-corners="false" data-inline="true">了解更多</a></div>
+            <div class="more"><a href="#detail?id=${id}" data-ajax="false" data-icon="arrow-r" data-iconpos="right" data-role="button" data-mini="true" data-corners="false" data-inline="true">了解更多</a></div>
         </li>
     </script>
     <script type="text/javascript" src="/static/js/page.js"></script>
