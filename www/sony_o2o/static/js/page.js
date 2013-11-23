@@ -37,7 +37,7 @@ $(document).on("swiperight", function( e ) {
 /**
  * profile页面
  */
-$(document).on('pageinit', '#page-profile', function(e) {
+$(document).on('pageinit', '#profile', function(e) {
     $('#J_profile_form').on('submit', function(e) {
         if($('#J_login').val() === '') {
             window.scrollTo(0, 0);
@@ -50,17 +50,19 @@ $(document).on('pageinit', '#page-profile', function(e) {
 /**
  * list页面
  */
-$(document).on('pageinit', '#page-list', function(e) {
+$(document).on('pageinit', '#hot, #travel', function(e) {
     /**
      * 获取数据，填充列表
      */
-    var page = list_config.page,
-        hot_arr = [2, 3, 6, 7, 9, 11, 12, 13, 14],
-        travel_arr = [1, 4, 5, 8, 10],
+    var page = $(this).attr('id'),
+        hot_arr = [2, 3, 6, 7, 13, 14],
+        //hot_arr = [2, 3, 6, 7, 9, 11, 12, 13, 14],
+        travel_arr = [1, 4, 5],
+        //travel_arr = [1, 4, 5, 8, 10],
         urls = {
-            hot: '/v1/products?id=' + hot_arr.join('&id='),
-            travel: '/v1/products?id=' + travel_arr.join('&id='),
-            other: '/v1/products'
+            'hot': '/v1/products?id=' + hot_arr.join('&id='),
+            'travel': '/v1/products?id=' + travel_arr.join('&id='),
+            'other': '/v1/products'
         },
         url = urls[(page in urls) ? page : 'other'];
 
@@ -78,8 +80,8 @@ $(document).on('pageinit', '#page-list', function(e) {
                 brief: data[i].brief
             });
         }
-        $('#J_list').html(html).trigger('create').listview('refresh');
-        $('#J_list' + ' .swipe').each(function(idx) {
+        $('#' + page + ' ul').html(html).trigger('create').listview('refresh');
+        $('#' + page + ' ul' + ' .swipe').each(function(idx) {
             Swipe(this, {
                 continuous: true,
                 stopPropagation: true
