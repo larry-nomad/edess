@@ -40,7 +40,7 @@ def login():
         
     session["guest_id"] = guest.get("id")
     session["guest_name"] = guest.get("name")
-    session.save()
+#     session.save()
     ret = request.args.get("ret")
     logger.debug("login,guest:%s ret:%s"%(session["guest_id"],ret))
 #     return render_template("index.html#", data = guest)
