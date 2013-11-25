@@ -10,6 +10,7 @@ from o2olib import LoginService
 from o2olib import logger
 import re
 from flask import redirect,Blueprint,request,session
+from flask import render_template
 
 BP = Blueprint('login', __name__)
 LOGIN_URL = "http://oauth.qunar.com/oauth-client/%s/login?appname=%s&display=mobile&ret=%s&method=login&vistor=%s"
@@ -39,8 +40,10 @@ def login():
         
     session["guest_id"] = guest.get("id")
     session["guest_name"] = guest.get("name")
+    session.save()
     ret = request.args.get("ret")
     logger.debug("login,guest:%s ret:%s"%(session["guest_id"],ret))
+#     return render_template("index.html#", data = guest)
     return redirect(ret)    
     
 @BP.route("v1/logout")
