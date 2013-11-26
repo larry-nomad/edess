@@ -10,7 +10,7 @@ from o2olib import LoginService
 from o2olib import logger
 import re
 from flask import redirect,Blueprint,request,session
-from flask import render_template
+from o2olib.QException import QException
 
 BP = Blueprint('login', __name__)
 LOGIN_URL = "http://oauth.qunar.com/oauth-client/%s/login?appname=%s&display=mobile&ret=%s&method=login&vistor=%s"
@@ -37,6 +37,8 @@ def login():
         guest = LoginService.login_from_sina(request.args)
     elif domain and re.search("qq", domain, re.IGNORECASE):
         guest = LoginService.login_from_qq(request.args)
+    else:
+        raise QException(u"不支持这种登陆方式，domain:%s"%domain)
         
     session["guest_id"] = guest.get("id")
     session["guest_name"] = guest.get("name")
@@ -50,4 +52,4 @@ def login():
 def logout():
     session.pop("guest_id",None)
     session.pop("guest_name",None)
-    return redirect('/hot')
+    return redirect('/')

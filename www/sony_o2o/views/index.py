@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, session
 from flask import render_template
 
 BP = Blueprint('index', __name__)
@@ -6,4 +6,7 @@ BP = Blueprint('index', __name__)
 
 @BP.route('/')
 def index():
-    return render_template("index.html")
+    guest = {}
+    guest["id"] = session["guest_id"]
+    guest["name"] = session["guest_name"]
+    return render_template("index.html", guest=guest)
