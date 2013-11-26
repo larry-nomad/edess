@@ -58,10 +58,10 @@ class Review(Resource):
 
 class Reviews(Resource):
     
-    @require_login
+#     @require_login
     def get(self):
         con_dic = utils.multidict2dict(request.args)
-        con_dic["guest_id"] = session["guest_id"]
+#         con_dic["guest_id"] = session["guest_id"]
         reviews = ReviewService.gets(con_dic)
         for review in reviews:
             review["guest"] = GuestService.get(review.get("guest_id"))
