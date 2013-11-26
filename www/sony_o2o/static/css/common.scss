@@ -55,26 +55,17 @@ h1,h2,h3,h4,h5,h6,div,p,ul,li {
 .detail-container {
   width: 290px;
   margin: 0 auto;
-  .info {
-    .title {
-      font-size: 20px;
-    }
-  }
   .video {
     height: 290px;
     background-color: #333333;
   }
-  .comment {
-    height: 290px;
-    background-color: #cccccc;
+  .title {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
   }
-  .manual {
-    height: 290px;
-    background-color: #cccccc;
-  }
-  .specific {
-    height: 290px;
-    background-color: #cccccc;
+  .brief {
+    font-size: 12px;
   }
 }
 

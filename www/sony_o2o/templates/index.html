@@ -29,32 +29,31 @@
 <div data-role="page" id="detail" data-theme="d">
     <div data-role="header" data-theme="d">
         <a href="#panel-left-detail" data-icon="bars" data-iconpos="notext"></a>
-        <h1>Smartphone attachable lens-style camera</h1>
+        <h1 class="J-detail-title"></h1>
         <a href="#panel-right-detail" data-icon="grid" data-iconpos="notext"></a>
     </div>
     <div data-role="content">
         <div class="detail-container">
-            <div class="info">
-                <h2 class="title">DSC-QX10/B</h2>
-                <p class="ext"></p>
-            </div>
             <div class="video">
                 video
             </div>
             <div class="toolbar">
-                <a href="#" data-role="button" data-mini="true" data-inline="true" data-icon="star" data-corners="false">321</a>
-                <a href="#" data-role="button" data-mini="true" data-inline="true" data-icon="forward" data-corners="false">分享</a>
-                <a href="#" data-role="button" data-mini="true" data-inline="true" data-icon="forward" data-corners="false">分享</a>
+                <a href="#" data-role="button" data-mini="true" data-inline="true" data-icon="star" data-corners="false">
+                    <span id="J_detail_like">0</span>
+                </a>
+                <a href="#share" data-rel="dialog" data-role="button" data-mini="true" data-inline="true" data-icon="forward" data-corners="false">分享</a>
             </div>
             <div data-role="collapsible-set" data-theme="d" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
-                <div data-role="collapsible">
+                <div data-role="collapsible" data-collapsed="false">
                     <h2>规格</h2>
-                </div>
-                <div data-role="collapsible">
-                    <h2>手册</h2>
+                    <div class="J-detail-title title"></div>
+                    <div class="J-detail-brief brief"></div>
                 </div>
                 <div data-role="collapsible">
                     <h2>评价</h2>
+                    <ul data-role="listview" id="J_detail_comment">
+                        <li>comment</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -166,6 +165,16 @@
             </form>
         </div>
     </div>
+</div>
+
+<div data-role="page" id="share">
+    <div data-role="header" data-theme="b">
+        <h1>我要分享</h1>
+    </div>
+    <div data-role="content">
+        sdfsdf
+    </div>
+    <div data-role="footer">&nbsp;</div>
 </div>
 
 <div data-role="page" id="script-script">

@@ -1,7 +1,7 @@
 /**
  * 模版解析
  */
-var TemplateRender = function(template, data) {
+var renderTemplate = function(template, data) {
     for(var i in data) {
         if(!data.hasOwnProperty(i)) {
             continue;
@@ -10,6 +10,15 @@ var TemplateRender = function(template, data) {
         template = template.replace(reg, data[i]);
     }
     return template;
+};
+var getParam = function(str) {
+    var p_arr = str.split('&'),
+        param = {};
+    for(var len = p_arr.length; len > 0; len--) {
+        var obj = p_arr[len - 1].split('=');
+        param[obj[0]] = obj[1];
+    }
+    return param;
 };
 /**
  * 返回顶部按钮
@@ -40,7 +49,7 @@ $(document).on("swiperight swipeleft", '#hot, #travel, #detail, #profile, #store
 });
 $(document).on('pagebeforecreate', '#hot, #travel, #detail, #profile, #store', function(e) {
     var pageId = $(this).attr('id'),
-        panel_template = TemplateRender($('#J_template_panel').html(), {
+        panel_template = renderTemplate($('#J_template_panel').html(), {
             pageId: pageId
         });
     $(this).prepend(panel_template);
@@ -85,7 +94,7 @@ $(document).on('pageinit', '#hot, #travel', function(e) {
             data = res.data,
             html = '';
         for(var i = 0, len = data.length; i < len; i++) {
-            html += TemplateRender(template, {
+            html += renderTemplate(template, {
                 id: data[i].id,
                 name: data[i].name,
                 brief: data[i].brief
@@ -98,5 +107,22 @@ $(document).on('pageinit', '#hot, #travel', function(e) {
                 stopPropagation: true
             });
         });
+    });
+});
+/**
+ * detail页面
+ */
+$(document).on('pagebeforeshow', '#detail', function(e) {
+    var hash = window.location.hash,
+        param = getParam(hash.replace('#detail?', '')),
+        url = '/v1/product/' + param.id;
+    $.get(url, function(res, status, xhr) {
+        if(status !== 'success') {
+            return;
+        }
+        var data = res.data;
+        $('.J-detail-title').html(data.name);
+        $('.J-detail-brief').html(data.brief);
+        $('.J-detail-like').html(data.likes_count);
     });
 });
