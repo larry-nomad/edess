@@ -196,7 +196,7 @@ ALTER SEQUENCE map_guest_reviews_id_seq OWNED BY map_guest_reviews.id;
 -- Name: map_guest_reviews_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('map_guest_reviews_id_seq', 234, true);
+SELECT pg_catalog.setval('map_guest_reviews_id_seq', 236, true);
 
 
 --
@@ -265,7 +265,8 @@ CREATE TABLE table_guest (
     alipay character varying(256),
     credit_points integer,
     influence_point integer,
-    status character varying(64)
+    status character varying(64),
+    weibo_uid character varying(1024)
 );
 
 
@@ -296,7 +297,7 @@ ALTER SEQUENCE table_guest_id_seq OWNED BY table_guest.id;
 -- Name: table_guest_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('table_guest_id_seq', 27, true);
+SELECT pg_catalog.setval('table_guest_id_seq', 37, true);
 
 
 --
@@ -450,14 +451,16 @@ COPY map_guest_manuals (id, product_id, guest_id) FROM stdin;
 --
 
 COPY map_guest_reviews (id, product_id, guest_id, is_approved, comment, ranked_stars, review_date) FROM stdin;
-227	2	14	f	334\n	\N	\N
-228	2	14	f	334\n	\N	\N
-229	2	14	t	ddddd	\N	\N
-230	\N	\N	\N	\N	\N	\N
-231	\N	\N	\N	\N	\N	\N
-232	2	14	f	ddddd	\N	\N
-233	2	14	f	ddddd	\N	\N
-234	2	16	f	ddddd	\N	\N
+227	2	29	t	这个我就喜欢	5	2013-11-26
+228	1	29	t	确实不错	4	2013-11-11
+229	2	30	t	手感细腻	5	2013-11-11
+230	1	30	t	朋友推荐的，不错	4	2013-11-12
+231	2	31	t	颜色很正，做工不错	4	2013-11-10
+232	2	32	t	Great Value!	4	2013-11-13
+233	1	33	t	真不怕水！！	3	2013-11-09
+234	1	34	t	防水处理真好	5	2013-11-09
+235	1	36	t	Nice quanlity	5	2013-11-07
+236	1	37	t	果然超值！	4	2013-11-07
 \.
 
 
@@ -474,8 +477,16 @@ COPY map_product_img (id, product_id, small, medium, large) FROM stdin;
 -- Data for Name: table_guest; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY table_guest (id, name, gender, birthday, telephone, register_date, last_active_date, email, qq, qq_openid, wechat, twitter, weibo, facebook, google_plus, alipay, credit_points, influence_point, status) FROM stdin;
-27	HakunaMatata	f	\N	\N	2013-11-21	2013-11-21	\N	HakunaMatata	FEBD4A0F4EE4A7A5EEC6B2BB04E766E1	\N	\N	\N	\N	\N	\N	\N	\N	\N
+COPY table_guest (id, name, gender, birthday, telephone, register_date, last_active_date, email, qq, qq_openid, wechat, twitter, weibo, facebook, google_plus, alipay, credit_points, influence_point, status, weibo_uid) FROM stdin;
+30	availabletest	f	\N	\N	2013-11-21	2013-11-21	\N	\N	\N	\N	\N	3904348426	\N	\N	\N	\N	\N	\N	\N
+29	HakunaMatata	f	\N	\N	2013-11-21	2013-11-25	\N	HakunaMatata	FEBD4A0F4EE4A7A5EEC6B2BB04E766E1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+31	小毛	m	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+34	大师傅	m	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+33	007是我	m	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+32	黑影	m	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+35	我爱人民币	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+36	薛必群	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+37	Cherry王	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 \.
 
 
