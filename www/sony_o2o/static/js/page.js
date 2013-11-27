@@ -59,11 +59,35 @@ $(document).on('pagebeforecreate', '#hot, #travel, #detail, #profile, #store', f
  */
 $(document).on('pageinit', '#profile', function(e) {
     $('#J_profile_form').on('submit', function(e) {
-        if($('#J_profile_login').val() === '') {
+        if($('#J_profile_name').val() === '') {
             window.scrollTo(0, 0);
             alert('登录名称，不能为空！');
             e.preventDefault();
             return false;
+        }
+    });
+});
+$(document).on('pagebeforeshow', '#profile', function(e) {
+    var url = '/v1/guest';
+    $.get(url, function(res, status, xhr) {
+        if(status !== 'success') {
+            return;
+        }
+//        $('#J_profile_form')[0].reset();
+        var keys = ['name', 'gender', 'birthday', 'email', 'telephone', 'qq', 'wechat', 'weibo'],
+            data = res.data;
+        for(var i = 0; i < keys.length; i++) {
+            var key = keys[i];
+            if(data[key]) {
+                if(key === 'gender') {
+                    $('#J_profile_form input:radio[value=' + data[key]+ ']').prop('checked', true);
+                    $('#J_profile_form input:radio').checkboxradio('refresh');
+                    console.log(key);
+                }
+                else {
+                    $('#J_profile_form input[name=' + key + ']').val(data[key]);
+                }
+            }
         }
     });
 });

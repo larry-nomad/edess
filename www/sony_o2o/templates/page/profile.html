@@ -1,0 +1,43 @@
+<div data-role="page" id="profile" data-theme="d">
+    <div data-role="header" data-theme="d">
+        <a href="#panel-left-profile" data-icon="bars" data-iconpos="notext"></a>
+        <h1>我的资料</h1>
+        <a href="#panel-right-profile" data-icon="grid" data-iconpos="notext"></a>
+    </div>
+    <div data-role="content">
+        <div class="profile-container">
+            <form action="/v1/guest" id="J_profile_form" method="put">
+                <ul data-role="listview" data-divider-theme="d">
+                    <li data-role="list-divider" data-theme="a">基本信息</li>
+                    <li>
+                        <label for="J_profile_name">登录名称</label>
+                        <input type="text" id="J_profile_name" name="name" placeholder="登录名称，必填项" required="true"/>
+                        <fieldset data-role="controlgroup" data-type="horizontal">
+                            <legend>称呼</legend>
+                            <input type="radio" name="gender" id="J_profile_male" value="m"/>
+                            <label for="J_profile_male">先生</label>
+                            <input type="radio" name="gender" id="J_profile_female" value="f"/>
+                            <label for="J_profile_female">女士</label>
+                        </fieldset>
+                        <label for="J_profile_birthday">生日</label>
+                        <input type="date" id="J_profile_birthday" name="birthday" placeholder="生日"/>
+                    </li>
+                    <li data-role="list-divider" data-theme="a">联系方式</li>
+                    <li>
+                        <label for="J_profile_email">电子邮件</label>
+                        <input type="email" id="J_profile_email" name="email" placeholder="电子邮件"/>
+                        <label for="J_profile_telephone">手机</label>
+                        <input type="tel" id="J_profile_telephone" name="telephone" placeholder="手机号码"/>
+                        <label for="J_profile_qq">QQ</label>
+                        <input type="tel" id="J_profile_qq" name="qq" placeholder="QQ号码"/>
+                        <label for="J_profile_wechat">微信</label>
+                        <input type="text" id="J_profile_wechat" name="wechat" placeholder="微信号码"/>
+                        <label for="J_profile_weibo">微博</label>
+                        <input type="text" id="J_profile_weibo" name="weibo" placeholder="微博号码"/>
+                    </li>
+                    <li><button type="submit" data-icon="check" data-corners="false">保存信息</button></li>
+                </ul>
+            </form>
+        </div>
+    </div>
+</div>
