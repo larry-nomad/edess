@@ -83,7 +83,7 @@ class Like(Resource):
     def post(self):
         like = utils.multidict2dict(request.form)
         like["guest_id"] = session["guest_id"]
-        return  LikeService.add(like)
+        return  LikeService.add_or_update(like)
     
     @require_login
     def delete(self):

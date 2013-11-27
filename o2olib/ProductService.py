@@ -5,6 +5,7 @@ from o2olib.models.product import ProductModel
 from o2olib.models.like import LikeModel
 from o2olib.models.manual import ManualModel
 from QException import QException
+from o2olib.peewee  import desc 
 
 def get(id):
     if not id:
@@ -36,7 +37,7 @@ def get_products_for_like(con_dic):
         con = con & p_con
 
     query = ProductModel.select().join(
-             LikeModel).where(con)
+            LikeModel).where(con).order_by(desc('like_date'))
     query_rs = utils.getPwMap(query)
     return query_rs
 

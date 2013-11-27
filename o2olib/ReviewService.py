@@ -6,6 +6,7 @@ from o2olib.models.review import GuestModel
 from datetime import datetime
 from o2olib.models.modelbase import update_model
 from o2olib.QException import QException
+from o2olib.peewee import desc
 
 def gets(con_dic):
     con = ReviewModel.build_con(con_dic)
@@ -20,7 +21,7 @@ def get_reviews_for_guest(con_dic):
     if not(con_dic and con_dic.get("guest_id")):
         raise QException(u"用户id不能为空")
     con = ReviewModel.build_con(con_dic)
-    query = ReviewModel.select().join(GuestModel).where(con)
+    query = ReviewModel.select().join(GuestModel).where(con).order_by(desc("review_date"))
     query_rs = utils.getPwMap(query)
     return query_rs
 

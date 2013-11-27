@@ -10,7 +10,5 @@ def gets(con_dic):
     else:
         query = ProductImgModel.select()
     query_rs = utils.getPwMap(query)
-    from o2olib import logger
-    logger.info(query_rs)
     return query_rs
 
