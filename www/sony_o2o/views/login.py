@@ -31,10 +31,12 @@ def login():
     guest = loginServiceFactory(domain).login(request.args)
     session["guest_id"] = guest.get("id")
     session["guest_name"] = guest.get("name")
+    session["is_login"] = True
     return redirect(request.args.get("ret"))    
     
 @BP.route("v1/logout")
 def logout():
     session.pop("guest_id",None)
     session.pop("guest_name",None)
+    session.pop("is_login",None)
     return redirect('/')
