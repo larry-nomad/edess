@@ -20,6 +20,7 @@ class GuestModel(ModelBase):
     wechat = CharField()
     twitter = CharField()
     weibo = CharField()
+    weibo_uid = CharField()
     facebook = CharField()
     google_plus = CharField()
     alipay = CharField()
