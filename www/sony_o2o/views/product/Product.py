@@ -7,6 +7,7 @@ from o2olib import LikeService
 from o2olib import ReviewService
 from o2olib import ManualService
 from o2olib import GuestService
+from o2olib import StoreService
 from Resource import Resource
 from o2olib.utils import utils
 from sony_o2o.libs.auth import require_login
@@ -120,3 +121,9 @@ class Manuals(Resource):
         con = utils.multidict2dict(request.args)
         con["guest_id"] = session["guest_id"]
         return ProductService.get_products_for_manual(con)
+
+class Stores(Resource):
+    
+    def get(self):
+        con = utils.multidict2dict(request.args)
+        return StoreService.gets(con)
