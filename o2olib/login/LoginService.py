@@ -7,13 +7,7 @@ Created on 2013年11月15日
 '''
 
 from o2olib import GuestService
-from o2olib import logger
-import httplib2 as http
-import json
-from o2olib.QException import QException
 from datetime import datetime
-from urllib import urlencode
-import re
 
 class LoginService(object):
     
