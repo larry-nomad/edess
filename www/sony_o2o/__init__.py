@@ -60,7 +60,7 @@ def default_context_processor():
     return result
 
 from sony_o2o.views.guest.Guest import Guest as v1_guest
-_api.add_resource(v1_guest, '/v1/guest', '/v1/guest/<int:id>')
+_api.add_resource(v1_guest, '/v1/guest')
 
 from sony_o2o.views.guest.Guest import Guests as v1_guest_list
 _api.add_resource(v1_guest_list, '/v1/guests')

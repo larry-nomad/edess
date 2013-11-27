@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import request
+from flask import request, session
 from o2olib import GuestService
 from Resource import Resource
 from o2olib.utils import utils
@@ -30,17 +30,19 @@ class Guest(Resource):
         self.parser_update.add_argument('influence_point', type=str, help='influence_point code error')
 
     @require_login
-    def get(self, id):
-        return GuestService.get(id)
+    def get(self):
+        return GuestService.get(session["guest_id"])
 
     def post(self):
         args = self.parser_update.parse_args()
         guest = utils.multidict2dict(request.form)
         return GuestService.add(guest)
     
+    @require_login
     def put(self):
         args = self.parser_update.parse_args()
         guest = utils.multidict2dict(request.form)
+        guest["guest_id"] = session["guest_id"]
         return GuestService.update(guest)
     
     def delete(self,id):
@@ -51,5 +53,6 @@ class Guests(Resource):
 
     @require_login
     def get(self):
-        con_dic = utils.multidict2dict(request.args)
-        return GuestService.gets(con_dic)
+#         con_dic = utils.multidict2dict(request.args)
+#         return GuestService.gets(con_dic)
+        return []
