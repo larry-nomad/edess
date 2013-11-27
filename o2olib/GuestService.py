@@ -27,7 +27,7 @@ def get(id):
 def add(guest):
     if not guest:
         raise QException(u"客户不能为空")
-    check_name(guest.get("name"))
+#     check_name(guest.get("name"))
     guest["id"] = None
     model = GuestModel().create()
     model = update_model(model,guest)
@@ -39,7 +39,7 @@ def update(guest):
     if not (guest and guest.get("id")):
         raise QException(u"客户id不能为空")
     id = guest.get("id")
-    check_name(guest.get("name"),id)
+#     check_name(guest.get("name"),id)
     model = GuestModel.get(id = id)
     update_model(model,guest)
     model.save()
