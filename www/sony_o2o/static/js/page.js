@@ -75,7 +75,7 @@ $(document).on('pageinit', '#hot, #travel', function(e) {
      * 获取数据，填充列表
      */
     var page = $(this).attr('id'),
-        hot_arr = [2, 3, 6, 7, 13, 14],
+        hot_arr = [2, 3, 6, 7, 12, 13, 14],
         //hot_arr = [2, 3, 6, 7, 9, 11, 12, 13, 14],
         travel_arr = [1, 4, 5],
         //travel_arr = [1, 4, 5, 8, 10],
@@ -100,7 +100,7 @@ $(document).on('pageinit', '#hot, #travel', function(e) {
                 brief: data[i].brief
             });
         }
-        $('#' + page + ' .list-container ul').html(html).trigger('create').listview('refresh');
+        $('#' + page + ' .list-container ul').html(html).listview('refresh').trigger('create');
         $('#' + page + ' .list-container ul' + ' .swipe').each(function(idx) {
             Swipe(this, {
                 continuous: true,
@@ -115,8 +115,9 @@ $(document).on('pageinit', '#hot, #travel', function(e) {
 $(document).on('pagebeforeshow', '#detail', function(e) {
     var hash = window.location.hash,
         param = getParam(hash.replace('#detail?', '')),
-        url = '/v1/product/' + param.id;
-    $.get(url, function(res, status, xhr) {
+        brief_url = '/v1/product/' + param.id,
+        comment_url = '/v1/reviews?is_approved=false&product_id=' + param.id;
+    $.get(brief_url, function(res, status, xhr) {
         if(status !== 'success') {
             return;
         }
@@ -124,5 +125,18 @@ $(document).on('pagebeforeshow', '#detail', function(e) {
         $('.J-detail-title').html(data.name);
         $('.J-detail-brief').html(data.brief);
         $('.J-detail-like').html(data.likes_count);
+    });
+    $.get(comment_url, function(res, status, xhr) {
+        if(status !== 'success') {
+            return;
+        }
+        var data = res.data,
+            el = $('#J_detail_comment'),
+            template = $('#J_template_comment').html();
+        el.html('');
+        for(var i = 0; i < data.length; i++) {
+            el.append(renderTemplate(template, {comment: data[i].comment}));
+        }
+        el.listview('refresh').trigger('create');
     });
 });

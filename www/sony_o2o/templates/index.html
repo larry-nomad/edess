@@ -51,9 +51,7 @@
                 </div>
                 <div data-role="collapsible">
                     <h2>评价</h2>
-                    <ul data-role="listview" id="J_detail_comment">
-                        <li>comment</li>
-                    </ul>
+                    <ul data-role="listview" id="J_detail_comment"></ul>
                 </div>
             </div>
         </div>
@@ -195,12 +193,20 @@
             </div>
             <div data-role="panel" id="panel-right-${pageId}" data-theme="a" data-position="right">
                 <ul data-role="listview" data-theme="a">
+                    {{session.test}}
+                    {% if session.is_login %}
+                    <li data-role="list-divider" data-theme="d">用户信息</li>
+                    <li>用户ID：{{session.guest_id}}</li>
+                    <li>用户名：{{session.guest_name}}</li>
+                    {% endif %}
                     <li data-role="list-divider" data-theme="d">登录方式</li>
                     <li>
-                        <a href="http://oauth.qunar.com/oauth-client/qq/login?appname=www&display=mobile&ret=http://touch.xperia.qunar.com/list/hot&method=login&vistor=http://touch.xperia.qunar.com/v1/login">QQ登录</a>
+                        <a href="http://oauth.qunar.com/oauth-client/qq/login?appname=www&display=mobile&method=login&vistor=http://touch.xperia.qunar.com/v1/login&ret=http://touch.xperia.qunar.com/%23hot">QQ登录</a>
+                        <!--<a href="http://oauth.qunar.com/oauth-client/qq/login?appname=www&display=mobile&method=login&vistor=http://touch.xperia.qunar.com:8888/v1/login&ret=http://touch.xperia.qunar.com:8888/%23hot">QQ登录</a>-->
                     </li>
                     <li>
-                        <a href="http://oauth.qunar.com/oauth-client/sina/login?appname=www&display=mobile&ret=http://touch.xperia.qunar.com/list/hot&method=login&vistor=http://touch.xperia.qunar.com/v1/login">微博登录</a>
+                        <a href="http://oauth.qunar.com/oauth-client/sina/login?appname=www&display=mobile&method=login&vistor=http://touch.xperia.qunar.com/v1/login&ret=http://touch.xperia.qunar.com/%23hot">微博登录</a>
+                        <!--<a href="http://oauth.qunar.com/oauth-client/sina/login?appname=www&display=mobile&method=login&vistor=http://touch.xperia.qunar.com:8888/v1/login&ret=http://touch.xperia.qunar.com:8888/%23hot">微博登录</a>-->
                     </li>
                 </ul>
             </div>
@@ -219,6 +225,9 @@
             <div class="info">${brief}</div>
             <div class="more"><a href="#detail?id=${id}" data-ajax="false" data-icon="arrow-r" data-iconpos="right" data-role="button" data-mini="true" data-corners="false" data-inline="true">了解更多</a></div>
         </li>
+    </script>
+    <script type="text/template" id="J_template_comment">
+        <li>${comment}</li>
     </script>
     <script type="text/javascript" src="/static/js/page.js"></script>
 </div>
