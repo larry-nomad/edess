@@ -1,0 +1,57 @@
+#!/bin/bash
+
+PYTHON_PATH='/usr/bin/python'
+PYTHON=python
+APP_PATH='/Users/yanlu/edess'
+
+export PYTHON_EGG_CACHE=/tmp/.egg_cache
+export GPM_PATH=$APP_PATH
+export PYTHONPATH=$APP_PATH:$APP_PATH/etc:$PYTHON_PATH/lib/python2.7/site-packages:$PYTHONPATH
+
+function Usage() {
+    echo "Usage:"
+    echo "    $0 web start|stop|restart|debug"
+    echo "    $0 exec pyfile.py"
+}
+
+if [ $# -eq 0 ]; then
+    Usage
+    exit 1
+fi
+
+CMD=$1
+
+if [ $CMD == "web" ]; then
+    CMD2=$2
+    if [ $CMD2 == "start" ]; then
+        $PYTHON $APP_PATH/www/manage.py start_server
+    elif [ $CMD2 == "stop" ]; then
+        $PYTHON $APP_PATH/www/manage.py stop_server
+    elif [ $CMD2 == "restart" ]; then
+        $PYTHON $APP_PATH/www/manage.py restart_server
+    elif [ $CMD2 == "debug" ]; then
+        $PYTHON $APP_PATH/www/manage.py runserver  -p 8888
+    else
+        Usage
+        exit 2
+    fi
+elif [ $CMD == "schedule" ]; then
+    CMD2=$2
+    if [ $CMD2 == "start" ]; then
+        $PYTHON $APP_PATH/schedule/schedule.py start
+    elif [ $CMD2 == "stop" ]; then
+        $PYTHON $APP_PATH/schedule/schedule.py stop
+    elif [ $CMD2 == "restart" ]; then
+        $PYTHON $APP_PATH/schedule/schedule.py restart
+    else
+        Usage
+        exit 2
+    fi
+elif [ $CMD == "exec" ]; then
+    shift
+    export PYTHONPATH=$APP_PATH/www:$PYTHONPATH
+    $PYTHON $*
+else
+    Usage
+    exit 2
+fi
