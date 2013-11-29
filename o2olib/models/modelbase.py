@@ -76,5 +76,6 @@ def update_model(model,dic):
             if isinstance(v,list):
                 val = v[0]
             logger.debug("update_model(k:%s v:%s)"%(key,val))
-            model.__setattr__(key,val)
+            if val:
+                model.__setattr__(key,val)
     return model

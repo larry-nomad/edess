@@ -41,6 +41,8 @@ def update(guest):
     id = guest.get("id")
 #     check_name(guest.get("name"),id)
     model = GuestModel.get(id = id)
+    if not guest.get("birthday"):
+        guest["birthday"] = None
     update_model(model,guest)
     model.save()
     return model.id

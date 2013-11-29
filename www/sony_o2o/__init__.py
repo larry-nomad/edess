@@ -28,6 +28,12 @@ logger.log_dir = settings.LOG_PATH
 logger.log_name = settings.LOG_WEB_NAME
 
 
+@app.errorhandler(400)
+def bad_request(error):
+    logger.exception(error)
+    msg = error.data
+    return jjson.dumps(JsonResult().set_error_msg(msg).to_dic()), 400
+
 @app.errorhandler(404)
 def page_not_fount(error):
     logger.exception(error)

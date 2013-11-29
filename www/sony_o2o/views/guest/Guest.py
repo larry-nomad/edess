@@ -5,14 +5,15 @@ from o2olib import GuestService
 from Resource import Resource
 from o2olib.utils import utils
 from sony_o2o.libs.auth import require_login
-from flask.ext.restful import reqparse, types
+from flask.ext.restful import reqparse, types 
+from o2olib import logger
 
 class Guest(Resource):
     
     def __init__(self):
 
         self.parser_update = reqparse.RequestParser()
-        self.parser_update.add_argument('id', type=int, dest='guest_id', required=False, help='用户id错误')
+        self.parser_update.add_argument('id', type=int, required=False, help='用户id错误')
         self.parser_update.add_argument('name', required=True, help='称呼必须填写')
         self.parser_update.add_argument('email', type=GuestService.check_email, required=False, help='请填写正确的email地址')
         self.parser_update.add_argument('gender', type=str, help='请选择正确的性别')
@@ -28,6 +29,7 @@ class Guest(Resource):
         self.parser_update.add_argument('paypal', type=str, help='paypal error')
         self.parser_update.add_argument('credit_point', type=int, help='credit point error')
         self.parser_update.add_argument('influence_point', type=str, help='influence_point code error')
+        super(Guest, self).__init__()
 
     @require_login
     def get(self):
@@ -40,9 +42,9 @@ class Guest(Resource):
     
     @require_login
     def put(self):
-        args = self.parser_update.parse_args()
-        guest = utils.multidict2dict(request.form)
-        guest["guest_id"] = session["guest_id"]
+        guest = self.parser_update.parse_args()
+#         guest = utils.multidict2dict(request.form)
+        guest["id"] = session["guest_id"]
         return GuestService.update(guest)
     
     def delete(self,id):
