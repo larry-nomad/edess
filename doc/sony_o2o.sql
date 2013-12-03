@@ -110,7 +110,7 @@ ALTER SEQUENCE map_guest_likes_id_seq OWNED BY map_guest_likes.id;
 -- Name: map_guest_likes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('map_guest_likes_id_seq', 27, true);
+SELECT pg_catalog.setval('map_guest_likes_id_seq', 30, true);
 
 
 --
@@ -200,19 +200,18 @@ SELECT pg_catalog.setval('map_guest_reviews_id_seq', 236, true);
 
 
 --
--- Name: map_product_img; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: map_product_video; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
-CREATE TABLE map_product_img (
+CREATE TABLE map_product_video (
     id integer NOT NULL,
     product_id integer,
-    small character varying(1024),
-    medium character varying(1024),
-    large character varying(1024)
+    video_url character varying(1024),
+    description text
 );
 
 
-ALTER TABLE public.map_product_img OWNER TO postgres;
+ALTER TABLE public.map_product_video OWNER TO postgres;
 
 --
 -- Name: map_product_img_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -232,14 +231,14 @@ ALTER TABLE public.map_product_img_id_seq OWNER TO postgres;
 -- Name: map_product_img_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE map_product_img_id_seq OWNED BY map_product_img.id;
+ALTER SEQUENCE map_product_img_id_seq OWNED BY map_product_video.id;
 
 
 --
 -- Name: map_product_img_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('map_product_img_id_seq', 1, true);
+SELECT pg_catalog.setval('map_product_img_id_seq', 16, true);
 
 
 --
@@ -297,7 +296,7 @@ ALTER SEQUENCE table_guest_id_seq OWNED BY table_guest.id;
 -- Name: table_guest_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('table_guest_id_seq', 37, true);
+SELECT pg_catalog.setval('table_guest_id_seq', 44, true);
 
 
 --
@@ -312,7 +311,8 @@ CREATE TABLE table_product (
     brief text,
     invisible boolean,
     year character varying,
-    tmall_link character varying(2048)
+    jd_link character varying(1024),
+    tmall_link character varying(1024)
 );
 
 
@@ -378,7 +378,7 @@ ALTER TABLE ONLY map_guest_reviews ALTER COLUMN id SET DEFAULT nextval('map_gues
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY map_product_img ALTER COLUMN id SET DEFAULT nextval('map_product_img_id_seq'::regclass);
+ALTER TABLE ONLY map_product_video ALTER COLUMN id SET DEFAULT nextval('map_product_img_id_seq'::regclass);
 
 
 --
@@ -416,24 +416,6 @@ COPY dict_sony_store (id, name, address, gps_location, telephone) FROM stdin;
 --
 
 COPY map_guest_likes (id, product_id, guest_id, like_date) FROM stdin;
-1	\N	\N	\N
-2	\N	\N	\N
-3	\N	\N	\N
-4	\N	\N	\N
-5	\N	\N	\N
-12	2	1	\N
-13	0	\N	\N
-14	1	1	\N
-15	2	3	\N
-19	2	14	\N
-20	0	16	2013-11-15 18:13:23.350176
-21	0	16	2013-11-15 18:22:17.075818
-22	0	16	2013-11-15 18:23:28.069601
-23	0	16	2013-11-15 18:25:34.984616
-24	0	16	2013-11-15 18:25:56.852149
-25	0	16	2013-11-15 18:28:09.529762
-26	0	16	2013-11-15 18:29:24.805794
-27	20	16	2013-11-15 18:30:05.218105
 \.
 
 
@@ -442,7 +424,6 @@ COPY map_guest_likes (id, product_id, guest_id, like_date) FROM stdin;
 --
 
 COPY map_guest_manuals (id, product_id, guest_id) FROM stdin;
-2	2	1
 \.
 
 
@@ -465,11 +446,25 @@ COPY map_guest_reviews (id, product_id, guest_id, is_approved, comment, ranked_s
 
 
 --
--- Data for Name: map_product_img; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: map_product_video; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY map_product_img (id, product_id, small, medium, large) FROM stdin;
-1	2	s	m	l
+COPY map_product_video (id, product_id, video_url, description) FROM stdin;
+3	1	http://xperia.qunar.com/videos/1/b.mp4	索尼智能手机 Xperia Z1 L39h 官方宣传视频 因出色 而出众
+4	3	http://xperia.qunar.com/videos/3/a.mp4	索尼智能手机 Xperia C S39h 单车篇
+5	3	http://xperia.qunar.com/videos/3/b.mp4	索尼智能手机 Xperia C S39h 画画篇
+6	3	http://xperia.qunar.com/videos/3/c.mp4	索尼智能手机 Xperia C S39h 武功篇
+2	1	http://xperia.qunar.com/videos/1/a.mp4	索尼智能手机 Xperia Z1 L39h 官方宣传视频
+7	4	http://xperia.qunar.com/videos/4/a.mp4	Sony QX100 and QX10 attachable Lenses 镜头相机官方宣传视频
+9	7	http://xperia.qunar.com/videos/7/a.mp4	80后 内心强大，要你好看——索尼“黑卡”RX100
+8	6	http://xperia.qunar.com/videos/6/a.mp4	索尼NEX7微单广告
+10	8	http://xperia.qunar.com/videos/8/a.mp4	SONY Action Cam HDR-AS30V 官方宣传片
+11	8	http://xperia.qunar.com/videos/8/b.mp4	索尼酷拍AS30V极限影片-肆城记
+12	9	http://xperia.qunar.com/videos/9/a.mp4	Sony HMZ T1 3D
+13	10	http://xperia.qunar.com/videos/10/a.mp4	索尼数码望远镜 DEV-50
+14	11	http://xperia.qunar.com/videos/11/a.mp4	Sony VAIO Pro 13 宣传篇
+15	11	http://xperia.qunar.com/videos/11/b.mp4	Sony VAIO Pro 13 工艺篇
+16	14	http://xperia.qunar.com/videos/14/a.mp4	索尼2013年超高清电视宣传片“美的感受”
 \.
 
 
@@ -478,15 +473,6 @@ COPY map_product_img (id, product_id, small, medium, large) FROM stdin;
 --
 
 COPY table_guest (id, name, gender, birthday, telephone, register_date, last_active_date, email, qq, qq_openid, wechat, twitter, weibo, facebook, google_plus, alipay, credit_points, influence_point, status, weibo_uid) FROM stdin;
-30	availabletest	f	\N	\N	2013-11-21	2013-11-21	\N	\N	\N	\N	\N	3904348426	\N	\N	\N	\N	\N	\N	\N
-29	HakunaMatata	f	\N	\N	2013-11-21	2013-11-25	\N	HakunaMatata	FEBD4A0F4EE4A7A5EEC6B2BB04E766E1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-31	小毛	m	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-34	大师傅	m	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-33	007是我	m	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-32	黑影	m	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-35	我爱人民币	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-36	薛必群	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-37	Cherry王	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 \.
 
 
@@ -494,21 +480,21 @@ COPY table_guest (id, name, gender, birthday, telephone, register_date, last_act
 -- Data for Name: table_product; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY table_product (id, name, category, manufacturer, brief, invisible, year, tmall_link) FROM stdin;
-6	一镜走天下微单 NEX-7	dc	SONY	标准机身NEX-7\n约2430万有效像素\n出色的低光照环境拍摄能力\nXGA OLED电子取景器\n镁合金机身\n索尼镜头E 18-200mm F3.5-6.3 OSS LE\n小巧、紧凑，具有11倍变焦倍率，\n焦段覆盖从广角到长焦，适合各种场景拍	\N	2013	http://a.m.tmall.com/i15602227906.htm
-11	超级本 VAIO® Pro13	laptop	SONY	512GB PCIE高速固态硬盘\n非触控屏，轻仅约940g\n正版windows 8 专业版\n大容量充电电池支持约17小时续航\n背光键盘\n内置摄像头有效像素约1280x720\n工厂精心定制\n激光刻印服务\n专业配送上门	\N	2013	\N
-7	黑卡 DSC-RX100	dc	SONY	1英寸Exmor CMOS影像传感器\n2020万有效像素\n卡尔·蔡司Vario-Sonnar T*镜头\nF1.8大光圈 焦距f=28-100mm\n附带8GB 东芝FlashAir SD存储卡	\N	2013	http://a.m.tmall.com/i16016543793.htm
-12	超级本 VAIO® RED Edition 红	laptop	SONY	VAIO® | red edition 红 限量版的艳丽外表，带来强烈视觉冲击。多重精致涂层，凝结了VAIO®的先进技术，趋近完美。经过手工作业多次研磨打造，并根据不同材质采用不同的涂层，才能创造出如此耀眼的色彩。	\N	2013	\N
-9	头戴式3D影院 HMZ-T1	display	SONY	750英寸3D巨幕/45度广视角/5.1虚拟声道	\N	2013	http://a.m.tmall.com/i15193917914.htm
-8	头戴式高清DV HDR-AS15	dv	SONY	Exmor R CMOS影像传感器 / 卡尔·蔡司®Tessar®镜头 / 170°广角拍摄* / WIFI影像传输 / 5种录制模式 / 电子防抖  颜	\N	2013	\N
-13	弧面屏液晶电视 KDL-65S990A	display	SONY	弧面屏设计 / 多角度扬声器 / 迅锐图像处理引擎PRO / 特丽魅彩显示技术 / Motionflow XR 400 / 偏振式3D / 一触TM功能 / 屏幕镜像 / 智能连接 / 多屏遥控 / 标配3D眼镜3副 / 标配一触遥控器 / *产品图仅为展示，具体以实物为主	\N	2013	http://a.m.tmall.com/i35529055090.htm
-14	4K高清电视 KD-65X8500A	display	SONY	4K分辨率 / 4K迅锐图像处理引擎PRO / 特丽魅彩显示技术 / 低频反射扬声器 / 一触TM功能 / 标配3D眼镜3副 / 标配一触遥控器	\N	2013	http://a.m.tmall.com/i35593210635.htm
-1	浮潜拍照 移动4G Xperia™ Z1 L39h	mobile	SONY	约2070万像素高清晰成像\n1/2.3英寸索尼 Exmor RS™ 积层型影像传感器\n索尼G镜头，BIONZ影像处理器\n智能AR、局部彩色等多种相机效果\nTimeshift burst时光平移(2秒内可拍下61张照片)\n5英寸屏幕，1080p高清晰屏幕\nX-Reality™ 迅锐图像处理引擎\n索尼TRILUMINOS™ 特丽魅彩移动显示技术\n高通骁龙800四核处理器\nIP55/IP58精密防尘、防水\n支持NFC近场通信技术	\N	2013	http://a.m.tmall.com/i20025165904.htm
-10	摄录望远镜 DEV-50	telescope	SONY	25倍放大倍率*1 / 3D/2D高清视频拍摄 / 约2040万像素静态图像拍摄*2 / 光学防抖（增强模式）*3/ 以记忆棒*4或SD/SDHC存储卡*5为存储介质 / 标配电池持续拍摄时长约3小时*6	\N	2013	\N
-2	防水防尘 联通合约 Xperia™ Z L36h	mobile	SONY	5英寸，1080p高清晰屏幕\n约7.9mm 防尘、防水双玻璃镜面机身\n索尼BRAVIA® Engine 2 图像处理引擎\n约1300万像素拍摄\n索尼 Exmor RS™ 积层型影像传感器\n高通 APQ8064 四核处理器\n支持NFC近场通信技术	f	2013	http://a.m.tmall.com/i17200558607.htm
-3	联通双卡双待 Xperia™ C S39h	mobile	SONY	中国联通定制\nWCDMA+GSM双卡双待\n5英寸，1600万色，960×540显示屏\n索尼音乐独家首发\n3,000,000首在线音乐库\n2个月高品质音乐免费下载\n1年免费 VIP 特权服务\n索尼Walkman™ 领先音乐技术\n21M 网络	f	2013	http://a.m.tmall.com/i26813432346.htm
-4	NFC镜头 DSC-QX100	len	SONY	卡尔∙蔡斯Vario-Sonnar T*镜头\n1英寸Exmor R CMOS影像传感器\n支持NFC（近场通信）\n支持WiFi链接	f	2013	http://a.m.tmall.com/i20237394444.htm
-5	全画幅 ILCE-7R	dc	SONY	标准机身ILCE-7R\n约3640万有效像素\nBIONZ X影像处理器\n小巧的镁合金机身\nXGA OLED电子取景器\n一触TM功能和WiFi功能\n支持特丽魅彩色彩技术和4K静态影像输出\n卡口适配器 LA-EA4\n只有使用LA-EA4卡口适配器，\n才可直接搭载您现有的索尼A卡口全画幅镜头	\N	2013	http://a.m.tmall.com/i35519637462.htm
+COPY table_product (id, name, category, manufacturer, brief, invisible, year, jd_link, tmall_link) FROM stdin;
+11	超级本 VAIO® Pro13	laptop	SONY	512GB PCIE高速固态硬盘\n非触控屏，轻仅约940g\n正版windows 8 专业版\n大容量充电电池支持约17小时续航\n背光键盘\n内置摄像头有效像素约1280x720\n工厂精心定制\n激光刻印服务\n专业配送上门	\N	2013	http://m.jd.com/product/928758.html	\N
+13	弧面屏液晶电视 KDL-65S990A	display	SONY	弧面屏设计 / 多角度扬声器 / 迅锐图像处理引擎PRO / 特丽魅彩显示技术 / Motionflow XR 400 / 偏振式3D / 一触TM功能 / 屏幕镜像 / 智能连接 / 多屏遥控 / 标配3D眼镜3副 / 标配一触遥控器 / *产品图仅为展示，具体以实物为主	\N	2013	\N	http://a.m.tmall.com/i35529055090.htm
+12	超级本 VAIO® RED Edition 红	laptop	SONY	VAIO® | red edition 红 限量版的艳丽外表，带来强烈视觉冲击。多重精致涂层，凝结了VAIO®的先进技术，趋近完美。经过手工作业多次研磨打造，并根据不同材质采用不同的涂层，才能创造出如此耀眼的色彩。	\N	2013	\N	\N
+3	联通双卡双待 Xperia™ C S39h	mobile	SONY	中国联通定制\nWCDMA+GSM双卡双待\n5英寸，1600万色，960×540显示屏\n索尼音乐独家首发\n3,000,000首在线音乐库\n2个月高品质音乐免费下载\n1年免费 VIP 特权服务\n索尼Walkman™ 领先音乐技术\n21M 网络	f	2013	http://m.jd.com/product/929598.html	\N
+4	NFC镜头 DSC-QX100	len	SONY	卡尔∙蔡斯Vario-Sonnar T*镜头\n1英寸Exmor R CMOS影像传感器\n支持NFC（近场通信）\n支持WiFi链接	f	2013	http://m.jd.com/product/977121.html	\N
+14	4K高清电视 KD-65X8500A	display	SONY	4K分辨率 / 4K迅锐图像处理引擎PRO / 特丽魅彩显示技术 / 低频反射扬声器 / 一触TM功能 / 标配3D眼镜3副 / 标配一触遥控器	\N	2013	\N	http://a.m.tmall.com/i35593210635.htm
+5	全画幅 ILCE-7R	dc	SONY	标准机身ILCE-7R\n约3640万有效像素\nBIONZ X影像处理器\n小巧的镁合金机身\nXGA OLED电子取景器\n一触TM功能和WiFi功能\n支持特丽魅彩色彩技术和4K静态影像输出\n卡口适配器 LA-EA4\n只有使用LA-EA4卡口适配器，\n才可直接搭载您现有的索尼A卡口全画幅镜头	\N	2013	http://m.jd.com/product/1017249.html	\N
+6	一镜走天下微单 NEX-7	dc	SONY	标准机身NEX-7\n约2430万有效像素\n出色的低光照环境拍摄能力\nXGA OLED电子取景器\n镁合金机身\n索尼镜头E 18-200mm F3.5-6.3 OSS LE\n小巧、紧凑，具有11倍变焦倍率，\n焦段覆盖从广角到长焦，适合各种场景拍	\N	2013	http://m.jd.com/product/606261.html	\N
+7	黑卡 DSC-RX100	dc	SONY	1英寸Exmor CMOS影像传感器\n2020万有效像素\n卡尔·蔡司Vario-Sonnar T*镜头\nF1.8大光圈 焦距f=28-100mm\n附带8GB 东芝FlashAir SD存储卡	\N	2013	http://m.jd.com/product/676676.html	\N
+1	浮潜拍照 移动4G Xperia™ Z1 L39h	mobile	SONY	约2070万像素高清晰成像\n1/2.3英寸索尼 Exmor RS™ 积层型影像传感器\n索尼G镜头，BIONZ影像处理器\n智能AR、局部彩色等多种相机效果\nTimeshift burst时光平移(2秒内可拍下61张照片)\n5英寸屏幕，1080p高清晰屏幕\nX-Reality™ 迅锐图像处理引擎\n索尼TRILUMINOS™ 特丽魅彩移动显示技术\n高通骁龙800四核处理器\nIP55/IP58精密防尘、防水\n支持NFC近场通信技术	\N	2013	http://m.jd.com/product/968184.html	\N
+8	头戴式高清DV HDR-AS15	dv	SONY	Exmor R CMOS影像传感器 / 卡尔·蔡司®Tessar®镜头 / 170°广角拍摄* / WIFI影像传输 / 5种录制模式 / 电子防抖  颜	\N	2013	http://m.jd.com/product/886164.html	\N
+9	头戴式3D影院 HMZ-T1	display	SONY	750英寸3D巨幕/45度广视角/5.1虚拟声道	\N	2013	http://m.jd.com/product/958258.html	\N
+2	防水防尘 联通合约 Xperia™ Z L36h	mobile	SONY	5英寸，1080p高清晰屏幕\n约7.9mm 防尘、防水双玻璃镜面机身\n索尼BRAVIA® Engine 2 图像处理引擎\n约1300万像素拍摄\n索尼 Exmor RS™ 积层型影像传感器\n高通 APQ8064 四核处理器\n支持NFC近场通信技术	f	2013	http://m.jd.com/product/813097.html	\N
+10	摄录望远镜 DEV-50	telescope	SONY	25倍放大倍率*1 / 3D/2D高清视频拍摄 / 约2040万像素静态图像拍摄*2 / 光学防抖（增强模式）*3/ 以记忆棒*4或SD/SDHC存储卡*5为存储介质 / 标配电池持续拍摄时长约3小时*6	\N	2013	\N	\N
 \.
 
 
@@ -548,7 +534,7 @@ ALTER TABLE ONLY map_guest_reviews
 -- Name: map_product_img_idx; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
-ALTER TABLE ONLY map_product_img
+ALTER TABLE ONLY map_product_video
     ADD CONSTRAINT map_product_img_idx PRIMARY KEY (id);
 
 
