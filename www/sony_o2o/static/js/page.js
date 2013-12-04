@@ -58,13 +58,24 @@ $(document).on('pagebeforecreate', '#hot, #travel, #detail, #profile, #store', f
  * profile页面
  */
 $(document).on('pageinit', '#profile', function(e) {
-    $('#J_profile_form').on('submit', function(e) {
+    $('#J_profile_btn_save').on('click', function(e) {
         if($('#J_profile_name').val() === '') {
             window.scrollTo(0, 0);
             alert('登录名称，不能为空！');
-            e.preventDefault();
-            return false;
+            return;
         }
+        var url = '/v1/guest';
+        $.ajax(url, {
+            type: 'put',
+            data: $('#J_profile_form').serialize(),
+            error: function(xhr, status, err) {
+                var res = JSON.parse(xhr.responseText);
+                alert(res.msg);
+            },
+            success: function(res, status, xhr) {
+                alert('用户信息修改成功');
+            }
+        });
     });
 });
 $(document).on('pagebeforeshow', '#profile', function(e) {
@@ -73,7 +84,6 @@ $(document).on('pagebeforeshow', '#profile', function(e) {
         if(status !== 'success') {
             return;
         }
-//        $('#J_profile_form')[0].reset();
         var keys = ['name', 'gender', 'birthday', 'email', 'telephone', 'qq', 'wechat', 'weibo'],
             data = res.data;
         for(var i = 0; i < keys.length; i++) {
@@ -82,7 +92,6 @@ $(document).on('pagebeforeshow', '#profile', function(e) {
                 if(key === 'gender') {
                     $('#J_profile_form input:radio[value=' + data[key]+ ']').prop('checked', true);
                     $('#J_profile_form input:radio').checkboxradio('refresh');
-                    console.log(key);
                 }
                 else {
                     $('#J_profile_form input[name=' + key + ']').val(data[key]);
