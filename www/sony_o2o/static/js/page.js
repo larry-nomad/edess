@@ -130,7 +130,8 @@ $(document).on('pageinit', '#hot, #travel', function(e) {
             html += renderTemplate(template, {
                 id: data[i].id,
                 name: data[i].name,
-                brief: data[i].brief
+                brief: data[i].brief,
+                tmall_link: data[i].tmall_link
             });
         }
         $('#' + page + ' .list-container ul').html(html).listview('refresh').trigger('create');

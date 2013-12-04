@@ -16,10 +16,10 @@ h1,h2,h3,h4,h5,h6,div,p,ul,li {
   margin: 0 auto;
   .product {
     .pic {
-      margin-bottom: 10px;
+      margin: -13px -15px 10px -15px;
       img {
-        width: 290px;
-        height: 290px;
+        width: 320px;
+        height: 320px;
       }
     }
     .info {
@@ -29,7 +29,6 @@ h1,h2,h3,h4,h5,h6,div,p,ul,li {
     .more {
       text-align: right;
     }
-
     .swipe {
       overflow: hidden;
       visibility: hidden;
@@ -56,8 +55,11 @@ h1,h2,h3,h4,h5,h6,div,p,ul,li {
   width: 290px;
   margin: 0 auto;
   .video {
-    height: 290px;
+    margin: -15px -15px 10px -15px;
     background-color: #333333;
+    video {
+      width: 320px;
+    }
   }
   .title {
     font-size: 14px;
