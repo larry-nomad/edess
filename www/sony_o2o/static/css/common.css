@@ -3,8 +3,8 @@ h1, h2, h3, h4, h5, h6, div, p, ul, li { margin: 0; padding: 0; }
 .go-top { position: fixed; left: 5px; bottom: 5px; display: none; z-index: 9999; }
 
 .list-container { width: 290px; margin: 0 auto; }
-.list-container .product .pic { margin-bottom: 10px; }
-.list-container .product .pic img { width: 290px; height: 290px; }
+.list-container .product .pic { margin: -13px -15px 10px -15px; }
+.list-container .product .pic img { width: 320px; height: 320px; }
 .list-container .product .info { font-size: 12px; margin-bottom: 10px; }
 .list-container .product .more { text-align: right; }
 .list-container .product .swipe { overflow: hidden; visibility: hidden; position: relative; }
@@ -14,7 +14,8 @@ h1, h2, h3, h4, h5, h6, div, p, ul, li { margin: 0; padding: 0; }
 .search-container { width: 290px; margin: 0 auto; }
 
 .detail-container { width: 290px; margin: 0 auto; }
-.detail-container .video { height: 290px; background-color: #333333; }
+.detail-container .video { margin: -15px -15px 10px -15px; background-color: #333333; }
+.detail-container .video video { width: 320px; }
 .detail-container .title { font-size: 14px; font-weight: bold; margin-bottom: 10px; }
 .detail-container .brief { font-size: 12px; }
 
