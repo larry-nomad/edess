@@ -15,7 +15,7 @@ class Guest(Resource):
 
         self.parser_update = reqparse.RequestParser()
         self.parser_update.add_argument('id', type=tc.check_int, required=False, help=u'用户id错误')
-        self.parser_update.add_argument('name', required=True,type=tc.check_str, help=u'称呼必须填写')
+        self.parser_update.add_argument('name', required=True,type=tc.check_str, help=u'登录名称必须填写')
         self.parser_update.add_argument('email',required=False,default=None,type=tc.check_email, help=u'请填写正确的email地址')
         self.parser_update.add_argument('gender',required=False,choices=[u"f",u"m"], type=str, help=u'请选择正确的性别')
         self.parser_update.add_argument('birthday',required=False,default=None, type=tc.check_date, help=u'请输入正确的生日,应为“YYYY年MM月DD日”或“YYYY-MM-DD”')
