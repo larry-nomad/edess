@@ -30,8 +30,8 @@ logger.log_name = settings.LOG_WEB_NAME
 
 @app.errorhandler(400)
 def bad_request(error):
-    logger.exception(error)
     msg = error.data.get("message")
+    logger.error(msg)
     return jjson.dumps(JsonResult().set_error_msg(msg).to_dic()), 400
 
 @app.errorhandler(404)
