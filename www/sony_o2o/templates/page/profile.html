@@ -12,7 +12,7 @@
                     <li>
                         <label for="J_profile_name">登录名称</label>
                         <input type="text" id="J_profile_name" name="name" placeholder="登录名称，必填项" required="true"/>
-                        <fieldset data-role="controlgroup" data-type="horizontal">
+                        <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" data-corners="false">
                             <legend>称呼</legend>
                             <input type="radio" name="gender" id="J_profile_male" value="m"/>
                             <label for="J_profile_male">先生</label>
@@ -35,7 +35,7 @@
                         <label for="J_profile_weibo">微博</label>
                         <input type="text" id="J_profile_weibo" name="weibo" placeholder="微博号码"/>
                     </li>
-                    <li><button type="button" data-corners="false" id="J_profile_btn_save">保存信息</button></li>
+                    <a type="button" data-corners="false" id="J_profile_btn_save">保存信息</a>
                 </ul>
             </form>
         </div>

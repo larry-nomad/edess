@@ -1,3 +1,6 @@
+var CONST = {
+    stars: ['☆', '★']
+};
 /**
  * 模版解析
  */
@@ -11,6 +14,7 @@ var renderTemplate = function(template, data) {
     }
     return template;
 };
+
 var getParam = function(str) {
     var p_arr = str.split('&'),
         param = {};
@@ -19,6 +23,22 @@ var getParam = function(str) {
         param[obj[0]] = obj[1];
     }
     return param;
+};
+
+var rankStar = function(n) {
+    var n = parseInt(n) || 0;
+    n = n < 0 ? 0 : n;
+    n = n > 5 ? 5 : n;
+    var star = [];
+    for(var i = 0; i < 5; i++) {
+        if(i < n) {
+            star.push(CONST.stars[1]);
+        }
+        else {
+            star.push(CONST.stars[0]);
+        }
+    }
+    return star.join('');
 };
 /**
  * 返回顶部按钮
@@ -108,7 +128,7 @@ $(document).on('pageinit', '#hot, #travel', function(e) {
      * 获取数据，填充列表
      */
     var page = $(this).attr('id'),
-        hot_arr = [2, 3, 6, 7, 12, 13, 14],
+        hot_arr = [2, 3, 6, 7, 9, 12, 13, 14],
         //hot_arr = [2, 3, 6, 7, 9, 11, 12, 13, 14],
         travel_arr = [1, 4, 5],
         //travel_arr = [1, 4, 5, 8, 10],
@@ -131,7 +151,7 @@ $(document).on('pageinit', '#hot, #travel', function(e) {
                 id: data[i].id,
                 name: data[i].name,
                 brief: data[i].brief,
-                tmall_link: data[i].tmall_link
+                buy_link: data[i].tmall_link || data[i].jd_link || '#'
             });
         }
         $('#' + page + ' .list-container ul').html(html).listview('refresh').trigger('create');
@@ -146,11 +166,81 @@ $(document).on('pageinit', '#hot, #travel', function(e) {
 /**
  * detail页面
  */
+$(document).on('pageinit', '#detail', function(e) {
+    /**
+     * 喜欢按钮
+     */
+    $('#J_detail_like').on('click', function(e) {
+        var hash = window.location.hash,
+            param = getParam(hash.replace('#detail?', '')),
+            like_url = '/v1/like';
+        $.ajax(like_url, {
+            type: 'post',
+            data: 'product_id='+param.id,
+            error: function(xhr, status, err) {
+                var res = JSON.parse(xhr.responseText);
+                alert(res.msg);
+            },
+            success: function(res, status, xhr) {
+                window.location.reload();
+            }
+        });
+    });
+    /**
+     * 提交评论
+     */
+    $('#J_detail_stars').on('click', 'span', function(e) {
+        var els = $('span', e.delegateTarget),
+            idx = 0;
+        for(var i = 0; i < els.length; i++) {
+            if(this === els[i]) {
+                idx = i+1;
+                break;
+            }
+        }
+        for(var i = 0; i < els.length; i++) {
+            if(i < idx) {
+                $(els[i]).html(CONST.stars[1]);
+            }
+            else {
+                $(els[i]).html(CONST.stars[0]);
+            }
+        }
+        $(e.delegateTarget).attr('data-ranked_stars', idx);
+    });
+    $('#J_detail_send_comment').on('click', function(e) {
+        var hash = window.location.hash,
+            param = getParam(hash.replace('#detail?', '')),
+            comment = $.trim($('#J_detail_write_comment').val()),
+            ranked_stars = $('#J_detail_stars').attr('data-ranked_stars'),
+            url = '/v1/review';
+        if(comment === '') {
+            alert('评论内容不能为空！')
+            return;
+        }
+        $.ajax(url, {
+            type: 'post',
+            data: {
+                product_id: param.id,
+                comment: comment,
+                ranked_stars: ranked_stars
+            },
+            error: function(xhr, status, err) {
+                var res = JSON.parse(xhr.responseText);
+                alert(res.msg);
+            },
+            success: function(res, status, xhr) {
+                $('#detail_comment').dialog('close');
+            }
+        });
+    });
+});
+
 $(document).on('pagebeforeshow', '#detail', function(e) {
     var hash = window.location.hash,
         param = getParam(hash.replace('#detail?', '')),
         brief_url = '/v1/product/' + param.id,
-        comment_url = '/v1/reviews?is_approved=false&product_id=' + param.id;
+        comment_url = '/v1/reviews?is_approved=true&product_id=' + param.id;
     $.get(brief_url, function(res, status, xhr) {
         if(status !== 'success') {
             return;
@@ -158,7 +248,8 @@ $(document).on('pagebeforeshow', '#detail', function(e) {
         var data = res.data;
         $('.J-detail-title').html(data.name);
         $('.J-detail-brief').html(data.brief);
-        $('.J-detail-like').html(data.likes_count);
+        $('#J_detail_like').html(data.likes_count+'喜欢').button('refresh');
+        $('#J_detail_buy_link').attr('href', data.jd_link || data.tmall_link || '#');
     });
     $.get(comment_url, function(res, status, xhr) {
         if(status !== 'success') {
@@ -169,8 +260,17 @@ $(document).on('pagebeforeshow', '#detail', function(e) {
             template = $('#J_template_comment').html();
         el.html('');
         for(var i = 0; i < data.length; i++) {
-            el.append(renderTemplate(template, {comment: data[i].comment}));
+            el.append(renderTemplate(template, {
+                comment: data[i].comment,
+                review_date: data[i].review_date,
+                ranked_stars: rankStar(data[i].ranked_stars),
+                guest_id: data[i].guest_id,
+                product_id: data[i].product_id
+            }));
         }
         el.listview('refresh').trigger('create');
     });
+
+    $('#J_detail_stars span').html(CONST.stars[0]);
+    $('#J_detail_write_comment').val('');
 });

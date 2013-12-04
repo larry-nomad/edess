@@ -46,11 +46,6 @@ h1,h2,h3,h4,h5,h6,div,p,ul,li {
   }
 }
 
-.search-container {
-  width: 290px;
-  margin: 0 auto;
-}
-
 .detail-container {
   width: 290px;
   margin: 0 auto;
@@ -61,13 +56,32 @@ h1,h2,h3,h4,h5,h6,div,p,ul,li {
       width: 320px;
     }
   }
+  .toolbar {
+    margin-bottom: 10px;
+  }
   .title {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
     margin-bottom: 10px;
   }
   .brief {
     font-size: 12px;
+  }
+  .comment {
+    .stars {
+      color: #FF9933;
+    }
+  }
+}
+
+.detail-comment-container {
+  .stars {
+    font-size: 20px;
+    text-align: center;
+    color: #FF9933;
+    span {
+      cursor: pointer;
+    }
   }
 }
 

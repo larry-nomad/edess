@@ -13,31 +13,46 @@
                 </video>
             </div>
             <div class="toolbar">
-                <a href="#" data-role="button" data-mini="true" data-inline="true" data-icon="star" data-corners="false">
-                    <span id="J_detail_like">0</span>
-                </a>
-                <a href="#share" data-rel="dialog" data-role="button" data-mini="true" data-inline="true" data-icon="forward" data-corners="false">分享</a>
+                <a id="J_detail_buy_link" href="#" target="_blank" data-ajax="false" data-role="button" data-mini="true" data-corners="false" data-inline="true">购买</a>
+                <button id="J_detail_like" href="#" data-role="button" data-mini="true" data-inline="true" data-corners="false">喜欢</button>
+                <a href="#detail_share" data-rel="dialog" data-role="button" data-mini="true" data-inline="true" data-corners="false">分享</a>
+                <a href="#detail_comment" data-rel="dialog" data-role="button" data-mini="true" data-inline="true" data-corners="false">评论</a>
             </div>
-            <div data-role="collapsible-set" data-theme="d" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
-                <div data-role="collapsible" data-collapsed="false">
-                    <h2>规格</h2>
-                    <div class="J-detail-title title"></div>
-                    <div class="J-detail-brief brief"></div>
-                </div>
-                <div data-role="collapsible">
-                    <h2>评价</h2>
-                    <ul data-role="listview" id="J_detail_comment"></ul>
-                </div>
+            <div data-role="collapsible" data-theme="d" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false" data-collapsed="false">
+                <h2>规格</h2>
+                <div class="J-detail-title title"></div>
+                <div class="J-detail-brief brief"></div>
+            </div>
+            <div data-role="collapsible" data-theme="d" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false" data-collapsed="false">
+                <h2>评价</h2>
+                <ul data-role="listview" id="J_detail_comment" class="comment"></ul>
             </div>
         </div>
     </div>
 </div>
-<div data-role="page" id="share">
-    <div data-role="header" data-theme="b">
+<div data-role="page" id="detail_share" data-theme="d">
+    <div data-role="header" >
         <h1>我要分享</h1>
     </div>
     <div data-role="content">
         sdfsdf
     </div>
-    <div data-role="footer">&nbsp;</div>
 </div>
+<div data-role="page" id="detail_comment" data-theme="d">
+    <div data-role="header" >
+        <h1>撰写评论</h1>
+        <a type="button" id="J_detail_send_comment">发送</a>
+    </div>
+    <div data-role="content" class="detail-comment-container">
+        <div class="stars" id="J_detail_stars" data-ranked_stars="0">
+            <span>☆</span>
+            <span>☆</span>
+            <span>☆</span>
+            <span>☆</span>
+            <span>☆</span>
+        </div>
+        <textarea id="J_detail_write_comment" cols="40" rows="10" placeholder="输入评论内容" data-corners="false" data-inset="false"></textarea>
+    </div>
+</div>
+
+

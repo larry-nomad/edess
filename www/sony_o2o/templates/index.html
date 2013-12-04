@@ -32,12 +32,12 @@
                     {% endif %}
                     <li data-role="list-divider" data-theme="d">登录方式</li>
                     <li>
-                        <!--<a href="http://oauth.qunar.com/oauth-client/qq/login?appname=www&display=mobile&method=login&vistor=http://touch.xperia.qunar.com/v1/login&ret=http://touch.xperia.qunar.com/%23hot">QQ登录</a>-->
-                        <a href="http://oauth.qunar.com/oauth-client/qq/login?appname=www&display=mobile&method=login&vistor=http://touch.xperia.qunar.com:8888/v1/login&ret=http://touch.xperia.qunar.com:8888/%23hot">QQ登录</a>
+                        <a href="http://oauth.qunar.com/oauth-client/qq/login?appname=www&display=mobile&method=login&vistor=http://touch.xperia.qunar.com/v1/login&ret=http://touch.xperia.qunar.com/%23hot">QQ登录</a>
+                        <!--<a href="http://oauth.qunar.com/oauth-client/qq/login?appname=www&display=mobile&method=login&vistor=http://touch.xperia.qunar.com:8888/v1/login&ret=http://touch.xperia.qunar.com:8888/%23hot">QQ登录</a>-->
                     </li>
                     <li>
-                        <!--<a href="http://oauth.qunar.com/oauth-client/sina/login?appname=www&display=mobile&method=login&vistor=http://touch.xperia.qunar.com/v1/login&ret=http://touch.xperia.qunar.com/%23hot">微博登录</a>-->
-                        <a href="http://oauth.qunar.com/oauth-client/sina/login?appname=www&display=mobile&method=login&vistor=http://touch.xperia.qunar.com:8888/v1/login&ret=http://touch.xperia.qunar.com:8888/%23hot">微博登录</a>
+                        <a href="http://oauth.qunar.com/oauth-client/sina/login?appname=www&display=mobile&method=login&vistor=http://touch.xperia.qunar.com/v1/login&ret=http://touch.xperia.qunar.com/%23hot">微博登录</a>
+                        <!--<a href="http://oauth.qunar.com/oauth-client/sina/login?appname=www&display=mobile&method=login&vistor=http://touch.xperia.qunar.com:8888/v1/login&ret=http://touch.xperia.qunar.com:8888/%23hot">微博登录</a>-->
                     </li>
                 </ul>
             </div>
@@ -55,12 +55,15 @@
             </div>
             <div class="info">${brief}</div>
             <div class="more">
-                <a href="${tmall_link}" data-ajax="false" data-role="button" data-mini="true" data-corners="false" data-inline="true">立即购买</a>
+                <a href="${buy_link}" target="_blank" data-ajax="false" data-role="button" data-mini="true" data-corners="false" data-inline="true">立即购买</a>
                 <a href="#detail?id=${id}" data-ajax="false" data-role="button" data-mini="true" data-corners="false" data-inline="true">了解更多</a></div>
         </li>
     </script>
     <script type="text/template" id="J_template_comment">
-        <li>${comment}</li>
+        <li data-guestId="${guest_id}" data-product_id="${product_id}">
+            <h3>${comment}</h3>
+            <p><span class="stars">${ranked_stars}</span>，来自用户${guest_id}，${review_date}</p>
+        </li>
     </script>
     <script type="text/javascript" src="/static/js/page.js"></script>
 </div>

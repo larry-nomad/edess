@@ -11,13 +11,16 @@ h1, h2, h3, h4, h5, h6, div, p, ul, li { margin: 0; padding: 0; }
 .list-container .product .swipe-wrap { overflow: hidden; position: relative; }
 .list-container .product .swipe-wrap > div { float: left; width: 100%; position: relative; }
 
-.search-container { width: 290px; margin: 0 auto; }
-
 .detail-container { width: 290px; margin: 0 auto; }
 .detail-container .video { margin: -15px -15px 10px -15px; background-color: #333333; }
 .detail-container .video video { width: 320px; }
-.detail-container .title { font-size: 14px; font-weight: bold; margin-bottom: 10px; }
+.detail-container .toolbar { margin-bottom: 10px; }
+.detail-container .title { font-size: 16px; font-weight: bold; margin-bottom: 10px; }
 .detail-container .brief { font-size: 12px; }
+.detail-container .comment .stars { color: #FF9933; }
+
+.detail-comment-container .stars { font-size: 20px; text-align: center; color: #FF9933; }
+.detail-comment-container .stars span { cursor: pointer; }
 
 .store-container { width: 290px; margin: 0 auto; }
 
