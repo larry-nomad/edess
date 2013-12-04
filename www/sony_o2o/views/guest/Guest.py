@@ -5,7 +5,8 @@ from o2olib import GuestService
 from Resource import Resource
 from o2olib.utils import utils
 from sony_o2o.libs.auth import require_login
-from flask.ext.restful import reqparse, types 
+from flask.ext.restful import reqparse
+from o2olib.utils import typesChecker as tc 
 from o2olib import logger
 
 class Guest(Resource):
@@ -13,22 +14,15 @@ class Guest(Resource):
     def __init__(self):
 
         self.parser_update = reqparse.RequestParser()
-        self.parser_update.add_argument('id', type=int, required=False, help='用户id错误')
-        self.parser_update.add_argument('name', required=True, help='称呼必须填写')
-        self.parser_update.add_argument('email', type=GuestService.check_email, required=False, help='请填写正确的email地址')
-        self.parser_update.add_argument('gender', type=str, help='请选择正确的性别')
-        self.parser_update.add_argument('birthday', type=types.date, default='0000-00-00', help='请输入正确的生日')
-        self.parser_update.add_argument('telephone', type=int, help='请输入正确的手机号码')
-        self.parser_update.add_argument('qq', type=int, help='请输入正确的QQ号码')
-        self.parser_update.add_argument('wechat', type=str, help='请输入正确的微信号码')
-        self.parser_update.add_argument('weibo', type=str,help='请输入正确的微博')
-        self.parser_update.add_argument('twitter', type=str, help='twitter error')
-        self.parser_update.add_argument('facebook', type=str, help='facebook error')
-        self.parser_update.add_argument('google_plus', type=str, help='google_plus error')
-        self.parser_update.add_argument('alipay', type=str, help='alipay error')
-        self.parser_update.add_argument('paypal', type=str, help='paypal error')
-        self.parser_update.add_argument('credit_point', type=int, help='credit point error')
-        self.parser_update.add_argument('influence_point', type=str, help='influence_point code error')
+        self.parser_update.add_argument('id', type=tc.check_int, required=False, help=u'用户id错误')
+        self.parser_update.add_argument('name', required=True,type=tc.check_str, help=u'称呼必须填写')
+        self.parser_update.add_argument('email',required=False,default=None,type=tc.check_email, help=u'请填写正确的email地址')
+        self.parser_update.add_argument('gender',required=False,choices=[u"f",u"m"], type=str, help=u'请选择正确的性别')
+        self.parser_update.add_argument('birthday',required=False,default=None, type=tc.check_date, help=u'请输入正确的生日,应为“YYYY年MM月DD日”或“YYYY-MM-DD”')
+        self.parser_update.add_argument('telephone',required=False,default=None, type=tc.check_int, help=u'请输入正确的手机号码')
+        self.parser_update.add_argument('qq',required=False,default=None, type=tc.check_int, help=u'请输入正确的QQ号码')
+        self.parser_update.add_argument('wechat',required=False,default=None, type=tc.check_str, help=u'请输入正确的微信号码')
+        self.parser_update.add_argument('weibo',required=False,default=None, type=tc.check_str,help=u'请输入正确的微博')
         super(Guest, self).__init__()
 
     @require_login
