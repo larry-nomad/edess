@@ -43,11 +43,11 @@ class QQLoginService(LoginService):
             raise QException(u"获取用户信息失败")
         
         name = ret_data.get("nickname")
-        qq = ret_data.get("nickname")
+#         qq = ret_data.get("nickname")
         gender = ret_data.get("gender")
         return {
                   "qq_openid":openid
-                  ,"qq":qq
+#                   ,"qq":qq
                   ,"name":name
                   ,"gender":GENDER_DICT.get(gender)
                   }

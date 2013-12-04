@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from modelbase import ModelBase
-from o2olib.peewee import IntegerField, CharField, BooleanField, TextField, DateTimeField
+from o2olib.peewee import IntegerField, CharField, BooleanField, TextField
 from o2olib.utils import utils
 from o2olib import logger
 
@@ -16,7 +16,9 @@ class ProductModel(ModelBase):
     brief = TextField()
     invisible = BooleanField()
     year = CharField()
+    jd_link = CharField()
     tmall_link = CharField()
+    
 
     @classmethod
     def build_con(cls,con_dict):

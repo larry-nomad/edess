@@ -42,7 +42,7 @@ class SinaLoginService(LoginService):
         gender = ret_data.get("gender")
         guest = {
                  "name": name
-                 ,"weibo": name
+#                  ,"weibo": name
                  ,"weibo_uid": weibo_uid
                  ,"gender": gender
                  }

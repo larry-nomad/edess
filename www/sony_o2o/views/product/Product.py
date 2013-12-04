@@ -8,6 +8,7 @@ from o2olib import ReviewService
 from o2olib import ManualService
 from o2olib import GuestService
 from o2olib import StoreService
+from o2olib import VideoService
 from Resource import Resource
 from o2olib.utils import utils
 from sony_o2o.libs.auth import require_login
@@ -18,7 +19,8 @@ def fill_product(product):
         con = {"product_id": product.get("id")}
         product["likes_count"] = LikeService.count_likes(con)
         product["starts_counts"] =  ReviewService.count_stars(con)
-        product["imgs"] = ProductImgService.gets(con)
+#         product["imgs"] = ProductImgService.gets(con)
+        product["videos"] = VideoService.gets(con)
 
 class Product(Resource):
     

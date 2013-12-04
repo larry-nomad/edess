@@ -6,10 +6,7 @@ import uuid
 import decimal
 from o2olib import logger
 import datetime
-from types import *
-import re
 from time import sleep
-from o2olib.QException import QException
 
 
 def GenUuid():
@@ -198,12 +195,6 @@ def multidict2dict(req):
     return kvs
     '''
     return req.to_dict(False)
-
-def check_email_format(email):
-    'check email'
-    re_email = re.compile(r'^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,6}$', re.IGNORECASE)
-    re_email_res = re_email.match(email)
-    return re_email_res
 
 def get_val_from_dict(dict, key, type=None):
     if not dict or not key:
