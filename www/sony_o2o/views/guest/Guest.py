@@ -11,7 +11,7 @@ from o2olib import logger
 
 class Guest(Resource):
     
-    def __init__(self):
+    def __init__(self): 
 
         self.parser_update = reqparse.RequestParser()
         self.parser_update.add_argument('id', type=tc.check_int, required=False, help=u'用户id错误')
@@ -36,6 +36,7 @@ class Guest(Resource):
     
     @require_login
     def put(self):
+        logger.debug("guest:[%s]",(request.form))
         guest = self.parser_update.parse_args()
 #         guest = utils.multidict2dict(request.form)
         guest["id"] = session["guest_id"]
