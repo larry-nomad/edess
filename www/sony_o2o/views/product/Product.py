@@ -40,8 +40,10 @@ class Products(Resource):
 
 class Review(Resource):
     
+    @require_login
     def post(self):
         review = utils.multidict2dict(request.form)
+        review["guest_id"] = session["guest_id"]
         review["id"] = None
         review["is_approved"] = False
         return ReviewService.add(review)
@@ -67,7 +69,9 @@ class Reviews(Resource):
 #         con_dic["guest_id"] = session["guest_id"]
         reviews = ReviewService.gets(con_dic)
         for review in reviews:
-            review["guest"] = GuestService.get(review.get("guest_id"))
+            guest_id = review["guest_id"]
+            if guest_id:
+                review["guest"] = GuestService.get(guest_id)
         return reviews
 
 class ReviewsForGuest(Resource):
