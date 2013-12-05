@@ -49,11 +49,14 @@ def update(like):
         raise QException(u"没有要修改数据")
     dbLike = get(like)
     if dbLike:
-        model = LikeModel().create()
-        update_model(model,like)
-        model.like_date = datetime.now()
-        model.save()
-        return model.id
+        id = dbLike.get("id")
+        query = LikeModel.update(like_date=datetime.now()).where(id=id) 
+        query.execute()
+#         model = LikeModel().get(id=dbLike.get("id"))
+#         update_model(model,like)
+#         model.like_date = datetime.now()
+#         model.save()
+        return id
 
 def delete(like):
     if like:
