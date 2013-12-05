@@ -56,7 +56,7 @@ $(window).on('scrollstop', function(e) {
 /**
  * 滑动菜单
  */
-$(document).on("swiperight swipeleft", '#hot, #travel, #detail, #profile, #store', function( e ) {
+$(document).on("swiperight swipeleft", '#hot, #travel, #likes, #detail, #profile, #store', function( e ) {
     var pageId = $(this).attr('id');
     if($.mobile.activePage.jqmData("panel") !== "open" ) {
         if ( e.type === "swiperight" ) {
@@ -67,7 +67,7 @@ $(document).on("swiperight swipeleft", '#hot, #travel, #detail, #profile, #store
         }
     }
 });
-$(document).on('pagebeforecreate', '#hot, #travel, #detail, #profile, #store', function(e) {
+$(document).on('pagebeforecreate', '#hot, #travel, #likes, #detail, #profile, #store', function(e) {
     var pageId = $(this).attr('id'),
         panel_template = renderTemplate($('#J_template_panel').html(), {
             pageId: pageId
@@ -123,7 +123,7 @@ $(document).on('pagebeforeshow', '#profile', function(e) {
 /**
  * list页面
  */
-$(document).on('pageinit', '#hot, #travel', function(e) {
+$(document).on('pagebeforeshow', '#hot, #travel', function(e) {
     /**
      * 获取数据，填充列表
      */
@@ -144,6 +144,53 @@ $(document).on('pageinit', '#hot, #travel', function(e) {
             return;
         }
         var template = $('#J_template_list').html(),
+            data = res.data,
+            html = '';
+        for(var i = 0, len = data.length; i < len; i++) {
+            html += renderTemplate(template, {
+                id: data[i].id,
+                name: data[i].name,
+                brief: data[i].brief,
+                buy_link: data[i].tmall_link || data[i].jd_link || '#'
+            });
+        }
+        $('#' + page + ' .list-container ul').html(html).listview('refresh').trigger('create');
+        $('#' + page + ' .list-container ul' + ' .swipe').each(function(idx) {
+            Swipe(this, {
+                continuous: true,
+                stopPropagation: true
+            });
+        });
+    });
+});
+/**
+ * 我的收藏
+ */
+$(document).on('pageinit', '#likes', function(e) {
+    $(this).on('click', '.J-likes-unlike', function(e) {
+        var id = $(this).attr('data-product_id'),
+            url = '/v1/like?product_id=' + id;
+        $.ajax(url, {
+            type: 'delete',
+            error: function(xhr, status, err) {
+                var res = JSON.parse(xhr.responseText);
+                alert(res.msg);
+            },
+            success: function(res, status, xhr) {
+                window.location.reload();
+            }
+        });
+    });
+});
+
+$(document).on('pagebeforeshow', '#likes', function(e) {
+    var page = $(this).attr('id'),
+        url = '/v1/likes';
+    $.get(url, function(res, status, xhr) {
+        if(status !== 'success' || res.data.length === 0) {
+            return;
+        }
+        var template = $('#J_template_list_likes').html(),
             data = res.data,
             html = '';
         for(var i = 0, len = data.length; i < len; i++) {

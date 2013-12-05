@@ -3,6 +3,7 @@
 
 {% include "page/hot.html" %}
 {% include "page/travel.html" %}
+{% include "page/likes.html" %}
 {% include "page/detail.html" %}
 {% include "page/store.html" %}
 {% include "page/profile.html" %}
@@ -18,8 +19,7 @@
                     <li><a href="#travel" data-ajax="false">旅友必备</a></li>
                     <li><a href="#store" data-ajax="false">直营店面</a></li>
                     <li data-role="list-divider" data-theme="d">用户</li>
-                    <li><a href="#">我的收藏</a></li>
-                    <li><a href="#">我的手册</a></li>
+                    <li><a href="#likes">我的收藏</a></li>
                     <li><a href="#profile" data-ajax="false">我的资料</a></li>
                 </ul>
             </div>
@@ -43,6 +43,7 @@
             </div>
         </div>
     </script>
+
     <script type="text/template" id="J_template_list">
         <li data-role="list-divider" data-theme="a">${name}</li>
         <li class="product">
@@ -56,15 +57,37 @@
             <div class="info">${brief}</div>
             <div class="more">
                 <a href="${buy_link}" target="_blank" data-ajax="false" data-role="button" data-mini="true" data-corners="false" data-inline="true">立即购买</a>
-                <a href="#detail?id=${id}" data-ajax="false" data-role="button" data-mini="true" data-corners="false" data-inline="true">了解更多</a></div>
+                <a href="#detail?id=${id}" data-ajax="false" data-role="button" data-mini="true" data-corners="false" data-inline="true">了解更多</a>
+            </div>
         </li>
     </script>
+
+    <script type="text/template" id="J_template_list_likes">
+        <li data-role="list-divider" data-theme="a">${name}</li>
+        <li class="product">
+            <div class="pic swipe">
+                <div class='swipe-wrap'>
+                    <div><img src="/static/product_img/${id}/a.jpg" alt=""/></div>
+                    <div><img src="/static/product_img/${id}/b.jpg" alt=""/></div>
+                    <div><img src="/static/product_img/${id}/c.jpg" alt=""/></div>
+                </div>
+            </div>
+            <div class="info">${brief}</div>
+            <div class="more">
+                <a href="${buy_link}" target="_blank" data-ajax="false" data-role="button" data-mini="true" data-corners="false" data-inline="true">立即购买</a>
+                <a class="J-likes-unlike" data-product_id="${id}" data-role="button" data-mini="true" data-corners="false" data-inline="true">不喜欢了</a>
+                <a href="#detail?id=${id}" data-ajax="false" data-role="button" data-mini="true" data-corners="false" data-inline="true">了解更多</a>
+            </div>
+        </li>
+    </script>
+
     <script type="text/template" id="J_template_comment">
         <li data-guestId="${guest_id}" data-product_id="${product_id}">
             <h3>${comment}</h3>
             <p><span class="stars">${ranked_stars}</span>，来自用户${guest_id}，${review_date}</p>
         </li>
     </script>
+
     <script type="text/javascript" src="/static/js/page.js"></script>
 </div>
 
