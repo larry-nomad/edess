@@ -328,3 +328,7 @@ $(document).on('pagebeforeshow', '#detail', function(e) {
     $('#J_detail_stars span').html(CONST.stars[0]);
     $('#J_detail_write_comment').val('');
 });
+
+$(document).on('pagebeforehide', '#detail', function(e) {
+    $('#J_detail_video').html('');
+});
