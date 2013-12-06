@@ -128,10 +128,8 @@ $(document).on('pagebeforeshow', '#hot, #travel', function(e) {
      * 获取数据，填充列表
      */
     var page = $(this).attr('id'),
-        hot_arr = [2, 3, 6, 7, 9, 12, 13, 14],
-        //hot_arr = [2, 3, 6, 7, 9, 11, 12, 13, 14],
-        travel_arr = [1, 4, 5],
-        //travel_arr = [1, 4, 5, 8, 10],
+        hot_arr = [2, 3, 6, 7, 9, 11, 12, 13, 14],
+        travel_arr = [1, 4, 5, 8, 10],
         urls = {
             'hot': '/v1/products?id=' + hot_arr.join('&id='),
             'travel': '/v1/products?id=' + travel_arr.join('&id='),
@@ -148,7 +146,7 @@ $(document).on('pagebeforeshow', '#hot, #travel', function(e) {
             html = '';
         for(var i = 0, len = data.length; i < len; i++) {
             html += renderTemplate(template, {
-                id: data[i].id,
+                product_id: data[i].id,
                 name: data[i].name,
                 brief: data[i].brief,
                 buy_link: data[i].tmall_link || data[i].jd_link || '#'
@@ -195,7 +193,7 @@ $(document).on('pagebeforeshow', '#likes', function(e) {
             html = '';
         for(var i = 0, len = data.length; i < len; i++) {
             html += renderTemplate(template, {
-                id: data[i].id,
+                product_id: data[i].id,
                 name: data[i].name,
                 brief: data[i].brief,
                 buy_link: data[i].tmall_link || data[i].jd_link || '#'
@@ -292,9 +290,18 @@ $(document).on('pagebeforeshow', '#detail', function(e) {
         if(status !== 'success') {
             return;
         }
-        var data = res.data;
+        var template = $('#J_template_video').html(),
+            data = res.data,
+            v_url = '';
+        for(var i = 0; i < data.videos.length; i++) {
+            v_url = data.videos[i].video_url;
+        }
+        $('#J_detail_video').html(renderTemplate(template, {
+            product_id: data.id,
+            video_url: v_url
+        }));
         $('.J-detail-title').html(data.name);
-        $('.J-detail-brief').html(data.brief);
+        $('#J_detail_brief').html(data.brief);
         $('#J_detail_like').html(data.likes_count+'喜欢').button('refresh');
         $('#J_detail_buy_link').attr('href', data.jd_link || data.tmall_link || '#');
     });

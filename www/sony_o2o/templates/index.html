@@ -33,11 +33,11 @@
                     <li data-role="list-divider" data-theme="d">登录方式</li>
                     <li>
                         <a href="http://oauth.qunar.com/oauth-client/qq/login?appname=www&display=mobile&method=login&vistor=http://touch.xperia.qunar.com/v1/login&ret=http://touch.xperia.qunar.com/%23hot">QQ登录</a>
-                        <!--<a href="http://oauth.qunar.com/oauth-client/qq/login?appname=www&display=mobile&method=login&vistor=http://touch.xperia.qunar.com:8888/v1/login&ret=http://touch.xperia.qunar.com:8888/%23hot">QQ登录</a>-->
+                        <!--<a href="http://oauth.qunar.com/oauth-client/qq/login?appname=www&display=mobile&method=login&vistor=http://sanji.qunar.com:8888/v1/login&ret=http://sanji.qunar.com:8888/%23hot">QQ登录</a>-->
                     </li>
                     <li>
                         <a href="http://oauth.qunar.com/oauth-client/sina/login?appname=www&display=mobile&method=login&vistor=http://touch.xperia.qunar.com/v1/login&ret=http://touch.xperia.qunar.com/%23hot">微博登录</a>
-                        <!--<a href="http://oauth.qunar.com/oauth-client/sina/login?appname=www&display=mobile&method=login&vistor=http://touch.xperia.qunar.com:8888/v1/login&ret=http://touch.xperia.qunar.com:8888/%23hot">微博登录</a>-->
+                        <!--<a href="http://oauth.qunar.com/oauth-client/sina/login?appname=www&display=mobile&method=login&vistor=http://sanji.qunar.com:8888/v1/login&ret=http://sanji.qunar.com:8888/%23hot">微博登录</a>-->
                     </li>
                 </ul>
             </div>
@@ -49,15 +49,15 @@
         <li class="product">
             <div class="pic swipe">
                 <div class='swipe-wrap'>
-                    <div><img src="/static/product_img/${id}/a.jpg" alt=""/></div>
-                    <div><img src="/static/product_img/${id}/b.jpg" alt=""/></div>
-                    <div><img src="/static/product_img/${id}/c.jpg" alt=""/></div>
+                    <div><img src="/static/product_img/${product_id}/a.jpg" alt=""/></div>
+                    <div><img src="/static/product_img/${product_id}/b.jpg" alt=""/></div>
+                    <div><img src="/static/product_img/${product_id}/c.jpg" alt=""/></div>
                 </div>
             </div>
             <div class="info">${brief}</div>
             <div class="more">
                 <a href="${buy_link}" target="_blank" data-ajax="false" data-role="button" data-mini="true" data-corners="false" data-inline="true">立即购买</a>
-                <a href="#detail?id=${id}" data-ajax="false" data-role="button" data-mini="true" data-corners="false" data-inline="true">了解更多</a>
+                <a href="#detail?id=${product_id}" data-ajax="false" data-role="button" data-mini="true" data-corners="false" data-inline="true">了解更多</a>
             </div>
         </li>
     </script>
@@ -67,18 +67,24 @@
         <li class="product">
             <div class="pic swipe">
                 <div class='swipe-wrap'>
-                    <div><img src="/static/product_img/${id}/a.jpg" alt=""/></div>
-                    <div><img src="/static/product_img/${id}/b.jpg" alt=""/></div>
-                    <div><img src="/static/product_img/${id}/c.jpg" alt=""/></div>
+                    <div><img src="/static/product_img/${product_id}/a.jpg" alt=""/></div>
+                    <div><img src="/static/product_img/${product_id}/b.jpg" alt=""/></div>
+                    <div><img src="/static/product_img/${product_id}/c.jpg" alt=""/></div>
                 </div>
             </div>
             <div class="info">${brief}</div>
             <div class="more">
                 <a href="${buy_link}" target="_blank" data-ajax="false" data-role="button" data-mini="true" data-corners="false" data-inline="true">立即购买</a>
-                <a class="J-likes-unlike" data-product_id="${id}" data-role="button" data-mini="true" data-corners="false" data-inline="true">不喜欢了</a>
-                <a href="#detail?id=${id}" data-ajax="false" data-role="button" data-mini="true" data-corners="false" data-inline="true">了解更多</a>
+                <a class="J-likes-unlike" data-product_id="${product_id}" data-role="button" data-mini="true" data-corners="false" data-inline="true">不喜欢了</a>
+                <a href="#detail?id=${product_id}" data-ajax="false" data-role="button" data-mini="true" data-corners="false" data-inline="true">了解更多</a>
             </div>
         </li>
+    </script>
+
+    <script type="text/template" id="J_template_video">
+        <video poster="/static/product_img/${product_id}/a.jpg" src="${video_url}" controls>
+            Your browser does not support the video tag.
+        </video>
     </script>
 
     <script type="text/template" id="J_template_comment">
