@@ -25,3 +25,6 @@ h1, h2, h3, h4, h5, h6, div, p, ul, li { margin: 0; padding: 0; }
 .store-container { width: 290px; margin: 0 auto; }
 
 .profile-container { width: 290px; margin: 0 auto; }
+
+#detail_share .qzOpenerDiv { width: 63px; height: 24px; display: inline-block; background-image: url(http://pub.idqqimg.com/qconn/site/css/sprite/intro.png); background-position: -183px 0; }
+#detail_share .qzOpenerDiv span { position: absolute; left: -999em; }

@@ -94,3 +94,17 @@ h1,h2,h3,h4,h5,h6,div,p,ul,li {
   width: 290px;
   margin: 0 auto;
 }
+
+#detail_share {
+  .qzOpenerDiv {
+    span {
+      position: absolute;
+      left: -999em;
+    }
+    width: 63px;
+    height: 24px;
+    display: inline-block;
+    background-image: url(http://pub.idqqimg.com/qconn/site/css/sprite/intro.png);
+    background-position: -183px 0;
+  }
+}
