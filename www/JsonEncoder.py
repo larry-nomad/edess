@@ -1,9 +1,6 @@
 # -*- encoding:utf-8 -*-
-
- 
 import json
 from datetime import datetime,date,time
-from o2olib import logger
 
 class JsonEncoder(json.JSONEncoder):
     DATE_FORMAT = u"%Y年%m月%d日"
@@ -13,7 +10,6 @@ class JsonEncoder(json.JSONEncoder):
         if isinstance(obj, datetime):
             return safeNewDatetime(obj).strftime("%s %s" % (self.DATE_FORMAT,self.TIME_FORMAT))
         if isinstance(obj, date):
-            logger.error("date:%s" % obj)
             return safeNewDate(obj).strftime(self.DATE_FORMAT)
         if isinstance(obj, time):
             return obj.strftime(self.TIME_FORMAT)
