@@ -12,6 +12,9 @@ import json as jjson
 from o2olib.QException import QException
 from o2olib.peewee import DoesNotExist
 from settings import SECRET_KEY
+import sys  
+reload(sys)  
+sys.setdefaultencoding('utf-8') 
 
 app = Flask(__name__)
 app.secret_key = SECRET_KEY
