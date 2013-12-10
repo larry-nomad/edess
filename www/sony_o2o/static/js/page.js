@@ -351,11 +351,16 @@ $(document).on('pagebeforeshow', '#detail', function(e) {
             template = $('#J_template_comment').html();
         el.html('');
         for(var i = 0; i < data.length; i++) {
+            var guest_name = '游客';
+            if(!!data[i].guest && !!data[i].guest.name) {
+                guest_name = data[i].guest.name;
+            }
             el.append(renderTemplate(template, {
                 comment: data[i].comment,
                 review_date: data[i].review_date,
                 ranked_stars: rankStar(data[i].ranked_stars),
                 guest_id: data[i].guest_id,
+                guest_name: guest_name,
                 product_id: data[i].product_id
             }));
         }
