@@ -47,8 +47,8 @@ class Guest(Resource):
 
 class Guests(Resource):
 
-    @require_login
+#     @require_login
     def get(self):
-#         con_dic = utils.multidict2dict(request.args)
-#         return GuestService.gets(con_dic)
-        return []
+        con_dic = utils.multidict2dict(request.args)
+        return GuestService.gets(con_dic)
+#         return []
