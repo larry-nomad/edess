@@ -25,19 +25,17 @@
             </div>
             <div data-role="panel" id="panel-right-${pageId}" data-theme="a" data-position="right">
                 <ul data-role="listview" data-theme="a">
-                    {{session.test}}
                     {% if session.is_login %}
                     <li data-role="list-divider" data-theme="d">用户信息</li>
                     <li>用户名：{{session.guest_name}}</li>
+                    <li><a href="/v1/logout">退出登录</a></li>
                     {% endif %}
                     <li data-role="list-divider" data-theme="d">登录方式</li>
                     <li>
                         <a href="http://oauth.qunar.com/oauth-client/qq/login?appname=www&display=mobile&method=login&vistor=http://touch.xperia.qunar.com/v1/login&ret=http://touch.xperia.qunar.com/%23hot">QQ登录</a>
-                        <!--<a href="http://oauth.qunar.com/oauth-client/qq/login?appname=www&display=mobile&method=login&vistor=http://touch.xperia.qunar.com:8888/v1/login&ret=http://touch.xperia.qunar.com:8888/%23hot">QQ登录</a>-->
                     </li>
                     <li>
                         <a href="http://oauth.qunar.com/oauth-client/sina/login?appname=www&display=mobile&method=login&vistor=http://touch.xperia.qunar.com/v1/login&ret=http://touch.xperia.qunar.com/%23hot">微博登录</a>
-                        <!--<a href="http://oauth.qunar.com/oauth-client/sina/login?appname=www&display=mobile&method=login&vistor=http://touch.xperia.qunar.com:8888/v1/login&ret=http://touch.xperia.qunar.com:8888/%23hot">微博登录</a>-->
                     </li>
                 </ul>
             </div>
