@@ -37,16 +37,19 @@ def bad_request(error):
     logger.error(msg)
     return jjson.dumps(JsonResult().set_error_msg(msg).to_dic()), 400
 
+
 @app.errorhandler(404)
 def page_not_fount(error):
     logger.exception(error)
     msg = u"资源正在维护"
     return jjson.dumps(JsonResult().set_error_msg(msg).to_dic()), 404
 
+
 @app.errorhandler(Exception)
 def exception_handler(error):
     logger.exception(error)
-    return jjson.dumps(JsonResult().set_error_msg(error.message).to_dic()),500
+    return jjson.dumps(JsonResult().set_error_msg(error.message).to_dic()), 500
+
 
 @app.errorhandler(QException)
 def special_exception_handler(error):

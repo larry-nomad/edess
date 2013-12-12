@@ -1,13 +1,18 @@
 from flask import Blueprint
 from flask import request
 import hashlib
+from o2olib import logger
 
 BP = Blueprint('weixin', __name__)
 
 
-@BP.route('weixin')
+@BP.route('weixin', methods=['GET', 'POST'])
 def weixin():
-    if 'signature' in request.args and \
+    if request.method == 'POST':
+        #print request.data
+        logger.info(request.data)
+        return ''
+    elif 'signature' in request.args and \
             'timestamp' in request.args and \
             'nonce' in request.args and \
             'echostr' in request.args:
