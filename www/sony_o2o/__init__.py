@@ -12,9 +12,9 @@ import json as jjson
 from o2olib.QException import QException
 from o2olib.peewee import DoesNotExist
 from settings import SECRET_KEY
-import sys  
-reload(sys)  
-sys.setdefaultencoding('utf-8') 
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 app = Flask(__name__)
 app.secret_key = SECRET_KEY
@@ -46,7 +46,7 @@ def page_not_fount(error):
 @app.errorhandler(Exception)
 def exception_handler(error):
     logger.exception(error)
-    return jjson.dumps(JsonResult().set_error_msg(error.message).to_dic()),500 
+    return jjson.dumps(JsonResult().set_error_msg(error.message).to_dic()),500
 
 @app.errorhandler(QException)
 def special_exception_handler(error):
@@ -110,3 +110,6 @@ app.register_blueprint(index.BP, url_prefix='/')
 
 from sony_o2o.views import login
 app.register_blueprint(login.BP, url_prefix='/')
+
+from sony_o2o.views import weixin
+app.register_blueprint(weixin.BP, url_prefix='/')
