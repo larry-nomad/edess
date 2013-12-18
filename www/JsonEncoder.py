@@ -3,8 +3,10 @@ import json
 from datetime import datetime,date,time
 
 class JsonEncoder(json.JSONEncoder):
-    DATE_FORMAT = u"%Y年%m月%d日"
-    TIME_FORMAT = u"%H时%M分%S秒"
+#     DATE_FORMAT = u"%Y年%m月%d日"
+#     TIME_FORMAT = u"%H时%M分%S秒"
+    DATE_FORMAT = u"%Y-%m-%d"
+    TIME_FORMAT = u"%H:%M:%S"
 
     def default(self,obj):
         if isinstance(obj, datetime):
