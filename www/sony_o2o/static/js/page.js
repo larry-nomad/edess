@@ -132,7 +132,7 @@ $(document).on('pagebeforeshow', '#hot, #travel', function(e) {
      * 获取数据，填充列表
      */
     var page = $(this).attr('id'),
-        hot_arr = [1, 2, 3, 15, 16, 17],
+        hot_arr = [1, 2, 3, 15, 16, 17, 18],
         travel_arr = [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
         urls = {
             'hot': '/v1/products?id=' + hot_arr.join('&id='),
