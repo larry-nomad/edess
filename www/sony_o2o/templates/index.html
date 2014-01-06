@@ -12,18 +12,18 @@
     <script type="text/template" id="J_template_panel">
         <div class="J_panel_container">
             <div class="go-top"><a href="javascript:window.scrollTo(0,0);" data-role="button" data-icon="arrow-u" data-corners="false" data-mini="true">顶部</a></div>
-            <div data-role="panel" id="panel-left-${pageId}" data-theme="a" data-position="left">
+            <div data-role="panel" id="panel-left-${pageId}" data-theme="a" data-position="left" data-position-fixed="true">
                 <ul data-role="listview" data-theme="a">
                     <li data-role="list-divider" data-theme="d">导航</li>
                     <li><a href="#hot" data-ajax="false">4G&旗舰</a></li>
                     <li><a href="#travel" data-ajax="false">热卖推荐</a></li>
-                    <li><a href="#store" data-ajax="false">活动店面</a></li>
+                    <li><a href="#store" data-ajax="false">4G办理店面</a></li>
                     <li data-role="list-divider" data-theme="d">用户</li>
                     <li><a href="#likes">我的收藏</a></li>
                     <li><a href="#profile" data-ajax="false">我的资料</a></li>
                 </ul>
             </div>
-            <div data-role="panel" id="panel-right-${pageId}" data-theme="a" data-position="right">
+            <div data-role="panel" id="panel-right-${pageId}" data-theme="a" data-position="right" data-position-fixed="true">
                 <ul data-role="listview" data-theme="a">
                     {% if session.is_login %}
                     <li data-role="list-divider" data-theme="d">用户信息</li>
@@ -54,7 +54,7 @@
             </div>
             <div class="info">${brief}</div>
             <div class="more">
-                <a href="${buy_link}" target="_blank" data-ajax="false" data-role="button" data-mini="true" data-corners="false" data-inline="true">立即购买</a>
+                <a href="${buy_link}" class="J-buylink" target="_blank" data-ajax="false" data-role="button" data-mini="true" data-corners="false" data-inline="true">立即购买</a>
                 <a href="#detail?id=${product_id}" data-ajax="false" data-role="button" data-mini="true" data-corners="false" data-inline="true">了解更多</a>
             </div>
         </li>
@@ -72,7 +72,7 @@
             </div>
             <div class="info">${brief}</div>
             <div class="more">
-                <a href="${buy_link}" target="_blank" data-ajax="false" data-role="button" data-mini="true" data-corners="false" data-inline="true">立即购买</a>
+                <a href="${buy_link}" class="J-buylink" target="_blank" data-ajax="false" data-role="button" data-mini="true" data-corners="false" data-inline="true">立即购买</a>
                 <a class="J-likes-unlike" data-product_id="${product_id}" data-role="button" data-mini="true" data-corners="false" data-inline="true">不喜欢了</a>
                 <a href="#detail?id=${product_id}" data-ajax="false" data-role="button" data-mini="true" data-corners="false" data-inline="true">了解更多</a>
             </div>

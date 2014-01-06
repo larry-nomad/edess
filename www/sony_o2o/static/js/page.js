@@ -5,6 +5,10 @@ var CONST = {
     btn_qzone: '<a version="1.0" class="qzOpenerDiv" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?${query}" target="_blank"><span>分享到Qzone</span></a>',
     js_qzone: '<script class="J-js-qzone" src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>'
 };
+
+var isWeixin = function() {
+    return /MicroMessenger/i.test(navigator.userAgent);
+};
 /**
  * 模版解析
  */
@@ -44,6 +48,18 @@ var rankStar = function(n) {
     }
     return star.join('');
 };
+
+/**
+ * 购买按钮处理
+ */
+$(document).on('click', '.J-buylink', function(e) {
+    if(!isWeixin()) {
+        return;
+    }
+    e.preventDefault();
+    alert('由于微信的限制，无法［立即购买］。\n请点击微信［右上角的按钮］，选择在浏览器中打开，然后继续购买！');
+});
+
 /**
  * 返回顶部按钮
  */
@@ -57,20 +73,22 @@ $(window).on('scrollstop', function(e) {
         el.hide();
     }
 });
+
 /**
  * 滑动菜单
  */
-$(document).on("swiperight swipeleft", '#hot, #travel, #likes, #detail, #profile, #store', function( e ) {
-    var pageId = $(this).attr('id');
-    if($.mobile.activePage.jqmData("panel") !== "open" ) {
-        if ( e.type === "swiperight" ) {
-            $('#panel-left-' + pageId).panel('open');
-        }
-        if ( e.type === "swipeleft" ) {
-            $('#panel-right-' + pageId).panel('open');
-        }
-    }
-});
+//$(document).on("swiperight swipeleft", '#hot, #travel, #likes, #detail, #profile, #store', function( e ) {
+//    var pageId = $(this).attr('id');
+//    if($.mobile.activePage.jqmData("panel") !== "open" ) {
+//        if ( e.type === "swiperight" ) {
+//            $('#panel-left-' + pageId).panel('open');
+//        }
+//        if ( e.type === "swipeleft" ) {
+//            $('#panel-right-' + pageId).panel('open');
+//        }
+//    }
+//});
+
 $(document).on('pagebeforecreate', '#hot, #travel, #likes, #detail, #profile, #store', function(e) {
     var pageId = $(this).attr('id'),
         panel_template = renderTemplate($('#J_template_panel').html(), {
