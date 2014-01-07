@@ -156,6 +156,7 @@ $(document).on('pagebeforeshow', '#hot, #travel', function(e) {
         urls = {
             'hot': '/v1/products?id=' + hot_arr.join('&id='),
             'travel': '/v1/products?id=' + travel_arr.join('&id='),
+            'fangshui': '/v1/products?id=' + fangshui_arr.join('&id='),
             'other': '/v1/products'
         },
         url = urls[(page in urls) ? page : 'other'];
