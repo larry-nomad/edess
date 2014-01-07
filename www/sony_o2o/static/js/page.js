@@ -145,7 +145,7 @@ $(document).on('pagebeforeshow', '#profile', function(e) {
 /**
  * list页面
  */
-$(document).on('pagebeforeshow', '#hot, #travel', '#fangshui', function(e) {
+$(document).on('pagebeforeshow', '#hot, #travel, #fangshui', function(e) {
     /**
      * 获取数据，填充列表
      */
