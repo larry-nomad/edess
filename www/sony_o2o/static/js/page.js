@@ -89,7 +89,7 @@ $(window).on('scrollstop', function(e) {
 //    }
 //});
 
-$(document).on('pagebeforecreate', '#hot, #travel, #likes, #detail, #profile, #store', function(e) {
+$(document).on('pagebeforecreate', '#hot, #travel, #fangshui, #likes, #detail, #profile, #store', function(e) {
     var pageId = $(this).attr('id'),
         panel_template = renderTemplate($('#J_template_panel').html(), {
             pageId: pageId
