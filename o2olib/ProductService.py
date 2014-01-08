@@ -5,7 +5,7 @@ from o2olib.models.product import ProductModel
 from o2olib.models.like import LikeModel
 from o2olib.models.manual import ManualModel
 from QException import QException
-from o2olib.peewee  import desc 
+from o2olib.peewee  import desc
 
 def get(id):
     if not id:
@@ -20,16 +20,16 @@ def get(id):
 def gets(con_dic):
     con = ProductModel.build_con(con_dic)
     if con:
-        query = ProductModel.select().where(con)
+        query = ProductModel.select().where(con).order_by('list_order')
     else:
-        query = ProductModel.select()
+        query = ProductModel.select().order_by('list_order')
     query_rs = utils.getPwMap(query)
     return query_rs
 
 def get_products_for_like(con_dic):
     if not(con_dic and con_dic.get("guest_id")):
         raise QException(u"客户id不能为空")
-    
+
     p_con = ProductModel.build_con(con_dic)
     l_con = LikeModel.build_con(con_dic)
     con = l_con
@@ -44,7 +44,7 @@ def get_products_for_like(con_dic):
 def get_products_for_manual(con_dic):
     if not(con_dic and con_dic.get("guest_id")):
         raise QException(u"客户id不能为空")
-    
+
     p_con = ProductModel.build_con(con_dic)
     m_con = ManualModel.build_con(con_dic)
     con = m_con
@@ -55,6 +55,6 @@ def get_products_for_manual(con_dic):
     query_rs = utils.getPwMap(query)
     return query_rs
 
-    
+
 
 
