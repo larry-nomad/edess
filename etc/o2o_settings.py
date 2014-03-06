@@ -30,10 +30,10 @@ LOG_WEB_NAME = 'web'
 
 # pgsql
 DBSETTINGS = {
-    'HOST': 'l-pg.ops.dev.cn6.qunar.com',
+    'HOST': 'localhost',
     'PORT': 5432,
     'USER': 'postgres',
-    'PASSWD': 'keyqunars1234',
+    'PASSWD': 'qunar',
     'DBNAME': 'sony_o2o',
     }
 

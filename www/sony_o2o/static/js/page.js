@@ -177,6 +177,7 @@ $(document).on('pagebeforeshow', '#hot, #travel, #fangshui', function(e) {
             });
         }
         $('#' + page + ' .list-container ul').html(html).listview('refresh').trigger('create');
+        console.log($('#' + page + ' .list-container ul' + ' .swipe'));
         $('#' + page + ' .list-container ul' + ' .swipe').each(function(idx) {
             Swipe(this, {
                 continuous: true,
